@@ -3,12 +3,16 @@
 Just a simple project for my pi
 
 1 Installed raspbian
+
 2 Setup wlan, locale, keyboard etc.
+
 3 install webserver
   sudo apt-get install lighttpd
+  
 4 install database
   sudo apt-get install mysql-server
   Set pwd to linden1mysql
+  
 5 install php (Perl is already installed as part of raspbian)
   sudo apt-get install php5-common php5-cgi
   sudo apt-get install php5
