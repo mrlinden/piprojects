@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 $db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'pi', 'linden1mysql');
@@ -14,3 +15,4 @@ foreach ($dayList as $row):
   print($row['date'] + " : " + $row['visits']);
 endforeach;
 
+?>
