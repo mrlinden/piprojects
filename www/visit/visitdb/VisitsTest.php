@@ -2,7 +2,7 @@
 
 <?php
 
-$db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'pi', 'linden1mysql');
+$db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
 
 include 'Visits.php';
 
@@ -13,7 +13,7 @@ $visits = new Visits($db);
 $dayList = $visits->getVisitsPerDay();
 
 foreach ($dayList as $row):
-  print($row['date'] + " : " + $row['visits']);
+  print "Date : " . $row['date'] . " had " . $row['visits'] . " visits \n" ;
 endforeach;
 
 ?>
