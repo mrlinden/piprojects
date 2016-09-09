@@ -1,29 +1,4 @@
-<!DOCTYPE html>
-<html class="" lang="sv-SE">
-  <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<style>
-h1 {
-    color: #000000;
-    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-	font-size: 24px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 26.4px;
-    margin-left: 20px;
-}
-h2 {
-    color: #000000;
-    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-	font-size: 18px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 26.4px;
-    margin-left: 40px;
-}
-</style>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["calendar"]});
@@ -32,6 +7,11 @@ h2 {
 	var nrYearsToShow = 1 + 2026-2012;
 	var pixelsPerDay = 15;
 	var pixelsPerWeek = pixelsPerDay * 9;  //9 due to 7 days + 2 spacing
+
+
+	<?php foreach ($list as $row): ?>
+    //<?= $row['date'] ?> - <?= $row['visits'] ?>
+    <?php endforeach ?>
 
    function drawChart() {
        var dataTable = new google.visualization.DataTable();
@@ -99,5 +79,3 @@ h2 {
   <body>
   	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
     <div id="calendar_basic" style="width: 1000px; height: (30+(pixelsPerWeek*nrYearsToShow)); "></div>
-  </body>
-</html>
