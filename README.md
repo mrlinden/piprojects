@@ -11,13 +11,17 @@ Just a simple project for my pi
   
 4 install database
   sudo apt-get install mysql-server
+  sudo apt-get install mysql-client phpmyadmin
   Set pwd to linden1mysql
   
 5 install php (Perl is already installed as part of raspbian)
   sudo apt-get install php5-common php5-cgi
   sudo apt-get install php5
   sudo apt-get install php5-mysql
-    Note it's important to install in the order listed above. If you try to install php5 without first installing the php5-cgi package then it will install Apache as well, which we don't want for this light-weight lighttpd server.
+    Note it's important to install in the order listed above. 
+    If you try to install php5 without first installing the 
+    php5-cgi package then it will install Apache as well, 
+    which we don't want for this light-weight lighttpd server.
 
 6 To enable the server to handle php scripts the fastcgi-php module should be enabled by issuing in the command
   sudo lighty-enable-mod fastcgi-php
@@ -31,6 +35,12 @@ Just a simple project for my pi
   sudo usermod -a -G www-data pi
 
   do the same for /var/www/html
+  
+8 Git checkout 
+  in /home/pi
+  checkout piprojects from https://github.com/mrlinden/piprojects.git
+  
+
   
 
 
