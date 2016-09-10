@@ -32,7 +32,7 @@
 </head>
 <body>
   	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
-    <div id="datadiv" style="width: datadivWidthpx; height: datadivHeight; "></div>
+    <div id="datadiv" style="width: datadivWidth px; height: datadivHeight px; "></div>
 <hr>
 copyright Marcus Lindén, 2016
 </body>
