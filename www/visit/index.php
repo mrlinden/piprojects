@@ -5,6 +5,15 @@ $db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden
 include 'db/Visits.php';
 $visits = new Visits($db);
 
+// Create new Plates instance
+require 'plates-3.1.1/Engine.php';
+$templates = new League\Plates\Engine('templates');
+
+// Render a template
+echo $templates->render('year', ['name' => 'Jonathan']);
+
+
+/*
 include 'views/header.php';
 
 if (isset($_GET['year'])) {
@@ -18,5 +27,6 @@ if (isset($_GET['year'])) {
 	include 'views/year.php';
 }
 include 'views/footer.php';
+*/
 
 ?>
