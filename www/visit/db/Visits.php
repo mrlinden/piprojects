@@ -1,4 +1,6 @@
 <?php
+namespace Cupolen\DataModel;
+use PDO;
 
 class Visits
 {

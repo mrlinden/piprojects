@@ -1,17 +1,26 @@
 <?php
 
-$db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
+spl_autoload_register(function ($className) {
+    $class_name = substr($className, strrpos($className, '\\') + 1);
+    $try = $class_name . '.php';
+    if (file_exists($try)) { include_once($try); }
+    $try = 'db/' . $class_name . '.php';
+    if (file_exists($try)) { include_once($try); }
+    $try = 'plates-3.1.1/src/' . $class_name . '.php';
+    if (file_exists($try)) { include_once($try); }
+    $try = 'plates-3.1.1/src/Template/' . $class_name . '.php';
+    if (file_exists($try)) { include_once($try); }
+});
 
-include 'db/Visits.php';
-$visits = new Visits($db);
+// Get visit data from database
+$db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
+$visits = new Cupolen\DataModel\Visits($db);
 
 // Create new Plates instance
-require 'plates-3.1.1/Engine.php';
-$templates = new League\Plates\Engine('templates');
+$templates = new League\Plates\Engine('templates/');
 
 // Render a template
 echo $templates->render('year', ['name' => 'Jonathan']);
-
 
 /*
 include 'views/header.php';
