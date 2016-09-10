@@ -15,12 +15,16 @@ spl_autoload_register(function ($className) {
 // Get visit data from database
 $db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
 $visits = new Cupolen\DataModel\Visits($db);
+$list = $visits->getVisitsPerDay();
+
 
 // Create new Plates instance
 $templates = new League\Plates\Engine('templates/');
 
 // Render a template
-echo $templates->render('year', ['name' => 'Jonathan']);
+echo $templates->render('year', ['list' => $list]);
+
+
 /*
 if (isset($_GET['year'])) {
 	$list = $visits->getVisitsPerDay($_GET['year']);
