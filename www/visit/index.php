@@ -21,10 +21,7 @@ $templates = new League\Plates\Engine('templates/');
 
 // Render a template
 echo $templates->render('year', ['name' => 'Jonathan']);
-
 /*
-include 'views/header.php';
-
 if (isset($_GET['year'])) {
 	$list = $visits->getVisitsPerDay($_GET['year']);
 	include 'views/year.php';

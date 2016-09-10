@@ -25,10 +25,15 @@
 	    margin-left: 40px;
 	}
 	</style>
+	
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+	<?=$this->section('content')?>
 </head>
 <body>
-
-<?=$this->section('content')?>
-
+  	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
+    <div id="datadiv" style="width: datadivWidthpx; height: datadivHeight; "></div>
+<hr>
+copyright Marcus Lindén, 2016
 </body>
 </html>
