@@ -24,6 +24,17 @@
 		line-height: 26.4px;
 	    margin-left: 40px;
 	}
+	h3 {
+	    color: #000000;
+	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+		font-size: 8px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		line-height: 26.4px;
+	    margin-left: 40px;
+	    text-align: right;
+	}
 	</style>
 	
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -34,6 +45,6 @@
   	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
     <div id="datadiv" style="width: datadivWidth px; height: datadivHeight px; "></div>
 <hr>
-copyright Marcus Lindén, 2016
+<h3>Copyright Marcus Lind&eacute;n, 2016</h3>
 </body>
 </html>
