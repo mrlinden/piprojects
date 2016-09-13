@@ -8,7 +8,7 @@
       [ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>, <?= $row['d'] ?>), <?= $row['visits'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
-  dataRows.pop(); # Remove the last row (dummy value)
+  dataRows.pop(); // Remove the last row (dummy value)
 
   if (dataRows.length > 0) {
     var nrYearsToShow = <?= $nrYears ?>;
