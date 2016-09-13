@@ -9,7 +9,7 @@
     <?php endforeach ?>
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
-	alert("dataRows.length " + dataRows.length);
+
   if (dataRows.length > 0) {
     var nrYearsToShow = <?= $nrYears ?>;
     var pixelsPerDay = 15;
@@ -38,9 +38,10 @@
               [ new Date(2026, 9, 24), 38436 ],
         [ new Date(2013, 9, 30), 38447 ]
       ]);
-      dataTable.addRows(dataRows);
+      //dataTable.addRows(dataRows);
 
 	  var theDiv = document.getElementById('datadiv');
+	  alert ("the div has width : " + theDiv.style.width);
 	  theDiv.style.width  = 1000;
 	  theDiv.style.height = (30+(15*9*<?= $nrYears ?>));
 
