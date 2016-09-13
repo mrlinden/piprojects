@@ -2,7 +2,6 @@
 <html class="" lang="sv-SE">
   <head>
     <title><?=$this->e($title)?></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<style>
 	h1 {
 	    color: #000000;
@@ -36,14 +35,14 @@
 	    text-align: right;
 	}
 	</style>
-	
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 	<?=$this->section('content')?>
 </head>
 <body>
   	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
-    <div id="datadiv" style="width: datadivWidth px; height: datadivHeight px; "></div>
+    <div id="datadiv"></div>
 <hr>
 <h3>Copyright Marcus Lind&eacute;n, 2016</h3>
 </body>
