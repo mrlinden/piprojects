@@ -47,7 +47,7 @@
 	  var theDiv = document.getElementById('datadiv');
 
 	  theDiv.style.width  = "1000px";
-	  var h = 30+(15*9*<?= $nrYears ?>);
+	  var h = 30+(15*9*nrYearsToShow);
 	  theDiv.style.height = h + "px";
 
 	  alert ("theDiv.style.height : " + theDiv.style.height + " width: " + theDiv.style.width);
