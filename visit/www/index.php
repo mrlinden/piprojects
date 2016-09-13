@@ -1,11 +1,11 @@
 <?php
 
 // To avoid exposing the config file on web, that file is in parent folder.
-// Since we use a symbolic link to deploy the application on the webserver, 
+// Since we use a symbolic link to deploy the application on the webserver,
 // the parent folder will not contain that config file. So we point that out
 // with a full path in config-pointer.ini.
-// In development environment on Windows that path is not valid but the 
-// config file in parent folder is accessibe, so we set the "default" path 
+// In development environment on Windows that path is not valid but the
+// config file in parent folder is accessibe, so we set the "default" path
 // to the config file in parent folder.
 $configFilePath = "../config.ini";
 
@@ -62,12 +62,16 @@ try {
 // Get data from model
 $visits = new Cupolen\Visits($db);
 $list = $visits->getVisitsPerDay();
+$nrYears = 0;
+if (sizeof($ist) > 0) {
+	$nrYears = 1 + end($list)['y'] - reset($list)['y'];
+}
 
 // Create new Plates instance
 $templates = new League\Plates\Engine($app_root_path . 'templates/');
 
 // Render a template
-echo $templates->render('year', ['list' => $list]);
+echo $templates->render('year', ['list' => $list, 'nrY' => $nrYears]);
 
 
 /*

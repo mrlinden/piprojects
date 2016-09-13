@@ -11,7 +11,7 @@
   dataRows.pop() # Remove the last row (dummy value)
 
   if (dataRows.length > 0) {
-    var nrYearsToShow = 1 + (dataRows[dataRows.length-1][0].getFullYear()-dataRows[0][0].getFullYear()); // 2026-2012;
+    var nrYearsToShow = 1 + (dataRows[dataRows.length-1][0].getFullYear()-dataRows[0][0].getFullYear()); // 2026-2012; <?= $nrY ?>,
     var pixelsPerDay = 15;
     var pixelsPerWeek = pixelsPerDay * 9;  // 9 due to 7 days + 2 spacing
     var datadivWidth = 1000;
