@@ -20,7 +20,6 @@
   var datadivHeight = (30 + (pixelsPerWeek * nrYearsToShow));
 
     function drawChart() {
-      alert ("drawchart called");
       var dataTable = new google.visualization.DataTable();
       dataTable.addColumn({ type: 'date', id: 'Datum' });
       dataTable.addColumn({ type: 'number', id: 'In/ut-passager' });
@@ -45,6 +44,7 @@
 
 	  var theDiv = document.getElementById('datadiv');
 
+	  alert ("theDiv.style.width : " + theDiv.style.width);
 	  theDiv.style.width  = 1000;
 	  theDiv.style.height = (30+(15*9*<?= $nrYears ?>));
 
