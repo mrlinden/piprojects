@@ -46,6 +46,7 @@ spl_autoload_register(function ($className) {
     if (file_exists($try)) { include_once($try); }
     $try = $GLOBALS['app_root_path'] . 'plates-3.1.1/src/Template/' . $class_name . '.php';
     if (file_exists($try)) { include_once($try); }
+    print('Included ' . $className . ' from ' . $GLOBALS['app_root_path'] );
 });
 
 
