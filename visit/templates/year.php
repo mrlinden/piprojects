@@ -1,5 +1,6 @@
 <?php $this->layout('template', ['title' => 'Cupolen Besöksräknare'])?>
 
+  <script type="text/javascript">
   google.charts.load("current", {packages:["calendar"]});
   google.charts.setOnLoadCallback(drawChart);
 
@@ -12,8 +13,9 @@
 
   var nrYearsToShow = 20;
   if (dataRows.length > 0) {
-    nrYearsToShow = <?= $nrYears ?>;
+    nrYearsToShow = <?= $nrYears ?> + 20;
   }
+  alert ("nrYearsToShow: " + nrYearsToShow);
   var pixelsPerDay = 15;
   var pixelsPerWeek = pixelsPerDay * 9;  // 9 due to 7 days + 2 spacing
   var datadivWidth = 1000;
@@ -84,8 +86,4 @@
 
       chart.draw(dataTable, options);
     }
-
-
 </script>
-
-<?=$this->e($name)?>
