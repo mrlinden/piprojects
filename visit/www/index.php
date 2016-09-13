@@ -28,13 +28,6 @@ if (file_exists ($configFilePath)) {
 
 $GLOBALS['app_root_path'] = $config['app_root_path'];
 
-// Get configuration from file
-$db_host       =  $config['db_host'];
-$db_name       =  $config['db_name'];
-$db_user       =  $config['db_user'];
-$db_password   =  $config['db_password'];
-
-
 // Handle class loading
 spl_autoload_register(function ($className) {
     $class_name = substr($className, strrpos($className, '\\') + 1);
@@ -46,8 +39,14 @@ spl_autoload_register(function ($className) {
     if (file_exists($try)) { include_once($try); }
     $try = $GLOBALS['app_root_path'] . 'plates-3.1.1/src/Template/' . $class_name . '.php';
     if (file_exists($try)) { include_once($try); }
-    print('Included ' . $className . ' from ' . $GLOBALS['app_root_path'] );
 });
+
+
+// Get configuration from file
+$db_host       =  $config['db_host'];
+$db_name       =  $config['db_name'];
+$db_user       =  $config['db_user'];
+$db_password   =  $config['db_password'];
 
 
 // Open database

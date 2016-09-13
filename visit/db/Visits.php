@@ -11,11 +11,8 @@ class Visits
         $this->db = $db;
     }
 
-// SELECT visits, date, EXTRACT(YEAR FROM date) AS y, EXTRACT(MONTH FROM date) AS m, EXTRACT(DAY FROM date) AS d
-
-
     public function getVisitsPerDay() {
-        return $this->db->query('SELECT * FROM daytable');
+        return $this->db->query('SELECT visits, date, EXTRACT(YEAR FROM date) AS y, EXTRACT(MONTH FROM date) AS m, EXTRACT(DAY FROM date) AS d FROM daytable');
     }
 /*
     public function getVisitsPerDay($year) {

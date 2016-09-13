@@ -11,6 +11,7 @@
 
 	<?php foreach ($list as $row): ?>
     //<?= $row['date'] ?> - <?= $row['visits'] ?>
+    //setVisits(<?= $row['y'] ?>, <?= $row['m'] ?>, <?= $row['d'] ?>, <?= $row['visits'] ?>);
     <?php endforeach ?>
 
    function drawChart() {
