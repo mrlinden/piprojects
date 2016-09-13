@@ -26,9 +26,9 @@ if (file_exists ($configFilePath)) {
 	exit();
 }
 
+$GLOBALS['app_root_path'] = $config['app_root_path'];
 
 // Get configuration from file
-$app_root_path =  $config['app_root_path'];
 $db_host       =  $config['db_host'];
 $db_name       =  $config['db_name'];
 $db_user       =  $config['db_user'];
@@ -40,11 +40,11 @@ spl_autoload_register(function ($className) {
     $class_name = substr($className, strrpos($className, '\\') + 1);
     $try = $class_name . '.php';
     if (file_exists($try)) { include_once($try); }
-    $try = $app_root_path . 'db/' . $class_name . '.php';
+    $try = $GLOBALS['app_root_path'] . 'db/' . $class_name . '.php';
     if (file_exists($try)) { include_once($try); }
-    $try = $app_root_path . 'plates-3.1.1/src/' . $class_name . '.php';
+    $try = $GLOBALS['app_root_path'] . 'plates-3.1.1/src/' . $class_name . '.php';
     if (file_exists($try)) { include_once($try); }
-    $try = $app_root_path . 'plates-3.1.1/src/Template/' . $class_name . '.php';
+    $try = $GLOBALS['app_root_path'] . 'plates-3.1.1/src/Template/' . $class_name . '.php';
     if (file_exists($try)) { include_once($try); }
 });
 
