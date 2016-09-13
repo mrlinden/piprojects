@@ -40,7 +40,7 @@
       ]);
       dataTable.addRows(dataRows);
 
-	  var theDiv = document.getElementById('dataDiv');
+	  var theDiv = document.getElementById('datadiv');
 	  theDiv.style.width  = 1000;
 	  theDiv.style.height = (30+(15*9*<?= $nrYears ?>));
 
