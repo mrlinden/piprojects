@@ -69,13 +69,7 @@
         var selectedItem = chart.getSelection()[0];
         if (selectedItem) {
           var selectedDate = new Date(selectedItem.date);
-          var newUrl = "Day.html?d=" +
-              selectedDate.getFullYear() + "-" +
-              (selectedDate.getMonth() + 1 ) + "-" +
-              selectedDate.getDate();
-	          console.log(newUrl);
-          //console.log(selectedDate.toISOString());
-          window.location = newUrl;
+          window.location.search = '?y=' + selectedDate.getFullYear() + "&m=" + (selectedDate.getMonth() + 1 ) + "&d=" + selectedDate.getDate();
         }
       }
 
