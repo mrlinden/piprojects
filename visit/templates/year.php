@@ -49,7 +49,7 @@
 	  theDiv.style.width  = "1000px";
 	  theDiv.style.height = "(30+(15*9*<?= $nrYears ?>))px";
 
-	  alert ("theDiv.style.height : " + theDiv.style.height + " background-color : " +  theDiv.style.background-color);
+	  alert ("theDiv.style.height : " + theDiv.style.height + " width: " + theDiv.style.width);
 
       var chart = new google.visualization.Calendar(theDiv);
 
