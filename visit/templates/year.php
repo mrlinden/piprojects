@@ -1,20 +1,21 @@
 <?php $this->layout('template', ['title' => 'Cupolen Besöksräknare'])?>
 
-    google.charts.load("current", {packages:["calendar"]});
-    google.charts.setOnLoadCallback(drawChart);
+  google.charts.load("current", {packages:["calendar"]});
+  google.charts.setOnLoadCallback(drawChart);
 
-    var nrYearsToShow = 1 + 2026-2012;
+  var dataRows = [
+    <?php foreach ($list as $row): ?>
+      [ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>, <?= $row['d'] ?>), <?= $row['visits'] ?> ],
+    <?php endforeach ?>
+      [ null, 0 ] ];
+  dataRows.pop() # Remove the last row (dummy value)
+
+  if (dataRows.length > 0) {
+    var nrYearsToShow = 1 + (dataRows[dataRows.length-1][0].getFullYear()-dataRows[0][0].getFullYear()); // 2026-2012;
     var pixelsPerDay = 15;
     var pixelsPerWeek = pixelsPerDay * 9;  // 9 due to 7 days + 2 spacing
     var datadivWidth = 1000;
     var datadivHeight = (30 + (pixelsPerWeek * nrYearsToShow));
-
-    var dataRows = [
-    <?php foreach ($list as $row): ?>
-        [ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>, <?= $row['d'] ?>), <?= $row['visits'] ?> ],
-    <?php endforeach ?>
-        [ null, 0 ] ];
-    dataRows.pop() # Remove the last row (dummy value)
 
     function drawChart() {
       var dataTable = new google.visualization.DataTable();
@@ -39,7 +40,7 @@
       ]);
       dataTable.addRows(dataRows);
 
-      var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+      var chart = new google.visualization.Calendar(document.getElementById('dataDiv'));
 
       var options = {
         height: 30+(pixelsPerWeek*nrYearsToShow),
@@ -74,6 +75,7 @@
 
       chart.draw(dataTable, options);
     }
+  }
 
 </script>
 
