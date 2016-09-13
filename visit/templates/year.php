@@ -5,16 +5,18 @@
 
 	var nrYearsToShow = 1 + 2026-2012;
 	var pixelsPerDay = 15;
-	var pixelsPerWeek = pixelsPerDay * 9;  //9 due to 7 days + 2 spacing
-    var datadivWidth=1000;
-    var datadivHeight=(30+(pixelsPerWeek*nrYearsToShow));
+	var pixelsPerWeek = pixelsPerDay * 9;  // 9 due to 7 days + 2 spacing
+    var datadivWidth = 1000;
+    var datadivHeight = (30 + (pixelsPerWeek * nrYearsToShow));
 
+	var dataRows = [
 	<?php foreach ($list as $row): ?>
-    //<?= $row['date'] ?> - <?= $row['visits'] ?>
-    //setVisits(<?= $row['y'] ?>, <?= $row['m'] ?>, <?= $row['d'] ?>, <?= $row['visits'] ?>);
+    	[ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>, <?= $row['d'] ?>), <?= $row['visits'] ?> ],
     <?php endforeach ?>
-
-   function drawChart() {
+		[ null, 0 ] ];
+	dataRows.pop() # Remove the last row (dummy value)
+	
+	function drawChart() {
        var dataTable = new google.visualization.DataTable();
        dataTable.addColumn({ type: 'date', id: 'Datum' });
        dataTable.addColumn({ type: 'number', id: 'In/ut-passager' });
@@ -35,7 +37,8 @@
                     [ new Date(2026, 9, 24), 38436 ],
           [ new Date(2013, 9, 30), 38447 ]
         ]);
-
+		dataTable.addRows(dataRows);
+		
        var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
 
        var options = {
