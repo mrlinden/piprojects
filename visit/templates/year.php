@@ -11,7 +11,7 @@
   dataRows.pop() # Remove the last row (dummy value)
 
   if (dataRows.length > 0) {
-    var nrYearsToShow = 1 + (dataRows[dataRows.length-1][0].getFullYear()-dataRows[0][0].getFullYear()); // 2026-2012; <?= $nrY ?>,
+    var nrYearsToShow = <?= $nrYears ?>;
     var pixelsPerDay = 15;
     var pixelsPerWeek = pixelsPerDay * 9;  // 9 due to 7 days + 2 spacing
     var datadivWidth = 1000;
@@ -43,10 +43,10 @@
       var chart = new google.visualization.Calendar(document.getElementById('dataDiv'));
 
       var options = {
-        height: 30+(pixelsPerWeek*nrYearsToShow),
+        height: (30+(15*9*<?= $nrYears ?>), // (30 + (pixelsPerWeek * nrYearsToShow));
         colorAxis:  {minValue: 0,  colors: ['#CCDDFF', '#0055AA']},
         calendar: {
-          cellSize: pixelsPerDay,
+          cellSize: 15, // pixelsPerDay
           underMonthSpace: 5,
           daysOfWeek:'SMTOTFL',
           cellColor: {

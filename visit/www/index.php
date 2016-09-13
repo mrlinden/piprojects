@@ -62,8 +62,8 @@ try {
 // Get data from model
 $visits = new Cupolen\Visits($db);
 $list = $visits->getVisitsPerDay();
-$nrYears = 10;
-if (sizeof($ist) > 0) {
+$nrYears = 0;
+if (sizeof($list) > 0) {
 	$nrYears = 1 + end($list)['y'] - reset($list)['y'];
 }
 
@@ -71,7 +71,7 @@ if (sizeof($ist) > 0) {
 $templates = new League\Plates\Engine($app_root_path . 'templates/');
 
 // Render a template
-echo $templates->render('year', ['list' => $list, 'nrY' => $nrYears]);
+echo $templates->render('year', ['list' => $list, 'nrYears' => $nrYears]);
 
 
 /*
