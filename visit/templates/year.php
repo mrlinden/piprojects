@@ -44,9 +44,10 @@
 
 	  var theDiv = document.getElementById('datadiv');
 
-	  alert ("theDiv.style.width : " + theDiv.style.width);
 	  theDiv.style.width  = 1000;
 	  theDiv.style.height = (30+(15*9*<?= $nrYears ?>));
+
+	  alert ("theDiv.style.height : " + theDiv.style.height);
 
       var chart = new google.visualization.Calendar(theDiv);
 
