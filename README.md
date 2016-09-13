@@ -40,7 +40,7 @@ Just a simple project for my pi
   in /home/pi
   checkout piprojects from https://github.com/mrlinden/piprojects.git
   
-  create a symbolic link from /var/www/html/visit to /home/pi/piprojects/www/visit/
+  create a symbolic link from /var/www/html/visit to /home/pi/piprojects/visit/www
   
   
 
