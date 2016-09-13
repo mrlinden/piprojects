@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare']) ?>
+<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare'])?>
 
     google.charts.load("current", {packages:["calendar"]});
     google.charts.setOnLoadCallback(drawChart);
@@ -15,7 +15,7 @@
     <?php endforeach ?>
 		[ null, 0 ] ];
 	dataRows.pop() # Remove the last row (dummy value)
-	
+
 	function drawChart() {
        var dataTable = new google.visualization.DataTable();
        dataTable.addColumn({ type: 'date', id: 'Datum' });
@@ -38,16 +38,16 @@
           [ new Date(2013, 9, 30), 38447 ]
         ]);
 		dataTable.addRows(dataRows);
-		
+
        var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
 
        var options = {
          height: 30+(pixelsPerWeek*nrYearsToShow),
          colorAxis:  {minValue: 0,  colors: ['#CCDDFF', '#0055AA']},
-         calendar: {  
-           	cellSize: pixelsPerDay, 
+         calendar: {
+           	cellSize: pixelsPerDay,
          	underMonthSpace: 5,
-         	daysOfWeek:'SMTOTFL', 
+         	daysOfWeek:'SMTOTFL',
          	cellColor: {
      			stroke: '#aaaaaa',
       			strokeOpacity: 1,
@@ -61,7 +61,7 @@
 	   var selectedItem = chart.getSelection()[0];
           if (selectedItem) {
             var selectedDate = new Date(selectedItem.date);
-            var newUrl = "Day.html?d=" + 
+            var newUrl = "Day.html?d=" +
             	selectedDate.getFullYear() + "-" +
             	(selectedDate.getMonth() + 1 ) + "-" +
             	selectedDate.getDate();
@@ -70,12 +70,12 @@
             window.location = newUrl;
           }
         }
-	  
- 		google.visualization.events.addListener(chart, 'select', selectHandler);  
- 
+
+ 		google.visualization.events.addListener(chart, 'select', selectHandler);
+
        chart.draw(dataTable, options);
    }
-    
-   </script>
-   
-   <?=$this->e($name)?>
+
+</script>
+
+<?=$this->e($name)?>
