@@ -10,14 +10,17 @@
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
 
+  var nrYearsToShow = 20;
   if (dataRows.length > 0) {
-    var nrYearsToShow = <?= $nrYears ?>;
-    var pixelsPerDay = 15;
-    var pixelsPerWeek = pixelsPerDay * 9;  // 9 due to 7 days + 2 spacing
-    var datadivWidth = 1000;
-    var datadivHeight = (30 + (pixelsPerWeek * nrYearsToShow));
+    nrYearsToShow = <?= $nrYears ?>;
+  }
+  var pixelsPerDay = 15;
+  var pixelsPerWeek = pixelsPerDay * 9;  // 9 due to 7 days + 2 spacing
+  var datadivWidth = 1000;
+  var datadivHeight = (30 + (pixelsPerWeek * nrYearsToShow));
 
     function drawChart() {
+      alert ("drawchart called");
       var dataTable = new google.visualization.DataTable();
       dataTable.addColumn({ type: 'date', id: 'Datum' });
       dataTable.addColumn({ type: 'number', id: 'In/ut-passager' });
@@ -41,7 +44,7 @@
       //dataTable.addRows(dataRows);
 
 	  var theDiv = document.getElementById('datadiv');
-	  alert ("the div has width : " + theDiv.style.width);
+
 	  theDiv.style.width  = 1000;
 	  theDiv.style.height = (30+(15*9*<?= $nrYears ?>));
 
@@ -80,7 +83,7 @@
 
       chart.draw(dataTable, options);
     }
-  }
+
 
 </script>
 
