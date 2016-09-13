@@ -43,7 +43,7 @@
       var chart = new google.visualization.Calendar(document.getElementById('dataDiv'));
 
       var options = {
-        height: (30+(15*9*<?= $nrYears ?>), // (30 + (pixelsPerWeek * nrYearsToShow));
+        height: (30+(15*9*<?= $nrYears ?>)), // (30 + (pixelsPerWeek * nrYearsToShow));
         colorAxis:  {minValue: 0,  colors: ['#CCDDFF', '#0055AA']},
         calendar: {
           cellSize: 15, // pixelsPerDay
