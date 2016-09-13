@@ -2,6 +2,7 @@
 <html class="" lang="sv-SE">
   <head>
     <title><?=$this->e($title)?></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<style>
 	h1 {
 	    color: #000000;
@@ -42,7 +43,7 @@
 </head>
 <body>
   	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
-    <div id="datadiv"></div>
+    <div id="datadiv" style="width: 600 px; height: 500 px; "></div>
 <hr>
 <h3>Copyright Marcus Lind&eacute;n, 2016</h3>
 </body>
