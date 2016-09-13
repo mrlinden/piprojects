@@ -42,7 +42,7 @@
 </head>
 <body>
   	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
-    <div id="datadiv" style="background-color: lightgrey; border: 0px; height: 100px; width: 100px;"></div>
+    <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
 <hr>
 <h3>Copyright Marcus Lind&eacute;n, 2016</h3>
 </body>

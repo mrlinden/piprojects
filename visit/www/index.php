@@ -54,6 +54,10 @@ $db_user       =  $config['db_user'];
 $db_password   =  $config['db_password'];
 
 
+echo filter_input(INPUT_GET,"link",FILTER_SANITIZE_STRING);
+
+
+
 // Open database
 try {
 	$dbUrl = 'mysql:host=' . $db_host . ';dbname=' . $db_name . ';charset=utf8';
