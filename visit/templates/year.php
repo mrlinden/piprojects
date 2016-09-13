@@ -46,8 +46,8 @@
 
 	  var theDiv = document.getElementById('datadiv');
 
-	  theDiv.style.width  = "1000";
-	  theDiv.style.height = "(30+(15*9*<?= $nrYears ?>))";
+	  theDiv.style.width  = "1000px";
+	  theDiv.style.height = "(30+(15*9*<?= $nrYears ?>))px";
 
 	  alert ("theDiv.style.height : " + theDiv.style.height + " background-color : " +  theDiv.style.background-color);
 
