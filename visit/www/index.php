@@ -62,7 +62,7 @@ try {
 // Get data from model
 $visits = new Cupolen\Visits($db);
 $list = $visits->getVisitsPerDay();
-$nrYears = 0;
+$nrYears = 10;
 if (sizeof($ist) > 0) {
 	$nrYears = 1 + end($list)['y'] - reset($list)['y'];
 }
