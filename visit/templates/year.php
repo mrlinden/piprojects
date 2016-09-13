@@ -9,7 +9,7 @@
     <?php endforeach ?>
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
-
+	alert("dataRows.length " + dataRows.length);
   if (dataRows.length > 0) {
     var nrYearsToShow = <?= $nrYears ?>;
     var pixelsPerDay = 15;
