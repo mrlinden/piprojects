@@ -8,7 +8,7 @@
       [ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>, <?= $row['d'] ?>), <?= $row['visits'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
-  dataRows.pop() # Remove the last row (dummy value)
+  dataRows.pop(); # Remove the last row (dummy value)
 
   if (dataRows.length > 0) {
     var nrYearsToShow = <?= $nrYears ?>;
@@ -40,7 +40,11 @@
       ]);
       dataTable.addRows(dataRows);
 
-      var chart = new google.visualization.Calendar(document.getElementById('dataDiv'));
+	  var theDiv = document.getElementById('dataDiv');
+	  theDiv.style.width  = 1000;
+	  theDiv.style.height = (30+(15*9*<?= $nrYears ?>));
+
+      var chart = new google.visualization.Calendar(theDiv);
 
       var options = {
         height: (30+(15*9*<?= $nrYears ?>)), // (30 + (pixelsPerWeek * nrYearsToShow));
@@ -65,7 +69,7 @@
               selectedDate.getFullYear() + "-" +
               (selectedDate.getMonth() + 1 ) + "-" +
               selectedDate.getDate();
-          console.log(newUrl);
+	          console.log(newUrl);
           //console.log(selectedDate.toISOString());
           window.location = newUrl;
         }
