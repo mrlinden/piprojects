@@ -1,11 +1,19 @@
+<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare'])?>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-    
-google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawStacked);
+  <script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawChart);
 
-function drawStacked() {
+
+  var dataRows = [
+    <?php foreach ($list as $row): ?>
+      [ new Date("<?= $row['intervalStart'] ?>"), <?= $row['doorA'] ?>, <?= $row['doorB'] ?>, <?= $row['doorC'], <?= $row['doorD'] ?> ],
+    <?php endforeach ?>
+      [ null, 0 ] ];
+  dataRows.pop(); // Remove the last row (dummy value)
+  
+
+  function drawChart() {
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'Tid pa dagen');
       data.addColumn('number', 'Passager');
@@ -48,17 +56,13 @@ function drawStacked() {
         							      new Date(2016,9,01,23,0,0,0), 
         							      new Date(2016,9,02,0,0,0,0)] }
       };
+	  var theDiv = document.getElementById('datadiv');
+	  theDiv.style.width  = "1000px";
+	  theDiv.style.height = "350px";
 
-      var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.AreaChart(theDiv);
+
       chart.draw(data, options);
     }
-    
-    
-    </script>
-  </head>
-  <body>
-  	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
-  	<h2>2016-09-01</h2>
-    <div id="chart_div" style="width: 1000px; height: 350px;"></div>
-  </body>
-</html>
+
+</script>

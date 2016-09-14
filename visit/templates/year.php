@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare'])?>
+<?php $this->layout('template', ['title' => 'Cupolen BesÃ¶ksrÃ¤knare'])?>
 
   <script type="text/javascript">
   google.charts.load("current", {packages:["calendar"]});
