@@ -1,6 +1,7 @@
 #!/usr/bin/php
 
 <?php
+namespace Cupolen;
 
 $db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
 
