@@ -1,9 +1,9 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
-mb_internal_encoding('UTF-8');
-mb_http_output('UTF-8');
-mb_http_input('UTF-8');
-mb_regex_encoding('UTF-8');
+//mb_internal_encoding('UTF-8');
+//mb_http_output('UTF-8');
+//mb_http_input('UTF-8');
+//mb_regex_encoding('UTF-8');
 
 // To avoid exposing the config file on web, that file is in parent folder.
 // Since we use a symbolic link to deploy the application on the webserver,
@@ -54,8 +54,20 @@ $db_user       =  $config['db_user'];
 $db_password   =  $config['db_password'];
 
 
-echo filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
+// Get URL arguments
+function validateDate($date, $format = 'Y-m-d')
+{
+	$d = DateTime::createFromFormat($format, $date);
+	return $d && $d->format($format) == $date;
+}
 
+$selectedDate = filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
+
+if (validateDate($selectedDate)) {
+	echo "Good date " . $selectedDate;
+} else {
+	echo "Bad date " . $selectedDate;
+}
 
 
 // Open database
