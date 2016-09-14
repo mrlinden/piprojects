@@ -76,6 +76,7 @@ function validateDate($date, $format = 'Y-m-d') {
 }
 
 $selectedDate = filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
+$selectedDate = "2016-09-01";
 
 if (!empty($selectedDate) && validateDate($selectedDate)) {
 	// A valid date is given. Display visits for that day 
