@@ -18,7 +18,7 @@ foreach ($dayList as $row):
 	$minuteList = $visits->getVisitsPerMinute($row['date']);
 	
 	foreach ($minuteList as $row2):
-		print " - Time : " . $row2['intervalStart'] . " had " . $row['doorA'] . " visits \n" ;
+		print " - Time : " . $row2['intervalStart'] . " had " . $row2['doorA'] . " visits \n" ;
 	endforeach;
 endforeach;
 
