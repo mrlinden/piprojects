@@ -12,15 +12,13 @@ $visits = new Cupolen\Visits($db);
 $dayList = $visits->getVisitsPerDay();
 
 foreach ($dayList as $row):
-  print "Date : " . $row['date'] . " had " . $row['visits'] . " visits \n" ;
-endforeach;
+  	print "Date : " . $row['date'] . " had " . $row['visits'] . " visits \n" ;
 
-// Get the list of visits for each day
-foreach ($dayList as $row):
+	// Get the list of visits for each day
 	$minuteList = $visits->getVisitsPerMinute($row['date']);
 	
 	foreach ($minuteList as $row2):
-	print "Time : " . $row2['intervalStart'] . " had " . $row['doorA'] . " visits \n" ;
+		print " - Time : " . $row2['intervalStart'] . " had " . $row['doorA'] . " visits \n" ;
 	endforeach;
 endforeach;
 
