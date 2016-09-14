@@ -21,9 +21,8 @@ class Visits
     }
 */
     public function getVisitsPerMinute($date) {
-    	return $this->db->query('SELECT * FROM minutetable WHERE date="$date"');
+    	return $this->db->query("SELECT * FROM minutetable WHERE DATE(intervalStart)='$date'");
     }
-    
 }
 
 ?>

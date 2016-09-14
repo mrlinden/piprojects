@@ -54,23 +54,7 @@ $db_user       =  $config['db_user'];
 $db_password   =  $config['db_password'];
 
 
-// Get URL arguments
-function validateDate($date, $format = 'Y-m-d')
-{
-	$d = DateTime::createFromFormat($format, $date);
-	return $d && $d->format($format) == $date;
-}
-
-$selectedDate = filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
-
-if (validateDate($selectedDate)) {
-	echo "Good date " . $selectedDate;
-} else {
-	echo "Bad date " . $selectedDate;
-}
-
-
-// Open database
+// Open database and create model object
 try {
 	$dbUrl = 'mysql:host=' . $db_host . ';dbname=' . $db_name . ';charset=utf8';
 	$db = new PDO($dbUrl, $db_user, $db_password);
@@ -78,35 +62,34 @@ try {
 	echo '\n\nFailed to connect to database (',  $e->getMessage(), ")\n";
 	exit();
 }
-
-
-// Get data from model
 $visits = new Cupolen\Visits($db);
-$list = $visits->getVisitsPerDay();
-$nrYears = 0;
-if (sizeof($list) > 0) {
-	$nrYears = 1 + end($list)['y'] - reset($list)['y'];
-}
+
 
 // Create new Plates instance
 $templates = new League\Plates\Engine($app_root_path . 'templates/');
 
-// Render a template
-echo $templates->render('year', ['list' => $list, 'nrYears' => $nrYears]);
 
-
-/*
-if (isset($_GET['year'])) {
-	$list = $visits->getVisitsPerDay($_GET['year']);
-	include 'views/year.php';
-} elseif (isset($_GET['date'])) {
-	$list = $visits->getVisitsPerDay($_GET['date']);
-	include 'views/day.php';
-} else {
-	$list = $visits->getVisitsPerDay();
-	include 'views/year.php';
+// Get URL arguments
+function validateDate($date, $format = 'Y-m-d') {
+	$d = DateTime::createFromFormat($format, $date);
+	return $d && $d->format($format) == $date;
 }
-include 'views/footer.php';
-*/
+
+$selectedDate = filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
+
+if (!empty($selectedDate) && validateDate($selectedDate)) {
+	// A valid date is given. Display visits for that day 
+	$list = $visits->getVisitsPerMinute($selectedDate);
+	echo $templates->render('day', ['list' => $list, 'date' => $selectedDate]);
+
+} else {
+	// bad or no date specified. Display visits per day
+	$list = $visits->getVisitsPerDay();
+	$nrYears = 0;
+	if (sizeof($list) > 0) {
+		$nrYears = 1 + end($list)['y'] - reset($list)['y'];
+	}	
+	echo $templates->render('year', ['list' => $list, 'nrYears' => $nrYears]);
+}
 
 ?>
