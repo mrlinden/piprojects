@@ -8,7 +8,7 @@ $db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden
 include 'Visits.php';
 
 // Create an instance
-$visits = new Visits($db);
+$visits = new Cupolen\Visits($db);
 
 // Get the list of visits
 $dayList = $visits->getVisitsPerDay();
