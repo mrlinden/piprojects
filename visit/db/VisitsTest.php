@@ -1,11 +1,9 @@
 #!/usr/bin/php
 
 <?php
-namespace Cupolen;
+include 'Visits.php';
 
 $db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
-
-include 'Visits.php';
 
 // Create an instance
 $visits = new Cupolen\Visits($db);
