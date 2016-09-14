@@ -7,7 +7,7 @@
 
   var dataRows = [
     <?php foreach ($list as $row): ?>
-      [ new Date("<?= $row['intervalStart'] ?>"), <?= $row['doorA'] ?>, <?= $row['doorB'] ?>, <?= $row['doorC'], <?= $row['doorD'] ?> ],
+      [ new Date("<?= $row['intervalStart'] ?>"), <?= $row['doorA'] ?>, <?= $row['doorB'] ?>, <?= $row['doorC'] ?>, <?= $row['doorD'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
