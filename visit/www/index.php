@@ -63,9 +63,9 @@ function validateDate($date, $format = 'Y-m-d')
 
 $selectedDate = filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
 
-if (validateDate($selectedDate)) {
+if ($selectedDate && validateDate($selectedDate)) {
 	echo "Good date " . $selectedDate;
-} else {
+} else if ($selectedDate) {
 	echo "Bad date " . $selectedDate;
 }
 
