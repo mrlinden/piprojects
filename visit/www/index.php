@@ -76,7 +76,6 @@ function validateDate($date, $format = 'Y-m-d') {
 }
 
 $selectedDate = filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
-$selectedDate = "2016-09-01";
 
 if (!empty($selectedDate) && validateDate($selectedDate)) {
 	// A valid date is given. Display visits for that day 
@@ -88,7 +87,11 @@ if (!empty($selectedDate) && validateDate($selectedDate)) {
 	$list = $visits->getVisitsPerDay();
 	$nrYears = 0;
 	if (sizeof($list) > 0) {
-		$nrYears = 1 + end($list)['y'] - reset($list)['y'];
+		$nrYears = 1;
+		$lastYear = end($list);
+		$firstYear = reset($list);
+		if (isset($lastYear['y'])) $nrYears += $lastYear['y'];
+		if (isset($firstYear['y'])) $nrYears -= $firstYear['y'];
 	}	
 	echo $templates->render('year', ['list' => $list, 'nrYears' => $nrYears]);
 }

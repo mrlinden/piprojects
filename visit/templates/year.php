@@ -11,9 +11,9 @@
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
 
-  var nrYearsToShow = 20;
+  var nrYearsToShow = 0;
   if (dataRows.length > 0) {
-    nrYearsToShow = <?= $nrYears ?> + 20;
+    nrYearsToShow = <?= $nrYears ?>;
   }
   alert ("nrYearsToShow: " + nrYearsToShow);
   var pixelsPerDay = 15;
