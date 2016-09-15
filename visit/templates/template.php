@@ -36,7 +36,6 @@
     background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
     margin: auto;
-    display: block;
     padding: 5px;
   	color: #FFFFFF;
     font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
@@ -52,7 +51,7 @@
 	<?=$this->section('content')?>
 </head>
 <body>
-    <div id="grad1"><img alt="Cupolen" src="Logo.png" height="50" width="44"/>&nbsp;&nbsp;&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</div>
+    <div id="grad1"><img alt="Cupolen" src="Logo.png" height="50" width="44" style="margin: auto; display: block;"/>&nbsp;&nbsp;&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
 <hr>
 <h3>Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</h3>
