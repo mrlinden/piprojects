@@ -13,6 +13,7 @@
 		font-weight: 500;
 		line-height: 26.4px;
 	    margin-left: 20px;
+	    background: #550055;
 	}
 	h2 {
 	    color: #000000;
@@ -35,13 +36,22 @@
 	    margin-left: 40px;
 	    text-align: right;
 	}
+	#grad1 {
+    height: 200px;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
 	</style>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<?=$this->section('content')?>
 </head>
 <body>
-  	<h1><img alt="Cupolen" src="CupolenLogoSmall.png"/>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
+    <div id="grad1">
+  	<h1 stye="grad"><img alt="Cupolen" src="Logo.png" height="42" width="42"/>Bes&ouml;ksr&auml;knare (in- och utpassager)</h1>
+    </div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
 <hr>
 <h3>Copyright Marcus Lind&eacute;n, 2016</h3>
