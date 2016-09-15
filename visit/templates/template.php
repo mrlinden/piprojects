@@ -42,10 +42,10 @@
     background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
-	padding-top: 15px;
-    padding-right: 30px;
-    padding-bottom: 15px;
-    padding-left: 30px;
+	padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
     </style>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -53,7 +53,7 @@
 </head>
 <body>
     <div id="grad1">
-  	<h1 stye="grad"><img alt="Cupolen" src="Logo.png" height="50" width="44"/>Bes&ouml;ksr&auml;knare (in- och utpassager)</h1>
+  	<h1 stye="grad"><img alt="Cupolen" src="Logo.png" height="50" width="44"/>&nbsp;&nbsp;&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</h1>
     </div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
 <hr>
