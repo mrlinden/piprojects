@@ -36,6 +36,31 @@
 		font-variant: normal;
 	    padding: 5px;
 	}
+	#logo {
+		margin: auto;
+	}
+	
+	#titel {
+	    padding: 5px;
+	  	color: #FFFFFF;
+	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+		font-size: 28px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		line-height: 40px;
+	}
+
+	#titel2 {
+	    padding: 5px;
+	  	color: #FFFFFF;
+	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+		font-size: 10px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		line-height: 10px;
+	}
 	
 	#grad1 {
 	    height: 60px;
@@ -45,14 +70,6 @@
 	    background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
 	    background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
 	    margin: auto;
-	    padding: 5px;
-	  	color: #FFFFFF;
-	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-		font-size: 28px;
-		font-style: normal;
-		font-variant: normal;
-		font-weight: 500;
-		line-height: 40px;
 		vertical-align: middle;
     }
     </style>
@@ -61,8 +78,10 @@
 	<?=$this->section('content')?>
 </head>
 <body>
-    <div id="grad1"><img alt="Cupolen" src="Logo.png" style="width: 44; height: 50;">&nbsp;Bes&ouml;ksr&auml;knare
-      <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.<BR>Notera att ökalendern </div>
+    <div id="grad1">
+    <div id="logo"><img alt="Cupolen" src="Logo.png" style="width: 44; height: 50;"></div>
+    <div id="titel">&nbsp;Bes&ouml;ksr&auml;knare</div>
+    <div id="titel2">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.<BR>Notera att ökalendern </div>
     </div>
     <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.</div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
