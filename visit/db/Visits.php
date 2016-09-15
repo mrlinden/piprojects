@@ -18,6 +18,14 @@ class Visits
     public function getVisitsPerMinute($date) {
     	return $this->db->query("SELECT * FROM minutetable WHERE DATE(intervalStart)='$date'");
     }
+    
+    public function getNrOfYears() {
+    	$list = $this->db->query("SELECT MIN(date) AS min FROM daytable UNION SELECT MAX(date) max FROM daytable");
+		foreach ($list as $row2) {
+    		print " - Time : " . $row2['min'] . " had " . $row2['max'] . " \n" ;
+    	}
+    	return 4;
+    }
 }
 
 ?>

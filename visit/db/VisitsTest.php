@@ -22,4 +22,6 @@ foreach ($dayList as $row) {
 	}
 }
 
+print("Check nr; " . $visits->getNrOfYears());
+
 ?>
