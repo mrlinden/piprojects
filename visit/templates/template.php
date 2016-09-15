@@ -5,14 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<style>
 	h1 {
-	    color: #FFFFFF;
-	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-		font-size: 28px;
-		font-style: normal;
-		font-variant: normal;
-		font-weight: 500;
-		line-height: 26.4px;
-	    margin-left: 40px;
+
 	}
 	h2 {
 	    color: #000000;
@@ -44,6 +37,14 @@
     background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
     margin: auto;
     padding: 5px;
+  	color: #FFFFFF;
+    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+	font-size: 28px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+    }
     </style>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
