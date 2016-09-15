@@ -5,15 +5,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<style>
 	h1 {
-	    color: #000000;
+	    color: #FFFFFF;
 	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-		font-size: 24px;
+		font-size: 28px;
 		font-style: normal;
 		font-variant: normal;
 		font-weight: 500;
 		line-height: 26.4px;
-	    margin-left: 20px;
-	    background: #550055;
+	    margin-left: 40px;
 	}
 	h2 {
 	    color: #000000;
@@ -50,7 +49,7 @@
 </head>
 <body>
     <div id="grad1">
-  	<h1 stye="grad"><img alt="Cupolen" src="Logo.png" height="42" width="42"/>Bes&ouml;ksr&auml;knare (in- och utpassager)</h1>
+  	<h1 stye="grad"><img alt="Cupolen" src="Logo.png" height="50" width="44"/>Bes&ouml;ksr&auml;knare (in- och utpassager)</h1>
     </div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
 <hr>
