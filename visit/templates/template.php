@@ -17,20 +17,20 @@
 		line-height: 26.4px;
 	    margin-left: 40px;
 	}
-	h3 {
+	
+	#footer {
 	    color: #000000;
 	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
 		font-size: 8px;
 		font-style: normal;
 		font-variant: normal;
 		font-weight: 500;
-		line-height: 26.4px;
-	    margin-left: 40px;
 	    text-align: right;
 	}
 
 	#space {
 	height:10px;
+	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
 	}
 	
 	#grad1 {
@@ -48,7 +48,7 @@
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 500;
-	line-height: 50px;
+	line-height: 40px;
 	vertical-align: middle;
     }
     </style>
@@ -58,9 +58,11 @@
 </head>
 <body>
     <div id="grad1">&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</div>
-    <div id="space"></div>
+    <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.</div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
+    <div id="space"></div>
+    
 <hr>
-<h3>Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</h3>
+<div id="footer">Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</div>
 </body>
 </html>
