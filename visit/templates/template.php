@@ -31,7 +31,9 @@
 	#space {
 		height:10px;
 		font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-	    margin: auto;
+	    font-size: 10px;
+		font-style: normal;
+		font-variant: normal;
 	    padding: 5px;
 	}
 	
@@ -59,7 +61,7 @@
 	<?=$this->section('content')?>
 </head>
 <body>
-    <div id="grad1">Bes&ouml;ksr&auml;knare
+    <div id="grad1"><img alt="Cupolen" src="Logo.png" style="width: 44; height: 50;">&nbsp;Bes&ouml;ksr&auml;knare
       <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.<BR>Notera att ökalendern </div>
     </div>
     <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.</div>
