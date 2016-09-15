@@ -88,12 +88,18 @@ if (!empty($selectedDate) && validateDate($selectedDate)) {
 	$nrYears = 0;
 	if (sizeof($list) > 0) {
 		echo "Size is " . sizeof($list);
+	
+
+		foreach ($list as $row2) {
+			echo "\nrow2 is " . $row2;
+		}
+		
 		$nrYears = 1;
 		$lastYear = end($list);
 		$firstYear = reset($list);
 
-		echo "firstYear is " . $firstYear;
-		echo "lastYear is " . $lastYear;
+		echo "\nfirstYear is " . $firstYear;
+		echo "\nlastYear is " . $lastYear;
 		
 		if (isset($lastYear['y'])) $nrYears += $lastYear['y'];
 		if (isset($firstYear['y'])) $nrYears -= $firstYear['y'];
