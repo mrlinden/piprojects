@@ -28,8 +28,13 @@
 	    margin-left: 40px;
 	    text-align: right;
 	}
+
+	#space {
+	height:10px;
+	}
+	
 	#grad1 {
-    height: 50px;
+    height: 40px;
     background: red; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
@@ -52,7 +57,8 @@
 	<?=$this->section('content')?>
 </head>
 <body>
-    <div id="grad1"><img alt="Cupolen" src="Logo.png" height="50" width="44"/>&nbsp;&nbsp;&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</div>
+    <div id="grad1">&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</div>
+    <div id="space"></div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
 <hr>
 <h3>Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</h3>
