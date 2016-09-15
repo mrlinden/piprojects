@@ -85,25 +85,7 @@ if (!empty($selectedDate) && validateDate($selectedDate)) {
 } else {
 	// bad or no date specified. Display calendar view
 	$list = $visits->getVisitsPerDay();
-	$nrYears = 0;
-	if (sizeof($list) > 0) {
-		echo "Size is " . sizeof($list);
-	
-
-		foreach ($list as $row2) {
-			echo "\nrow2 is " . $row2;
-		}
-		
-		$nrYears = 1;
-		$lastYear = end($list);
-		$firstYear = reset($list);
-
-		echo "\nfirstYear is " . $firstYear;
-		echo "\nlastYear is " . $lastYear;
-		
-		if (isset($lastYear['y'])) $nrYears += $lastYear['y'];
-		if (isset($firstYear['y'])) $nrYears -= $firstYear['y'];
-	}	
+	$nrYears = $visits->getNrOfYears();
 	echo $templates->render('year', ['list' => $list, 'nrYears' => $nrYears]);
 }
 
