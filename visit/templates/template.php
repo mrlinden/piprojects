@@ -36,7 +36,7 @@
 	}
 	
 	#grad1 {
-	    height: 40px;
+	    height: 60px;
 	    background: red; /* For browsers that do not support gradients */
 	    background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
 	    background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
@@ -59,8 +59,8 @@
 	<?=$this->section('content')?>
 </head>
 <body>
-    <div id="grad1">&nbsp;Bes&ouml;ksr&auml;knare
-      <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.</div>
+    <div id="grad1">Bes&ouml;ksr&auml;knare
+      <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.<BR>Notera att ökalendern </div>
     </div>
     <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.</div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
