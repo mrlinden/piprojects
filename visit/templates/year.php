@@ -15,7 +15,6 @@
   if (dataRows.length > 0) {
     nrYearsToShow = <?= $nrYears ?>;
   }
-  alert ("nrYearsToShow: " + nrYearsToShow);
   var pixelsPerDay = 15;
   var pixelsPerWeek = pixelsPerDay * 9;  // 9 due to 7 days + 2 spacing
   var datadivWidth = 1000;

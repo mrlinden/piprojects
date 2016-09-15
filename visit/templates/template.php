@@ -42,10 +42,8 @@
     background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
-	padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
+    margin: auto;
+    padding: 5px;
     </style>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
