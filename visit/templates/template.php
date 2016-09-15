@@ -36,13 +36,17 @@
 	    text-align: right;
 	}
 	#grad1 {
-    height: 200px;
+    height: 80px;
     background: red; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
-	</style>
+	padding-top: 15px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    </style>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<?=$this->section('content')?>
