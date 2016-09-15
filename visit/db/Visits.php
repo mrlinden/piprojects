@@ -22,10 +22,12 @@ class Visits
     public function getNrOfYears() {
     	//$list = $this->db->query("SELECT MIN(date) AS min FROM daytable UNION SELECT MAX(date) max FROM daytable");
 		$list = $this->db->query("SELECT MIN(date) least, MAX(date) max FROM daytable");
+		$result = 0;
     	foreach ($list as $row2) {
-    		print " - Time : " . $row2['min'] . " had " . $row2['max'] . " \n" ;
+    		$result = $row2['max'] - $row2['least'];
+    		print " - dif : " . $row2['least'] . " had " . $row2['max'] . " \n" ;
     	}
-    	return 4;
+    	return $result;
     }
 }
 
