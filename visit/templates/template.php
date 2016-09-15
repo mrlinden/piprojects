@@ -41,7 +41,7 @@
 	<?=$this->section('content')?>
 </head>
 <body>
-  	<h1>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
+  	<h1><img alt="Cupolen" src="CupolenLogoSmall.png"/>Cupolen bes&ouml;ksr&auml;knare (in och utpassager)</h1>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
 <hr>
 <h3>Copyright Marcus Lind&eacute;n, 2016</h3>
