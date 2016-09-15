@@ -36,6 +36,7 @@
     background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
     margin: auto;
+    display: block;
     padding: 5px;
   	color: #FFFFFF;
     font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
