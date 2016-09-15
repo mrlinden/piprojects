@@ -29,27 +29,29 @@
 	}
 
 	#space {
-	height:10px;
-	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+		height:10px;
+		font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+	    margin: auto;
+	    padding: 5px;
 	}
 	
 	#grad1 {
-    height: 40px;
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
-    margin: auto;
-    padding: 5px;
-  	color: #FFFFFF;
-    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-	font-size: 28px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 40px;
-	vertical-align: middle;
+	    height: 40px;
+	    background: red; /* For browsers that do not support gradients */
+	    background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
+	    background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
+	    margin: auto;
+	    padding: 5px;
+	  	color: #FFFFFF;
+	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
+		font-size: 28px;
+		font-style: normal;
+		font-variant: normal;
+		font-weight: 500;
+		line-height: 40px;
+		vertical-align: middle;
     }
     </style>
 
@@ -57,7 +59,9 @@
 	<?=$this->section('content')?>
 </head>
 <body>
-    <div id="grad1">&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</div>
+    <div id="grad1">&nbsp;Bes&ouml;ksr&auml;knare
+      <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.</div>
+    </div>
     <div id="space">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.</div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
     <div id="space"></div>
