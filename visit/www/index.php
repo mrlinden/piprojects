@@ -83,13 +83,18 @@ if (!empty($selectedDate) && validateDate($selectedDate)) {
 	echo $templates->render('day', ['list' => $list, 'date' => $selectedDate]);
 
 } else {
-	// bad or no date specified. Display visits per day
+	// bad or no date specified. Display calendar view
 	$list = $visits->getVisitsPerDay();
 	$nrYears = 0;
 	if (sizeof($list) > 0) {
+		echo "Size is " . sizeof($list);
 		$nrYears = 1;
 		$lastYear = end($list);
 		$firstYear = reset($list);
+
+		echo "firstYear is " . $firstYear;
+		echo "lastYear is " . $lastYear;
+		
 		if (isset($lastYear['y'])) $nrYears += $lastYear['y'];
 		if (isset($firstYear['y'])) $nrYears -= $firstYear['y'];
 	}	
