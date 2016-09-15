@@ -36,8 +36,10 @@
 		font-variant: normal;
 	    padding: 5px;
 	}
+	
 	#logo {
 		margin: auto;
+		padding: 5px;
 	}
 	
 	#titel {
@@ -49,6 +51,8 @@
 		font-variant: normal;
 		font-weight: 500;
 		line-height: 40px;
+		border-color: red;
+		border-width: 2px;
 	}
 
 	#titel2 {
@@ -60,6 +64,8 @@
 		font-variant: normal;
 		font-weight: 500;
 		line-height: 10px;
+		border-color: red;
+		border-width: 2px;
 	}
 	
 	#grad1 {
@@ -79,7 +85,7 @@
 </head>
 <body>
     <div id="grad1">
-    <div id="logo"><img alt="Cupolen" src="Logo.png" style="width: 44; height: 50;"></div>
+    <div id="logo"><img alt="Cupolen" src="Logo.png" style="width:44px; height: 50px;"></div>
     <div id="titel">&nbsp;Bes&ouml;ksr&auml;knare</div>
     <div id="titel2">In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.<BR>Notera att ökalendern </div>
     </div>
