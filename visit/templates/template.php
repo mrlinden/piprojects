@@ -51,11 +51,9 @@
 	<?=$this->section('content')?>
 </head>
 <body>
-    <div id="grad1">
-  	<h1 stye="grad"><img alt="Cupolen" src="Logo.png" height="50" width="44"/>&nbsp;&nbsp;&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</h1>
-    </div>
+    <div id="grad1"><img alt="Cupolen" src="Logo.png" height="50" width="44"/>&nbsp;&nbsp;&nbsp;Bes&ouml;ksr&auml;knare (in- och utpassager)</div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
 <hr>
-<h3>Copyright Marcus Lind&eacute;n, 2016</h3>
+<h3>Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</h3>
 </body>
 </html>
