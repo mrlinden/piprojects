@@ -14,14 +14,17 @@
 		font-weight: 500;
 	    text-align: right;
 	}
-
-	.space {
-		height:10px;
+	
+	.infotext {
 		font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-	    font-size: 10px;
+	    font-size: 12px;
 		font-style: normal;
 		font-variant: normal;
 	    padding: 5px;
+	}
+	
+	.space {
+		height:15px;
 	}
 	
 	.titel {
@@ -61,15 +64,15 @@
 </head>
 <body>
     <div class="grad">
-    <span class="titel"><img alt="Cupolen" src="Logo.png" class="logo"></span>
-	<span class="titel">Bes&ouml;ksr&auml;knare</span>
+	    <span class="titel"><img alt="Cupolen" src="Logo.png" class="logo"></span>
+		<span class="titel">Bes&ouml;ksr&auml;knare</span>
     </div>
-
-    <div class="space">
+    <div class="space"></div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
-    <div class="space">In- och utpassager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.<br>Notera att veckorna inleds med S&ouml;ndagen. 
-	</div>
-    
+    <div class="space"></div>
+    <div class="infotext">In- och utpassager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.
+    	<br>Notera att veckorna inleds med S&ouml;ndagen.</div>
+    <div class="space"></div>    	
 <hr>
 <div class="footer">Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</div>
 </body>
