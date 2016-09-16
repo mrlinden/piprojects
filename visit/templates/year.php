@@ -1,6 +1,7 @@
 <?php $this->layout('template', ['title' => 'Cupolen Besöksräknare',
-								 'infotext' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.<br>Notera att veckorna inleds med söndagen.'])?>])?>
-
+		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
+		'infotext2' => 'Notera att veckorna inleds med söndagen.'])?>
+				
   <script type="text/javascript">
   google.charts.load("current", {packages:["calendar"]});
   google.charts.setOnLoadCallback(drawChart);
