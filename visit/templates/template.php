@@ -50,6 +50,7 @@
     
 	.grad {
 	    height: 60px;
+	    width: 100%;
 	    background: #44276B; /* For browsers that do not support gradients */
 	    background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
 	    background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
@@ -71,7 +72,7 @@
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
     <div class="space"></div>
     <div class="infotext">In- och utpassager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.
-    	<br>Notera att veckorna inleds med S&ouml;ndagen.</div>
+    	<br>Notera att veckorna inleds med s&ouml;ndagen.</div>
     <div class="space"></div>    	
 <hr>
 <div class="footer">Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</div>
