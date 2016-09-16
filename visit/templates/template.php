@@ -15,7 +15,8 @@
     <div class="space"></div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
     <div class="space"></div>
-    <div class="infotext"><?=$this->e($infotext)?></div>
+    <div class="infotext1"><?=$this->e($infotext)?></div>
+    <div class="infotext2"><?=$this->e($infotext)?></div>
     <div class="space"></div>    	
 <hr>
 <div class="footer">Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</div>
