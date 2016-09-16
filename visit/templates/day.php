@@ -1,6 +1,6 @@
 <?php $this->layout('template', ['title' => 'Cupolen Besöksräknare',
 		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
-		'infotext2' => ''])?>
+		'infotext2' => 'Notera att det går att zooma i diagrammet. Högerklicka för att zooma ut.'])?>
 
   <script type="text/javascript">
   google.charts.load('current', {packages: ['corechart', 'bar']});
@@ -17,21 +17,25 @@
 
   function drawChart() {
       var data = new google.visualization.DataTable();
-      data.addColumn('date', 'Tid pa dagen');
-      data.addColumn('number', 'Passager');
-
+      data.addColumn('date', 'Tidpunkt');
+      data.addColumn('number', 'Passager Entre A');
+      data.addColumn('number', 'Passager Entre B');
+      data.addColumn('number', 'Passager Entre C');
+      data.addColumn('number', 'Passager Innergard');
+      
       data.addRows([
-      	[new Date(2016,9,1,7,30,0,0), 2],
-      	[new Date(2016,9,1,8,30,0,0), 3],
-      	[new Date(2016,9,1,8,31,0,0), 6],
-      	[new Date(2016,9,1,8,33,0,0), 19],
-      	[new Date(2016,9,2,0,0,0,0), 19]
+      	[new Date(2016,9,1,7,30,0,0), 2,5,2,9],
+      	[new Date(2016,9,1,8,30,0,0), 3,8,6,12],
+      	[new Date(2016,9,1,8,31,0,0), 6,11,8,13],
+      	[new Date(2016,9,1,8,33,0,0), 19,15,13,16],
+      	[new Date(2016,9,2,0,0,0,0), 19,20,16,18]
       	
       ]);
 
       var options = {
         explorer: { actions: ['dragToZoom', 'rightClickToReset'] },
         legend: { position: 'none' },
+        isStacked: true,
         hAxis: { format: 'HH:mm', ticks: [new Date(2016,9,01,0,0,0,0), 
         							      new Date(2016,9,01,1,0,0,0), 
         							      new Date(2016,9,01,2,0,0,0), 

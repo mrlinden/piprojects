@@ -82,7 +82,6 @@
         if (selectedItem) {
           var selectedDate = new Date(selectedItem.date);
           window.location.search = '?d=' + selectedDate.toMysqlFormat();
-          //window.location.search = '?y=' + selectedDate.getFullYear() + "&m=" + (selectedDate.getMonth() + 1 ) + "&d=" + selectedDate.getDate();
         }
       }
 
