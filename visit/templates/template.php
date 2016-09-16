@@ -62,14 +62,13 @@
 <body>
     <div class="grad">
     <span class="titel"><img alt="Cupolen" src="Logo.png" class="logo"></span>
-	<span class="titel">Bes&ouml;ksr&auml;knare
-	<br>In- och ut-passager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.
-	</span>
+	<span class="titel">Bes&ouml;ksr&auml;knare</span>
     </div>
 
     <div class="space">
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
-    <div class="space"></div>
+    <div class="space">In- och utpassager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.<br>Notera att veckorna inleds med S&ouml;ndagen. 
+	</div>
     
 <hr>
 <div class="footer">Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</div>
