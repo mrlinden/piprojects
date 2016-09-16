@@ -42,7 +42,7 @@
     }
     
 	.grad {
-	    height: 65px;
+	    height: 60px;
         width=100%;
 	    background: #44276B; /* For browsers that do not support gradients */
 	    background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */

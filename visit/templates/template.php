@@ -15,8 +15,7 @@
     <div class="space"></div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
     <div class="space"></div>
-    <div class="infotext">In- och utpassager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.
-    	<br>Notera att veckorna inleds med s&ouml;ndagen.</div>
+    <div class="infotext"><?=$this->e($infotext)?></div>
     <div class="space"></div>    	
 <hr>
 <div class="footer">Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</div>
