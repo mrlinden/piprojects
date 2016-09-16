@@ -42,8 +42,8 @@
     }
     
 	.grad {
-	    height: 60px;
-      width=800px;
+	    height: 65px;
+        width=100%;
 	    background: #44276B; /* For browsers that do not support gradients */
 	    background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
 	    background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
@@ -55,7 +55,7 @@
       position: absolute;
       top: 0;
       left: 0;
-	    display: table;
+	  display: table;
     }
   }
   
