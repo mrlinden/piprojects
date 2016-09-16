@@ -18,10 +18,10 @@
   function drawChart() {
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'Tidpunkt');
-      data.addColumn('number', 'Passager Entre A');
-      data.addColumn('number', 'Passager Entre B');
-      data.addColumn('number', 'Passager Entre C');
-      data.addColumn('number', 'Passager Innergård');
+      data.addColumn('number', 'Entre A');
+      data.addColumn('number', 'Entre B');
+      data.addColumn('number', 'Entre C');
+      data.addColumn('number', 'Innergård');
       
       data.addRows([
       	[new Date(2016,9,1,7,30,0,0), 2,5,2,9],
