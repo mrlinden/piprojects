@@ -34,7 +34,7 @@
 
       var options = {
         explorer: { actions: ['dragToZoom', 'rightClickToReset'] },
-        legend: { position: 'none' },
+        legend: { position: 'right' },
         isStacked: true,
         hAxis: { format: 'HH:mm', ticks: [new Date(2016,9,01,0,0,0,0), 
         							      new Date(2016,9,01,1,0,0,0), 
