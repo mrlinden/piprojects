@@ -10,7 +10,7 @@
 <body>
     <div class="grad">
 	    <span class="titel"><img alt="Cupolen" src="Logo.png" class="logo"></span>
-		<span class="titel"><a href="." class="titel">Bes&ouml;ksr&auml;knare</a></span>
+		<span class="titel"><a href=".">Bes&ouml;ksr&auml;knare</a></span>
     </div>
     <div class="space"></div>
     <div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>

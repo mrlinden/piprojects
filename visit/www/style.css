@@ -1,62 +1,78 @@
-	.footer {
-	    color: #000000;
-	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-		font-size: 8px;
-		font-style: normal;
-		font-variant: normal;
-		font-weight: 500;
-	    text-align: right;
-	}
-	
-	.infotext {
-		font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-	    font-size: 12px;
-		font-style: normal;
-		font-variant: normal;
-	    padding: 5px;
-	}
-	
-	.space {
-		height:15px;
-	}
-	
-	.titel {
-	    padding: 5px;
-	  	color: #FFFFFF;
-	    font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
-		font-size: 28px;
-		font-style: normal;
-		font-variant: normal;
-		font-weight: 500;
-		line-height: 40px;
-		text-decoration: none;
-		vertical-align: middle;
-        display: table-cell;
-	}
-	
-	.logo {
-	    vertical-align: middle;
-	    display: table-cell;
-	    margin-right: 1em;
-	    width:44px; 
-	    height: 50px;
-    }
-    
-	.grad {
-	    height: 60px;
-        width=100%;
-	    background: #44276B; /* For browsers that do not support gradients */
-	    background: -webkit-linear-gradient(left, #44276B, #78649E); /* For Safari 5.1 to 6.0 */
-	    background: -o-linear-gradient(right, #44276B, #78649E); /* For Opera 11.1 to 12.0 */
-	    background: -moz-linear-gradient(right, #44276B, #78649E); /* For Firefox 3.6 to 15 */
-	    background: linear-gradient(to right, #44276B, #78649E); /* Standard syntax (must be last) */
-    }
-    
-  .tableframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-	  display: table;
-    }
-  }
-  
+.footer {
+	color: #000000;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 8px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	text-align: right;
+}
+
+.infotext {
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-variant: normal;
+	padding: 5px;
+}
+
+.space {
+	height: 15px;
+}
+
+.titel {
+	padding: 5px;
+	color: #FFFFFF;
+	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+	font-size: 28px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 40px;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+.logo {
+	vertical-align: middle;
+	display: table-cell;
+	margin-right: 1em;
+	width: 44px;
+	height: 50px;
+}
+
+.grad {
+	height: 60px; width =100%;
+	background: #44276B; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(left, #44276B, #78649E);
+	/* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, #44276B, #78649E);
+	/* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, #44276B, #78649E);
+	/* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, #44276B, #78649E);
+	/* Standard syntax (must be last) */
+}
+
+.tableframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: table;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+}
