@@ -62,7 +62,7 @@
 
       var options = {
         height: datadivHeight,
-        colorAxis:  {minValue: 0,  colors: ['#cce0ff', '#339933']},
+        colorAxis:  {minValue: 0,  colors: ['#e4daf1', '#44276B']},
         calendar: {
           cellSize: 15, // pixelsPerDay
           underMonthSpace: 5,
