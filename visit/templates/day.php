@@ -2,6 +2,7 @@
 		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
 		'infotext2' => 'Notera att det går att zooma i diagrammet. Högerklicka för att zooma ut.'])?>
 
+<?php $this->start('script') ?>
   <script type="text/javascript">
   google.charts.load('current', {packages: ['corechart', 'bar']});
   google.charts.setOnLoadCallback(drawChart);
@@ -18,10 +19,10 @@
   function drawChart() {
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'Tidpunkt');
-      data.addColumn('number', 'Entre A');
-      data.addColumn('number', 'Entre B');
-      data.addColumn('number', 'Entre C');
       data.addColumn('number', 'Innergård');
+      data.addColumn('number', 'Entre C');
+      data.addColumn('number', 'Entre B');
+      data.addColumn('number', 'Entre A');
       
       data.addRows([
       	[new Date(2016,9,1,7,30,0,0), 2,5,2,9],
@@ -31,7 +32,20 @@
       	[new Date(2016,9,2,0,0,0,0), 19,20,16,18]
       	
       ]);
-
+      var table = document.getElementById("datatable");
+      var arrayLength = dataRows.length;
+      for (var rowNr = 0; rowNr < arrayLength; rowNr++) {
+          var row = table.insertRow(rowNr);
+          var cell0 = row.insertCell(0);
+          var cell1 = row.insertCell(1);
+          var cell2 = row.insertCell(2);
+          var cell3 = row.insertCell(3);
+          var cell4 = row.insertCell(4);
+          var cell5 = row.insertCell(5);
+          var cell6 = row.insertCell(6);
+          cell1.innerHTML = dataRows[rowNr][0];
+      }
+      
       var options = {
         explorer: { actions: ['dragToZoom', 'rightClickToReset'] },
         legend: { position: 'right' },
@@ -72,3 +86,38 @@
     }
 
 </script>
+<?php $this->stop() ?>
+
+
+<?php $this->start('body') ?>
+	<div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
+    <div class="space"></div>
+    <div class="infotext"><?=$this->e($infotext1)?></div>
+    <div class="infotext"><?=$this->e($infotext2)?></div>
+    <div class="space"></div>
+    <div class="table">
+  <table id="datatable">
+  <tr>
+    <th>Tidpunkt</th>
+    <th>Entre A</th> 
+    <th>Entre B</th>
+    <th>Entre C</th> 
+    <th>Innerg&aring;rd</th>
+    <th>Totalt f&ouml;r tidpunkten</th>
+    <th>Totalt hittils under dagen</th>
+  </tr>
+  <tr>
+    <td>Row2 cell1</td>
+    <td>Row2 cell2</td>
+    <td>Row2 cell3</td>
+    <td>Row2 cell4</td>
+    <td>Row2 cell5</td>
+    <td>Row2 cell6</td>
+    <td>Row2 cell7</td>
+  </tr>
+  </table>
+
+<?php $this->stop() ?>
+
+
+

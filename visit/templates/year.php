@@ -2,6 +2,7 @@
 		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
 		'infotext2' => 'Notera att veckorna inleds med söndagen.'])?>
 				
+<?php $this->start('script') ?>
   <script type="text/javascript">
   google.charts.load("current", {packages:["calendar"]});
   google.charts.setOnLoadCallback(drawChart);
@@ -90,3 +91,13 @@
       chart.draw(dataTable, options);
     }
 </script>
+<?php $this->stop() ?>
+
+<?php $this->start('body') ?>
+	<div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
+    <div class="space"></div>
+    <div class="infotext"><?=$this->e($infotext1)?></div>
+    <div class="infotext"><?=$this->e($infotext2)?></div>
+<?php $this->stop() ?>
+
+
