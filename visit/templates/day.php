@@ -16,6 +16,13 @@
   dataRows.pop(); // Remove the last row (dummy value)
   
 
+  var dataRows1 = [
+    <?php foreach ($list as $row): ?>
+      [ new Date("<?= $row['intervalStop'] ?>"), <?= $row['doorAtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorDtot'] ?> ],
+    <?php endforeach ?>
+      [ null, 0 ] ];
+  
+
   function drawChart() {
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'Tidpunkt');
