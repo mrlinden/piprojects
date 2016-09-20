@@ -62,17 +62,22 @@
 }
 
 table, td, th {
-    border: 1px solid #ddd;
-    text-align: center;
+ font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+ font-size: 16px;
+ font-style: normal;
+ font-variant: normal;
+ border: 1px solid #ddd;
+ text-align: center;
+ padding: 10px;
+}
+
+th {
+ background: #DDDDDD;
 }
 
 table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    padding: 15px;
+ border-collapse: collapse;
+ width: 80%;
 }
 
 a:link {
