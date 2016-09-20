@@ -10,7 +10,7 @@
 
   var dataRows = [
     <?php foreach ($list as $row): ?>
-      [ new Date("<?= $row['intervalStart'] ?>"), <?= $row['doorA'] ?>, <?= $row['doorB'] ?>, <?= $row['doorC'] ?>, <?= $row['doorD'] ?> ],
+      [ new Date("<?= $row['intervalStop'] ?>"), <?= $row['doorAtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorDtot'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
@@ -32,6 +32,7 @@
       	[new Date(2016,9,2,0,0,0,0), 19,20,16,18]
       	
       ]);
+      /*
       var table = document.getElementById("datatable");
       var arrayLength = dataRows.length;
       for (var rowNr = 0; rowNr < arrayLength; rowNr++) {
@@ -45,7 +46,7 @@
           var cell6 = row.insertCell(6);
           cell1.innerHTML = dataRows[rowNr][0];
       }
-      
+      */
       var options = {
         explorer: { actions: ['dragToZoom', 'rightClickToReset'] },
         legend: { position: 'right' },
@@ -106,15 +107,17 @@
     <th>Totalt f&ouml;r tidpunkten</th>
     <th>Totalt hittils under dagen</th>
   </tr>
+  <?php foreach ($list as $row): ?>
   <tr>
-    <td>Row2 cell1</td>
-    <td>Row2 cell2</td>
-    <td>Row2 cell3</td>
-    <td>Row2 cell4</td>
-    <td>Row2 cell5</td>
-    <td>Row2 cell6</td>
-    <td>Row2 cell7</td>
+    <td><?= $row['intervalStop'] ?></td>
+    <td><?= $row['doorA'] ?></td>
+    <td><?= $row['doorB'] ?></td>
+    <td><?= $row['doorC'] ?></td>
+    <td><?= $row['doorD'] ?></td>
+    <td><?= $row['visits'] ?></td>
+    <td><?= $row['visitsSum'] ?></td>
   </tr>
+  <?php endforeach ?>
   </table>
 
 <?php $this->stop() ?>
