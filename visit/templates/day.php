@@ -10,14 +10,15 @@
 
   var dataRows = [
     <?php foreach ($list as $row): ?>
-      [ new Date("<?= $row['intervalStop'] ?>"), <?= $row['doorDtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorAtot'] ?> ],
+      /* [ new Date("<?= $row['intervalStop'] ?>"), <?= $row['doorDtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorAtot'] ?> ], */
+      [ [<?= $row['h'] ?>,<?= $row['m'] ?>,<?= $row['s'] ?>,0], <?= $row['doorDtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorAtot'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
   
   function drawChart() {
       var data = new google.visualization.DataTable();
-      data.addColumn('date', 'Tidpunkt');
+      data.addColumn('timeofday', 'Tidpunkt');
       data.addColumn('number', 'Innergård');
       data.addColumn('number', 'Entre C');
       data.addColumn('number', 'Entre B');
