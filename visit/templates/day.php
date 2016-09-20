@@ -38,7 +38,7 @@
         legend: { position: 'right' },
         isStacked: true,
         hAxis: { format: 'HH:mm', 
-        	     gridlines.count: 24 }
+        	     gridlines: {count: 24 } }
 
 	      /*
         hAxis: { format: 'HH:mm', ticks: [new Date(2016,9,01,0,0,0,0), 
