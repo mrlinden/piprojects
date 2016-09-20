@@ -15,14 +15,6 @@
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
   
-
-  var dataRows1 = [
-    <?php foreach ($list as $row): ?>
-      [ new Date("<?= $row['intervalStop'] ?>"), <?= $row['doorAtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorDtot'] ?> ],
-    <?php endforeach ?>
-      [ null, 0 ] ];
-  
-
   function drawChart() {
       var data = new google.visualization.DataTable();
       data.addColumn('date', 'Tidpunkt');
@@ -39,21 +31,7 @@
       	[new Date(2016,9,2,0,0,0,0), 19,20,16,18]
       	
       ]);
-      /*
-      var table = document.getElementById("datatable");
-      var arrayLength = dataRows.length;
-      for (var rowNr = 0; rowNr < arrayLength; rowNr++) {
-          var row = table.insertRow(rowNr);
-          var cell0 = row.insertCell(0);
-          var cell1 = row.insertCell(1);
-          var cell2 = row.insertCell(2);
-          var cell3 = row.insertCell(3);
-          var cell4 = row.insertCell(4);
-          var cell5 = row.insertCell(5);
-          var cell6 = row.insertCell(6);
-          cell1.innerHTML = dataRows[rowNr][0];
-      }
-      */
+      
       var options = {
         explorer: { actions: ['dragToZoom', 'rightClickToReset'] },
         legend: { position: 'right' },

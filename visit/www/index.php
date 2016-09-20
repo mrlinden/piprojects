@@ -79,9 +79,9 @@ $selectedDate = filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
 
 if (!empty($selectedDate) && validateDate($selectedDate)) {
 	// A valid date is given. Display visits for that day 
-	$list = $visits->getVisitsPerMinute($selectedDate);
-	$a = $list->fetchAll();
-	echo $templates->render('day', ['list' => $a, 'date' => $selectedDate]);
+	$dblist = $visits->getVisitsPerMinute($selectedDate);
+	$arraylist = $list->fetchAll();
+	echo $templates->render('day', ['list' => $arraylist, 'date' => $selectedDate]);
 
 } else {
 	// bad or no date specified. Display calendar view
