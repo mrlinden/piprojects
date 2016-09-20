@@ -16,7 +16,23 @@ class Visits
     }
 
     public function getVisitsPerMinute($date) {
-    	return $this->db->query("SELECT * FROM minutetable WHERE DATE(intervalStart)='$date'");
+    	$sqlQuery = "SELECT PreAgg.date, PreAgg.doorA, PreAgg.doorB, PreAgg.doorC, PreAgg.doorD,
+    	@PrevSumA := @PrevSumA + PreAgg.doorA AS doorAtot
+    	FROM
+    	( SELECT
+    			MT.date,
+    			MT.doorA,
+    			MT.doorB,
+    			MT.doorC,
+    			MT.doorD,
+    			FROM minutetable MT
+    			ORDER BY
+    			MT.date ) AS PreAgg,
+    			( select @PrevSumA := 0.00 ) as SqlVars";
+    	
+    	return $this->db->query($sqlQuery);
+    	
+//    	return $this->db->query("SELECT * FROM minutetable WHERE DATE(intervalStart)='$date'");
     }
     
     public function getNrOfYears() {
