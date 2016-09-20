@@ -25,7 +25,7 @@ class Visits
     			PreAgg.doorB, 
     			PreAgg.doorC, 
     			PreAgg.doorD,
-    			SUM(PreAgg.doorA + PreAgg.doorB + PreAgg.doorC + PreAgg.doorD) AS visits
+    			SUM(PreAgg.doorA + PreAgg.doorB + PreAgg.doorC + PreAgg.doorD) AS visits,
     			@PrevSumA := @PrevSumA + PreAgg.doorA AS doorAtot,
 		    	@PrevSumB := @PrevSumB + PreAgg.doorB AS doorBtot,
 		    	@PrevSumC := @PrevSumC + PreAgg.doorC AS doorCtot,
