@@ -16,7 +16,6 @@ class Visits
     }
 
     public function getVisitsPerMinute($date) {
-    	
     	$sqlQuery = "SELECT 
     			EXTRACT(HOUR FROM PreAgg.intervalStop) AS h,
     			EXTRACT(MINUTE FROM PreAgg.intervalStop) AS m,
@@ -25,27 +24,23 @@ class Visits
     			PreAgg.doorB, 
     			PreAgg.doorC, 
     			PreAgg.doorD,
-    	@PrevSumA := @PrevSumA + PreAgg.doorA AS doorAtot,
-    	@PrevSumB := @PrevSumB + PreAgg.doorB AS doorBtot,
-    	@PrevSumC := @PrevSumC + PreAgg.doorC AS doorCtot,
-    	@PrevSumD := @PrevSumD + PreAgg.doorD AS doorDtot,
-    	@PrevSumVisits := @PrevSumVisits + PreAgg.doorA + PreAgg.doorB + PreAgg.doorC + PreAgg.doorD AS visits
-    	FROM
-    	( SELECT
-    			MT.intervalStop,
-    			MT.doorA,
-    			MT.doorB,
-    			MT.doorC,
-    			MT.doorD
-    			FROM `minutetable` AS MT
-    			WHERE DATE(MT.intervalStop)='".$date."'
-    			ORDER BY
-    			MT.intervalStop
-    			) AS PreAgg,
-    			( select @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
+    			@PrevSumA := @PrevSumA + PreAgg.doorA AS doorAtot,
+		    	@PrevSumB := @PrevSumB + PreAgg.doorB AS doorBtot,
+		    	@PrevSumC := @PrevSumC + PreAgg.doorC AS doorCtot,
+		    	@PrevSumD := @PrevSumD + PreAgg.doorD AS doorDtot,
+		    	@PrevSumVisits := @PrevSumVisits + PreAgg.doorA + PreAgg.doorB + PreAgg.doorC + PreAgg.doorD AS visits
+		    	FROM ( SELECT
+    					MT.intervalStop,
+	    				MT.doorA,
+	    				MT.doorB,
+	    				MT.doorC,
+	    				MT.doorD
+	    				FROM `minutetable` AS MT
+	    				WHERE DATE(MT.intervalStop)='".$date."'
+	    				ORDER BY MT.intervalStop
+	    			) AS PreAgg,
+	    		( select @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
     	return $this->db->query($sqlQuery);
-    	
-//    	return $this->db->query("SELECT * FROM minutetable WHERE DATE(intervalStart)='$date'");
     }
     
     public function getNrOfYears() {
