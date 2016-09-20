@@ -25,7 +25,7 @@ class Visits
     			PreAgg.doorB, 
     			PreAgg.doorC, 
     			PreAgg.doorD,
-    			SUM(PreAgg.doorA + PreAgg.doorB + PreAgg.doorC + PreAgg.doorD) AS visits,
+    			@SumABCD  := PreAgg.doorA + PreAgg.doorB + PreAgg.doorC + PreAgg.doorD AS visits,
     			@PrevSumA := @PrevSumA + PreAgg.doorA AS doorAtot,
 		    	@PrevSumB := @PrevSumB + PreAgg.doorB AS doorBtot,
 		    	@PrevSumC := @PrevSumC + PreAgg.doorC AS doorCtot,
@@ -41,7 +41,7 @@ class Visits
 	    				WHERE DATE(MT.intervalStop)='".$date."'
 	    				ORDER BY MT.intervalStop
 	    			) AS PreAgg,
-	    		( select @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
+	    		( select @SumABCD := 0, @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
     	return $this->db->query($sqlQuery);
     }
     
