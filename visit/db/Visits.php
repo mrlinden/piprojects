@@ -17,7 +17,14 @@ class Visits
 
     public function getVisitsPerMinute($date) {
     	
-    	$sqlQuery = "SELECT PreAgg.intervalStop, PreAgg.doorA, PreAgg.doorB, PreAgg.doorC, PreAgg.doorD,
+    	$sqlQuery = "SELECT 
+    			EXTRACT(HOUR FROM PreAgg.intervalStop) AS y,
+    			EXTRACT(MINUTE FROM PreAgg.intervalStop) AS m,
+    			EXTRACT(SECOND FROM PreAgg.intervalStop) AS s,
+    			PreAgg.doorA, 
+    			PreAgg.doorB, 
+    			PreAgg.doorC, 
+    			PreAgg.doorD,
     	@PrevSumA := @PrevSumA + PreAgg.doorA AS doorAtot,
     	@PrevSumB := @PrevSumB + PreAgg.doorB AS doorBtot,
     	@PrevSumC := @PrevSumC + PreAgg.doorC AS doorCtot,
