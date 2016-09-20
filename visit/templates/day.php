@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare - '.$this->date,
+<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare - '.$this->e($date),
 		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
 		'infotext2' => 'Notera att det går att zooma i diagrammet. Högerklicka för att zooma ut.'])?>
 
