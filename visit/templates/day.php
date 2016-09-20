@@ -10,7 +10,7 @@
 
   var dataRows = [
     <?php foreach ($list as $row): ?>
-      [ new Date("<?= $row['intervalStop'] ?>"), <?= $row['doorAtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorDtot'] ?> ],
+      [ new Date("<?= $row['intervalStop'] ?>"), <?= $row['doorDtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorAtot'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
   dataRows.pop(); // Remove the last row (dummy value)
@@ -22,7 +22,8 @@
       data.addColumn('number', 'Entre C');
       data.addColumn('number', 'Entre B');
       data.addColumn('number', 'Entre A');
-      
+      data.addRows(dataRows);
+      /*
       data.addRows([
       	[new Date(2016,9,1,7,30,0,0), 2,5,2,9],
       	[new Date(2016,9,1,8,30,0,0), 3,8,6,12],
@@ -31,11 +32,15 @@
       	[new Date(2016,9,2,0,0,0,0), 19,20,16,18]
       	
       ]);
-      
+      */
       var options = {
         explorer: { actions: ['dragToZoom', 'rightClickToReset'] },
         legend: { position: 'right' },
         isStacked: true,
+        hAxis: { format: 'HH:mm', 
+        	     gridlines: 24 }
+
+	      /*
         hAxis: { format: 'HH:mm', ticks: [new Date(2016,9,01,0,0,0,0), 
         							      new Date(2016,9,01,1,0,0,0), 
         							      new Date(2016,9,01,2,0,0,0), 
@@ -60,7 +65,8 @@
         							      new Date(2016,9,01,21,0,0,0), 
         							      new Date(2016,9,01,22,0,0,0), 
         							      new Date(2016,9,01,23,0,0,0), 
-        							      new Date(2016,9,02,0,0,0,0)] }
+        							      new Date(2016,9,02,0,0,0,0)] } */
+
       };
 	  var theDiv = document.getElementById('datadiv');
 	  theDiv.style.width  = "1000px";
