@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare',
+<?php $this->layout('template', ['title' => 'Besöksräknare',
 		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
 		'infotext2' => 'Notera att veckorna inleds med söndagen.'])?>
 				

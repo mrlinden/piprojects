@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare - '.$this->e($date),
+<?php $this->layout('template', ['title' => 'Besöksräknare '.$this->e($date),
 		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
 		'infotext2' => 'Notera att det går att zooma i diagrammet. Högerklicka för att zooma ut.'])?>
 
@@ -10,7 +10,6 @@
 
   var dataRows = [
     <?php foreach ($list as $row): ?>
-      /* [ new Date("<?= $row['intervalStop'] ?>"), <?= $row['doorDtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorAtot'] ?> ], */
       [ [<?= $row['h'] ?>,<?= $row['m'] ?>,<?= $row['s'] ?>,0], <?= $row['doorDtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorAtot'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
@@ -24,16 +23,7 @@
       data.addColumn('number', 'Entre B');
       data.addColumn('number', 'Entre A');
       data.addRows(dataRows);
-      /*
-      data.addRows([
-      	[new Date(2016,9,1,7,30,0,0), 2,5,2,9],
-      	[new Date(2016,9,1,8,30,0,0), 3,8,6,12],
-      	[new Date(2016,9,1,8,31,0,0), 6,11,8,13],
-      	[new Date(2016,9,1,8,33,0,0), 19,15,13,16],
-      	[new Date(2016,9,2,0,0,0,0), 19,20,16,18]
-      	
-      ]);
-      */
+
       var options = {
         explorer: { actions: ['dragToZoom', 'rightClickToReset'] },
         legend: { position: 'right' },
@@ -97,7 +87,7 @@
   </tr>
   <?php foreach ($list as $row): ?>
   <tr>
-    <td><?= $row['intervalStop'] ?></td>
+    <td><?= $row['time'] ?></td>
     <td><?= $row['doorA'] ?></td>
     <td><?= $row['doorB'] ?></td>
     <td><?= $row['doorC'] ?></td>
