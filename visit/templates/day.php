@@ -1,4 +1,4 @@
-<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare',
+<?php $this->layout('template', ['title' => 'Cupolen Besöksräknare - '.$this->date,
 		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
 		'infotext2' => 'Notera att det går att zooma i diagrammet. Högerklicka för att zooma ut.'])?>
 
@@ -64,33 +64,6 @@
         							      [23,0,0,0],
         							      [23,59,59,0]] 
         }
-	      /*
-        hAxis: { format: 'HH:mm', ticks: [[0,0,0,0), 
-        							      [1,0,0,0), 
-        							      new Date(2016,9,01,2,0,0,0), 
-        							      new Date(2016,9,01,3,0,0,0), 
-        							      new Date(2016,9,01,4,0,0,0), 
-        							      new Date(2016,9,01,5,0,0,0), 
-        							      new Date(2016,9,01,6,0,0,0), 
-        							      new Date(2016,9,01,7,0,0,0), 
-        							      new Date(2016,9,01,8,0,0,0), 
-        							      new Date(2016,9,01,9,0,0,0), 
-        							      new Date(2016,9,01,10,0,0,0), 
-        							      new Date(2016,9,01,11,0,0,0), 
-        							      new Date(2016,9,01,12,0,0,0), 
-        							      new Date(2016,9,01,13,0,0,0), 
-        							      new Date(2016,9,01,14,0,0,0), 
-        							      new Date(2016,9,01,15,0,0,0), 
-        							      new Date(2016,9,01,16,0,0,0), 
-        							      new Date(2016,9,01,17,0,0,0), 
-        							      new Date(2016,9,01,18,0,0,0), 
-        							      new Date(2016,9,01,19,0,0,0), 
-        							      new Date(2016,9,01,20,0,0,0), 
-        							      new Date(2016,9,01,21,0,0,0), 
-        							      new Date(2016,9,01,22,0,0,0), 
-        							      new Date(2016,9,01,23,0,0,0), 
-        							      new Date(2016,9,02,0,0,0,0)] } */
-
       };
 	  var theDiv = document.getElementById('datadiv');
 	  theDiv.style.width  = "1000px";
