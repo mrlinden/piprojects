@@ -80,7 +80,7 @@ $selectedDate = filter_input(INPUT_GET,"d",FILTER_SANITIZE_STRING);
 if (!empty($selectedDate) && validateDate($selectedDate)) {
 	// A valid date is given. Display visits for that day 
 	$dblist = $visits->getVisitsPerMinute($selectedDate);
-	$arraylist = $list->fetchAll();
+	$arraylist = $dblist->fetchAll();
 	echo $templates->render('day', ['list' => $arraylist, 'date' => $selectedDate]);
 
 } else {
