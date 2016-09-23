@@ -167,7 +167,7 @@ try:
                         
             if (allButtonsPressed):
                 allButtonsPressedCnt = allButtonsPressedCnt + 1
-		
+        
             if (allButtonsPressedCnt > 2):
                 log("Shutting down")
                 done = True
