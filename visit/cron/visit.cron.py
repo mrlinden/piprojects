@@ -42,7 +42,7 @@ def actOnSensor(gpioIn):
 
 
 # Program start
-logFile = open("/var/visit.log", "w")
+logFile = open("/var/log/visit.log", "w")
 log("Started Visit sensor service\n\n")
 
 GPIO.setmode(GPIO.BCM)
