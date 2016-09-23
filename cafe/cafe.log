@@ -1,0 +1,19 @@
+Started Cafe button and relay controller
+
+
+Setup GPIO nr 6 as output
+Setup GPIO nr 12 as output
+Setup GPIO nr 13 as output
+Setup GPIO nr 19 as output
+Setup GPIO nr 16 as output
+Setup GPIO nr 26 as output
+Setup GPIO nr 20 as output
+Setup GPIO nr 21 as output
+Setup GPIO nr 22 as output
+Setup GPIO nr 23 as output
+Setup GPIO nr 24 as output
+Setup GPIO nr 17 as input
+Setup GPIO nr 18 as input
+Setup GPIO nr 27 as input
+Pressed button 2. Change from preset 6 to preset 4
+Pressed button 2. Change from preset 4 to preset 6
