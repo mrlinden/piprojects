@@ -3,7 +3,7 @@
 # Copyright Marcus Lindén 2016
 # Script that reads the GPIO inputs and counts the number of GPIO changes
 
-import MySQLdb as mdb
+#import MySQLdb as mdb
 import sys
 import RPi.GPIO as GPIO
 import time
