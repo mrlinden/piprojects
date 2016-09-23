@@ -37,7 +37,7 @@ def actOnSensor(gpioIn):
 
         if (GPIO.input(gpioIn)):
             sensorCnt[sensorNr] = sensorCnt[sensorNr] + 1
-            log ("Sensor %d opened! Total counts this interval: %d." % sensorNr, sensorCnt[sensorNr])
+            log ("Sensor %d opened! Total counts this interval: %d." % (sensorNr, sensorCnt[sensorNr]))
         else:
             log ("Sensor %d closed!" % sensorNr)
 
