@@ -23,6 +23,7 @@ sensorCnt = [0, 0, 0, 0]
 # Some functions
 def log(message):
     if (logging):
+        print(message + "\n")
         logFile.write(message + "\n")
         logFile.flush()
 
