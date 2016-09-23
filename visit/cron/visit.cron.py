@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Copyright Marcus Lindén 2016
-# Script that reads the GPIO inputs and counts the number of GPIO changes
+# Script that reads the GPIO inputs and counts the number of GPIO sensor openings
 
-#import MySQLdb as mdb
+import MySQLdb as mdb
 import sys
 import RPi.GPIO as GPIO
+import datetime
 import time
 import os
 
@@ -54,9 +55,22 @@ for gpioInNr in ALL_GPIO_IN:
 
 try:
     while not done:
+        intervalStart = datetime.datetime.now()
+        intervalStop = datetime.datetime.now()
         time.sleep(10)
-        log ("Store counts for interval. sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sensorCnt[0], sensorCnt[1], sensorCnt[2], sensorCnt[3]))
+        log ("Store the count for interval. sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sensorCnt[0], sensorCnt[1], sensorCnt[2], sensorCnt[3]))
         
+        # open database @todo pick up from config file!!!
+        con = mdb.connect('localhost', 'visits', 'root', 'linden1mysql')
+        cur = con.cursor(mdb.cursors.DictCursor)
+            
+        #example; INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES ('2016-09-23 12:00:00', '2016-09-23 12:05:00', '32', '2', '7', '8');
+        sql_insert = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES ('%s',CURRENT_TIMESTAMP,'%d','%d','%d','%d')"            
+        addedLines = cur.execute(sql_insert, (intervalStart.strftime(dateformat), intervalStop.strftime(dateformat), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
+        if (addedLines != 1):
+            log("ERROR. Did not add 1 line to database as expected. Result was " + str(addedLines) + "...")
+        con.commit()
+
 except mdb.Error, e:
 
     log ("Error %d: %s" % (e.args[0],e.args[1]))
