@@ -35,7 +35,15 @@ Just a simple project for my pi
   sudo usermod -a -G www-data pi
 
   do the same for /var/www/html
-  
+
+8. Install python, python mysql and pri for gpio support     ????????????? needed????
+  sudo apt-get install python  (probably already installed)
+  sudo apt-get install python-dev   (got some missing libs here) 
+  sudo apt-get install python-pip
+  sudo easy_install -U distribute
+  sudo pip install rpi.gpio
+  sudo apt-get install python-mysqldb
+
 8 Git checkout 
   in /home/pi
   checkout piprojects from https://github.com/mrlinden/piprojects.git
