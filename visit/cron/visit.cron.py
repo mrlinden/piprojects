@@ -11,7 +11,8 @@ import time
 import os
 
 # Some constants
-ALL_GPIO_IN = [16, 26, 20, 21]
+#ALL_GPIO_IN = [16, 26, 20, 21]
+ALL_GPIO_IN = [21]
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 logging = True
 
@@ -70,10 +71,10 @@ try:
         #example; INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES ('2016-09-23 12:00:00', '2016-09-23 12:05:00', '32', '2', '7', '8');
         sql_insert = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES (%s,%s,%s,%s,%s,%s)"            
         log ("Try SQL: %s \n" % (sql_insert))
-        addedLines = cur.execute(sql_insert, (intervalStart.strftime(DATE_FORMAT ), intervalStop.strftime(DATE_FORMAT ), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
-        if (addedLines != 1):
-            log("ERROR. Did not add 1 line to database as expected. Result was " + str(addedLines) + "...")
-        con.commit()
+        #addedLines = cur.execute(sql_insert, (intervalStart.strftime(DATE_FORMAT ), intervalStop.strftime(DATE_FORMAT ), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
+        #if (addedLines != 1):
+        #    log("ERROR. Did not add 1 line to database as expected. Result was " + str(addedLines) + "...")
+        #con.commit()
         
         sensorCnt = [0, 0, 0, 0]
         intervalStart = intervalStop
