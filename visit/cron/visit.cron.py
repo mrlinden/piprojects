@@ -62,16 +62,16 @@ try:
         log ("Store the count for interval. sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sensorCnt[0], sensorCnt[1], sensorCnt[2], sensorCnt[3]))
         
         # open database @todo pick up from config file!!!
-        con = mdb.connect('localhost', 'visits', 'root', 'linden1mysql')
+        con = mdb.connect('localhost', 'root', 'linden1mysql', 'visits')
         cur = con.cursor(mdb.cursors.DictCursor)
             
         #example; INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES ('2016-09-23 12:00:00', '2016-09-23 12:05:00', '32', '2', '7', '8');
         sql_insert = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES ('%s',CURRENT_TIMESTAMP,'%d','%d','%d','%d')"            
         log ("Try SQL: %s \n" % (sql_insert))
-        #addedLines = cur.execute(sql_insert, (intervalStart.strftime(dateformat), intervalStop.strftime(dateformat), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
-        #if (addedLines != 1):
-        #    log("ERROR. Did not add 1 line to database as expected. Result was " + str(addedLines) + "...")
-        #con.commit()
+        addedLines = cur.execute(sql_insert, (intervalStart.strftime(dateformat), intervalStop.strftime(dateformat), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
+        if (addedLines != 1):
+            log("ERROR. Did not add 1 line to database as expected. Result was " + str(addedLines) + "...")
+        con.commit()
         
         sensorCnt = [0, 0, 0, 0]
         intervalStart = intervalStop
