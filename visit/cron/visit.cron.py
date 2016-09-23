@@ -12,7 +12,7 @@ import os
 
 # Some constants
 #ALL_GPIO_IN = [16, 26, 20, 21]
-ALL_GPIO_IN = [21]
+ALL_GPIO_IN = [16]
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 logging = True
 
