@@ -28,10 +28,10 @@ sensorCnt = [0, 0, 0, 0]
 # Some configuration
 config = ConfigParser()
 config.read('../config.ini')
-db_host     = config['database']['db_host']
-db_name     = config['database']['db_name']
-db_user     = config['database']['db_user']
-db_password = config['database']['db_password']
+db_host     = config.get('database','db_host')
+db_name     = config.get('database','db_name')
+db_user     = config.get('database','db_user')
+db_password = config.get('database','db_password')
 
 # Some functions
 def log(message):
