@@ -1,0 +1,2 @@
+* * * * *  /home/pi/piprojects/visit/cron/visit.cron.sh >/dev/null 2>&1
+0 1 * * *  /home/pi/piprojects/cron/update.cron.sh >/dev/null 2>&1

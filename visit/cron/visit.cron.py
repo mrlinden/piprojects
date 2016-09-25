@@ -9,10 +9,14 @@ import RPi.GPIO as GPIO
 import datetime
 import time
 import os
+try:
+    from configparser import ConfigParser
+except ImportError:
+    from ConfigParser import ConfigParser  # ver. < 3.0
 
 # Some constants
-#ALL_GPIO_IN = [16, 26, 20, 21]
-ALL_GPIO_IN = [16]
+ALL_GPIO_IN = [16, 26, 20, 21]
+#ALL_GPIO_IN = [16]
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 logging = True
 
@@ -20,6 +24,14 @@ logging = True
 done = False
 con = False
 sensorCnt = [0, 0, 0, 0]
+
+# Some configuration
+config = ConfigParser()
+config.read('../config.ini')
+db_host     = config.get('db_host')
+db_name     = config.get('db_name')
+db_user     = config.get('db_user')
+db_password = config.get('db_password')
 
 # Some functions
 def log(message):
@@ -54,27 +66,24 @@ GPIO.setmode(GPIO.BCM)
 for gpioInNr in ALL_GPIO_IN:
     log ("Setup GPIO nr %s as input" % gpioInNr)
     GPIO.setup(gpioInNr, GPIO.IN, pull_up_down = GPIO.PUD_OFF )
-    GPIO.add_event_detect(gpioInNr, GPIO.BOTH, callback=actOnSensor, bouncetime=20)
+    GPIO.add_event_detect(gpioInNr, GPIO.RISING, callback=actOnSensor, bouncetime=20)
 
 try:
     intervalStart = datetime.datetime.now()
     
     while not done:
-        time.sleep(10)
+        time.sleep(60)
         intervalStop = datetime.datetime.now()
         log ("Store the count for interval. sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sensorCnt[0], sensorCnt[1], sensorCnt[2], sensorCnt[3]))
         
-        # open database @todo pick up from config file!!!
-        con = mdb.connect('localhost', 'root', 'linden1mysql', 'visits')
+        con = mdb.connect(db_host, db_user, db_password, db_name)
         cur = con.cursor(mdb.cursors.DictCursor)
             
-        #example; INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES ('2016-09-23 12:00:00', '2016-09-23 12:05:00', '32', '2', '7', '8');
         sql_insert = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES (%s,%s,%s,%s,%s,%s)"            
-        log ("Try SQL: %s \n" % (sql_insert))
-        #addedLines = cur.execute(sql_insert, (intervalStart.strftime(DATE_FORMAT ), intervalStop.strftime(DATE_FORMAT ), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
-        #if (addedLines != 1):
-        #    log("ERROR. Did not add 1 line to database as expected. Result was " + str(addedLines) + "...")
-        #con.commit()
+        addedLines = cur.execute(sql_insert, (intervalStart.strftime(DATE_FORMAT ), intervalStop.strftime(DATE_FORMAT ), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
+        if (addedLines != 1):
+            log("ERROR. Did not add 1 line to database as expected. \nSQL was " + sql_insert + " \nResult was " + str(addedLines) + "...")
+        con.commit()
         
         sensorCnt = [0, 0, 0, 0]
         intervalStart = intervalStop

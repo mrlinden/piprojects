@@ -1,5 +1,5 @@
 #!/bin/sh
-# script that is called by crontab to start the python script that loops and controls GPIO output
+# script that is called by crontab to start the python script that loops and controls GPIO input
 
 SERVICE='visit.cron.py'
  
