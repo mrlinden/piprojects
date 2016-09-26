@@ -11,10 +11,12 @@ class Visits
         $this->db = $db;
     }
 
+	/* Get a list of all days and the number of visits for each day */    
     public function getVisitsPerDay() {
         return $this->db->query('SELECT visits, date, EXTRACT(YEAR FROM date) AS y, EXTRACT(MONTH FROM date) AS m, EXTRACT(DAY FROM date) AS d FROM daytable');
     }
 
+	/* Get a list of all visits per minute reported for given date */    
     public function getVisitsPerMinute($date) {
     	$sqlQuery = "SELECT 
     			PreAgg.intervalStop,
@@ -46,6 +48,24 @@ class Visits
     	return $this->db->query($sqlQuery);
     }
     
+    /* Get the sum of all visits for given date */
+    public function getSumOfVisits($date) {
+    	$sqlQuery = "SELECT
+    			@Sum  := @Sum + PreAgg.doorA + PreAgg.doorB + PreAgg.doorC + PreAgg.doorD AS visits
+		    	FROM ( SELECT
+    					MT.intervalStop,
+	    				MT.doorA,
+	    				MT.doorB,
+	    				MT.doorC,
+	    				MT.doorD
+	    				FROM `minutetable` AS MT
+	    				WHERE DATE(MT.intervalStop)='".$date."'
+	    			) AS PreAgg,
+	    		( select @Sum := 0) as SqlVars";
+    	return $this->db->query($sqlQuery);
+    }
+    
+    /* Get difference in years between last and first visit */
     public function getNrOfYears() {
     	$list = $this->db->query("SELECT MIN(date) least, MAX(date) max FROM daytable");
 		$nrYears = 0;
@@ -53,6 +73,11 @@ class Visits
     		$nrYears = 1 + ($row['max'] - $row['least']);
     	}
     	return $nrYears;
+    }
+    
+    /* Store the total number of visits for given date */
+    public function storeVisits($date) {
+    	
     }
 }
 
