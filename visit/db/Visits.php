@@ -62,7 +62,14 @@ class Visits
 	    				WHERE DATE(MT.intervalStop)='".$date."'
 	    			) AS PreAgg,
 	    		( select @Sum := 0) as SqlVars";
-    	return $this->db->query($sqlQuery);
+    	
+    	$res = $this->db->query($sqlQuery);
+    	
+    	$nrVisits = 0;
+    	foreach ($res as $row) {
+    		$nrVisits = $row['visits'];
+    	}
+    	return $nrVisits;
     }
     
     /* Get difference in years between last and first visit */
