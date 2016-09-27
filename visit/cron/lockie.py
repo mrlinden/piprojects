@@ -55,7 +55,7 @@ try:
         row = cur.fetchone()
         if (row != None):
             sensorDayTotal = row['visits']
-            log("Exist in daytable. Nr was " + sensorDayTotal)
+            log("Exist in daytable. Nr was " + str(sensorDayTotal))
 
         sensorDayTotal = sensorDayTotal + 1
 
