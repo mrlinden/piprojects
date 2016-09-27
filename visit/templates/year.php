@@ -9,10 +9,10 @@
 
   var dataRows = [
     <?php foreach ($list as $row): ?>
-      [ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>, <?= $row['d'] ?>), <?= $row['visits'] ?> ],
+      [ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>-1, <?= $row['d'] ?>), <?= $row['visits'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
-  dataRows.pop(); // Remove the last row (dummy value)
+  dataRows.pop();
 
   var nrYearsToShow = 0;
   if (dataRows.length > 0) {
