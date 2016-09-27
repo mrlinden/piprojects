@@ -57,11 +57,11 @@ try:
             sensorDayTotal = row['visits']
             log("Exist in daytable. Nr was " + str(sensorDayTotal))
 
-        sensorDayTotal = sensorDayTotal + 1
+        sensorDayTotal = sensorDayTotal + 10
 
-        sql_insert_day = "INSERT INTO `visits`.`daytable` (`date`, `visits`, `complete`) VALUES (%s,%s,0) ON DUPLICATE KEY UPDATE visits='%s', complete=0"
+        sql_insert_day = "INSERT INTO `visits`.`daytable` (`date`, `visits`) VALUES (%s,%s) ON DUPLICATE KEY UPDATE visits='%s'"
         addedLines = cur.execute(sql_insert_day, (intervalStart.strftime(DATE_FORMAT), sensorDayTotal, sensorDayTotal))
-        if (addedLines != 2):
+        if (addedLines < 1):
             log("ERROR. Did not update database as expected. \nSQL was " + sql_insert_day + " \nResult was " + str(addedLines) + "...")
         
         con.commit()
