@@ -2,7 +2,7 @@
 # script that is called by crontab to start the python script that loops and controls GPIO input
 
 SERVICE='visit.cron.py'
- 
+
 if ps ax | grep -v grep | grep $SERVICE > /dev/null
 then
     # Ony for troubleshooting. Log file size will increase a lot if this is uncommented
@@ -12,4 +12,5 @@ else
     echo "Starting $SERVICE ..."
     cd /home/pi/piprojects/visit/cron
     sudo python $SERVICE
+
 fi
