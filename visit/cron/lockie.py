@@ -54,7 +54,7 @@ try:
         cur.execute("SELECT * from `visits`.`daytable` WHERE `date` = %s", intervalStop.strftime(DATE_FORMAT))
         row = cur.fetchone()
         if (row != None):
-            log("Exist in daytable %d" + row['visits'])
+            log("Exist in daytable. Nr was " + str(row['visits']))
             sensorDayTotal = row['visits']
         
         sensorDayTotal = sensorDayTotal + 1
@@ -65,7 +65,7 @@ try:
             log("ERROR. Did not update database as expected. \nSQL was " + sql_insert_day + " \nResult was " + str(addedLines) + "...")
         
         con.commit()
-        
+        log ("written " + sensorDayTotal + " to database ")
         sensorCnt = [0, 0, 0, 0]
         intervalStart = intervalStop
     
