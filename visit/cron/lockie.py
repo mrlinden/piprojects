@@ -65,7 +65,7 @@ try:
             log("ERROR. Did not update database as expected. \nSQL was " + sql_insert_day + " \nResult was " + str(addedLines) + "...")
         
         con.commit()
-        log ("written " + sensorDayTotal + " to database ")
+        log ("written " + str(sensorDayTotal) + " to database ")
         sensorCnt = [0, 0, 0, 0]
         intervalStart = intervalStop
     
