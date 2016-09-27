@@ -47,6 +47,16 @@ class Visits
 	    		( select @SumABCD := 0, @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
     	return $this->db->query($sqlQuery);
     }
+
+    /* Get difference in years between last and first visit */
+    public function getNrOfYears() {
+    	$list = $this->db->query("SELECT MIN(date) least, MAX(date) max FROM daytable");
+    	$nrYears = 0;
+    	foreach ($list as $row) {
+    		$nrYears = 1 + ($row['max'] - $row['least']);
+    	}
+    	return $nrYears;
+    }
     
     /* Get the sum of all visits for given date */
     public function getSumOfVisits($date) {
@@ -72,19 +82,11 @@ class Visits
     	return $nrVisits;
     }
     
-    /* Get difference in years between last and first visit */
-    public function getNrOfYears() {
-    	$list = $this->db->query("SELECT MIN(date) least, MAX(date) max FROM daytable");
-		$nrYears = 0;
-    	foreach ($list as $row) {
-    		$nrYears = 1 + ($row['max'] - $row['least']);
-    	}
-    	return $nrYears;
-    }
-    
-    /* Store the total number of visits for given date */
-    public function storeVisits($date) {
-    	
+    /* Sum up and store yesterdays total number of visits */
+    public function sumUpYesterdaysVisits() {
+    	$yesterday = strtotime('yesterday');
+    	$nrVisits = getSumOfVisits($yesterday);
+    	#$sql_insert = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES (%s,%s,%s,%s,%s,%s)"
     }
 }
 
