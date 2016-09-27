@@ -54,9 +54,9 @@ try:
         cur.execute("SELECT * from `visits`.`daytable` WHERE `date` = %s", intervalStop.strftime(DATE_FORMAT))
         row = cur.fetchone()
         if (row != None):
-            log("Exist in daytable. Nr was " + str(row['visits']))
             sensorDayTotal = row['visits']
-        
+            log("Exist in daytable. Nr was " + sensorDayTotal)
+
         sensorDayTotal = sensorDayTotal + 1
 
         sql_insert_day = "INSERT INTO `visits`.`daytable` (`date`, `visits`, `complete`) VALUES (%s,%s,0) ON DUPLICATE KEY UPDATE visits='%s', complete=0"
