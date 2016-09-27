@@ -83,10 +83,11 @@ try:
         # get current stored value for day (re-read it instead of incrementing in this script 
         # to avoid getting tables out of sync if this script crashes)
         sensorDayTotal = 0
-        cur.execute("SELECT visits from 'visits'.'daytable' WHERE date='" + intervalStop.strftime(DATE_FORMAT) + "'")
+        cur.execute("SELECT visits from 'visits'.'daytable' WHERE date='%s'", intervalStop.strftime(DATE_FORMAT))
         row = cur.fetchone()
         if (row != None):
-            sensorDayTotal = row["visits"]
+            log("Exist in daytable %d" + row['visits'])
+            sensorDayTotal = row['visits']
         
         sensorDayTotal = sensorDayTotal + sensorCnt[0] + sensorCnt[1] + sensorCnt[2] + sensorCnt[3]
 
