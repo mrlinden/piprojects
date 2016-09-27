@@ -74,8 +74,6 @@ try:
     while not done:
         time.sleep(60)
         intervalStop = datetime.datetime.now()
-        if (intervalStart.date() != intervalStop.date()):
-            log("\nNew date " + intervalStop.date() + " -----------------------------")
         
         con = mdb.connect(db_host, db_user, db_password, db_name)
         cur = con.cursor(mdb.cursors.DictCursor)
@@ -90,7 +88,7 @@ try:
         
         sensorDayTotal = sensorDayTotal + sensorCnt[0] + sensorCnt[1] + sensorCnt[2] + sensorCnt[3]
 
-        log ("Store the count for interval. sensor A: %d sensor B: %d sensor C: %d sensor D: %d dayTotal %d" % (sensorCnt[0], sensorCnt[1], sensorCnt[2], sensorCnt[3], sensorDayTotal))
+        log (intervalStop + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d dayTotal %d" % (sensorCnt[0], sensorCnt[1], sensorCnt[2], sensorCnt[3], sensorDayTotal))
         
         sql_insert_minute = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES (%s,%s,%s,%s,%s,%s)"            
         addedLines = cur.execute(sql_insert_minute, (intervalStart.strftime(DATE_FORMAT ), intervalStop.strftime(DATE_FORMAT ), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
