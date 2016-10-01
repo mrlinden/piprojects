@@ -80,35 +80,40 @@ try:
     while not done:
         time.sleep(60)
         intervalStop = datetime.datetime.now()
+        # Transfer to local variables to not be interferred by new events
+        sCnt = sensorCnt;
+        sensorCnt = [0, 0, 0, 0]
+        sCntTot = arraySum(sCnt)
         
         con = mdb.connect(db_host, db_user, db_password, db_name)
         cur = con.cursor(mdb.cursors.DictCursor)
         
         # get current stored value for day (re-read it instead of incrementing local variable
         # in this script to avoid getting tables out of sync if this script is stoped/restarted)
-        sensorDayTotal = 0
+        oldSensorDayTotal = 0
         cur.execute("SELECT * from `visits`.`daytable` WHERE `date` = %s", intervalStop.strftime(DATE_FORMAT))
         row = cur.fetchone()
         if (row != None):
-            sensorDayTotal = row['visits']
+            oldSensorDayTotal = row['visits']
         
-        sensorDayTotal = sensorDayTotal + sensorCnt[0] + sensorCnt[1] + sensorCnt[2] + sensorCnt[3]
+        sensorDayTotal = oldSensorDayTotal + sCntTot
 
-        log (str(intervalStop) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d dayTotal %d" % (sensorCnt[0], sensorCnt[1], sensorCnt[2], sensorCnt[3], sensorDayTotal))
+        log (str(intervalStop) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d dayTotal %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3], sensorDayTotal))
         
-        sql_insert_minute = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES (%s,%s,%s,%s,%s,%s)"            
-        addedLines = cur.execute(sql_insert_minute, (intervalStart.strftime(DATE_TIME_FORMAT), intervalStop.strftime(DATE_TIME_FORMAT), sensorCnt[0],  sensorCnt[1],  sensorCnt[2],  sensorCnt[3]))
-        if (addedLines != 1):
-            log("ERROR. Did not add to database as expected. \nSQL was " + sql_insert_minute + " \nResult was " + str(addedLines) + "...")
-
-        sql_insert_day = "INSERT INTO `visits`.`daytable` (`date`, `visits`) VALUES (%s,%s) ON DUPLICATE KEY UPDATE visits='%s'"
-        addedLines = cur.execute(sql_insert_day, (intervalStart.strftime(DATE_FORMAT), sensorDayTotal, sensorDayTotal))
-        if (addedLines < 1):
-            log("ERROR. Did not update database as expected. \nSQL was " + sql_insert_day + " \nResult was " + str(addedLines) + "...")
+        if (sCntTot > 0):
+            sql_insert_minute = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES (%s,%s,%s,%s,%s,%s)"            
+            addedLines = cur.execute(sql_insert_minute, (intervalStart.strftime(DATE_TIME_FORMAT), intervalStop.strftime(DATE_TIME_FORMAT), sCnt[0], sCnt[1], sCnt[2], sCnt[3]))
+            if (addedLines != 1):
+                log("ERROR. Did not add to database as expected. \nSQL was " + sql_insert_minute + " \nResult was " + str(addedLines) + "...")
+        
+        if (oldSensorDayTotal != sensorDayTotal):
+            sql_insert_day = "INSERT INTO `visits`.`daytable` (`date`, `visits`) VALUES (%s,%s) ON DUPLICATE KEY UPDATE visits='%s'"
+            addedLines = cur.execute(sql_insert_day, (intervalStart.strftime(DATE_FORMAT), sensorDayTotal, sensorDayTotal))
+            if (addedLines < 1):
+                log("ERROR. Did not update database as expected. \nSQL was " + sql_insert_day + " \nResult was " + str(addedLines) + "...")
         
         con.commit()
         
-        sensorCnt = [0, 0, 0, 0]
         intervalStart = intervalStop
         
 except mdb.Error, e:
