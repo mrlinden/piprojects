@@ -11,7 +11,6 @@ import datetime
 import time
 import logging
 from logging.handlers import TimedRotatingFileHandler
-from _overlapped import NULL
 try:
     from configparser import ConfigParser
 except ImportError:
