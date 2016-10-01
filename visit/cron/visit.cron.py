@@ -44,7 +44,7 @@ def log(message):
                                                interval=1,
                                                backupCount=10)
             log.logger.addHandler(handler)
-        log.logger.info(message + "\n")
+        log.logger.info(message)
         
 def actOnSensor(gpioIn):
     global sensorCnt
