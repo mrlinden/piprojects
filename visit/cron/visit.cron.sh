@@ -9,6 +9,7 @@ then
     # echo "$SERVICE service running, everything is fine"
     cd /home/pi/piprojects/visit/cron
 else
+    date
     echo "Starting $SERVICE ..."
     cd /home/pi/piprojects/visit/cron
     sudo python $SERVICE
