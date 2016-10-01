@@ -66,14 +66,15 @@ def actOnSensor(gpioIn):
 # Program start
 log("Started Visit sensor service\n\n")
 GPIO.setmode(GPIO.BCM)
-
+con = False
+done = False
+    
 for gpioInNr in ALL_GPIO_IN:
     log ("Setup GPIO nr %s as input" % gpioInNr)
     GPIO.setup(gpioInNr, GPIO.IN, pull_up_down = GPIO.PUD_OFF )
     GPIO.add_event_detect(gpioInNr, GPIO.RISING, callback=actOnSensor, bouncetime=20)
 
 try:
-    done = False
     sensorCnt = [0, 0, 0, 0]
     intervalStart = datetime.datetime.now()
  
