@@ -84,7 +84,7 @@ try:
         # Transfer to local variables to not be interferred by new events
         sCnt = sensorCnt;
         sensorCnt = [0, 0, 0, 0]
-        sCntTot = arraySum(sCnt)
+        sCntTot = sum(sCnt)
         
         con = mdb.connect(db_host, db_user, db_password, db_name)
         cur = con.cursor(mdb.cursors.DictCursor)
