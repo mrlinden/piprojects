@@ -49,7 +49,7 @@ class Visits
     }
 
     /* Get difference in years between last and first visit */
-    public function getNrOfYears() {
+    public function getNrOfYearsFromFirstToLastVisit() {
     	$list = $this->db->query("SELECT MIN(date) least, MAX(date) max FROM daytable");
     	$nrYears = 0;
     	foreach ($list as $row) {
@@ -80,13 +80,6 @@ class Visits
     		$nrVisits = $row['visits'];
     	}
     	return $nrVisits;
-    }
-    
-    /* Sum up and store yesterdays total number of visits */
-    public function sumUpYesterdaysVisits() {
-    	$yesterday = strtotime('yesterday');
-    	$nrVisits = getSumOfVisits($yesterday);
-    	#$sql_insert = "INSERT INTO `visits`.`minutetable` (`intervalStart`, `intervalStop`, `doorA`, `doorB`, `doorC`, `doorD`) VALUES (%s,%s,%s,%s,%s,%s)"
     }
 }
 

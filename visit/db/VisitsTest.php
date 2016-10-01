@@ -21,7 +21,7 @@ foreach ($dayList as $row) {
 	}
 }
 
-print "Number of years; " . $visits->getNrOfYears(). " \n";
+print "Number of years; " . $visits->getNrOfYearsFromFirstToLastVisit(). " \n";
 
 print "Number of visits for 2016-09-25; " . $visits->getSumOfVisits("2016-09-25") . "\n";
 

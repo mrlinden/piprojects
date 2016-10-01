@@ -3,44 +3,51 @@
 # Copyright Marcus Lindén 2016
 # Script that reads the GPIO inputs and counts the number of GPIO sensor openings
 
-import MySQLdb as mdb
+import os
 import sys
+import MySQLdb as mdb
 import RPi.GPIO as GPIO
 import datetime
 import time
-import os
+import logging
+from logging.handlers import TimedRotatingFileHandler
+from _overlapped import NULL
 try:
     from configparser import ConfigParser
 except ImportError:
     from ConfigParser import ConfigParser  # ver. < 3.0
 
-# Some constants
+# Constants
 ALL_GPIO_IN = [16, 26, 20, 21]
-#ALL_GPIO_IN = [16]
 DATE_TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 DATE_FORMAT = "%Y-%m-%d"
 
-logging = True
-
-# Some global data
-done = False
-con = False
-sensorCnt = [0, 0, 0, 0]
-
-# Some configuration
+# Configuration
 config = ConfigParser()
 config.read('../config.ini')
 db_host     = config.get('database','db_host')
 db_name     = config.get('database','db_name')
 db_user     = config.get('database','db_user')
 db_password = config.get('database','db_password')
+logMode     = config.get('logging','log_mode')
+logPath     = config.get('logging','log_path')
 
 # Some functions
 def log(message):
-    if (logging):
+    if (logMode == "console"):
         print(message + "\n")
-        logFile.write(message + "\n")
-        logFile.flush()
+    elif (logMode == "file"):
+        if not hasattr(log, "logger"):
+            logger = logging.getLogger("Visit Log")
+            logger.setLevel(logging.INFO)
+            handler = TimedRotatingFileHandler(logPath,
+                                               when="midnight",
+                                               interval=1,
+                                               backupCount=10)
+            logger.addHandler(handler)
+            #log.logFile = open(logPath, "w")  # it doesn't exist yet, so initialize it
+        log.logger.info(message + "\n")
+        #log.logFile.flush()
 
 def actOnSensor(gpioIn):
     global sensorCnt
@@ -60,9 +67,7 @@ def actOnSensor(gpioIn):
 
 
 # Program start
-logFile = open("/var/log/visit.log", "w")
 log("Started Visit sensor service\n\n")
-
 GPIO.setmode(GPIO.BCM)
 
 for gpioInNr in ALL_GPIO_IN:
@@ -71,8 +76,10 @@ for gpioInNr in ALL_GPIO_IN:
     GPIO.add_event_detect(gpioInNr, GPIO.RISING, callback=actOnSensor, bouncetime=20)
 
 try:
+    done = False
+    sensorCnt = [0, 0, 0, 0]
     intervalStart = datetime.datetime.now()
-    
+ 
     while not done:
         time.sleep(60)
         intervalStop = datetime.datetime.now()
@@ -80,8 +87,8 @@ try:
         con = mdb.connect(db_host, db_user, db_password, db_name)
         cur = con.cursor(mdb.cursors.DictCursor)
         
-        # get current stored value for day (re-read it instead of incrementing in this script 
-        # to avoid getting tables out of sync if this script crashes)
+        # get current stored value for day (re-read it instead of incrementing local variable
+        # in this script to avoid getting tables out of sync if this script is stoped/restarted)
         sensorDayTotal = 0
         cur.execute("SELECT * from `visits`.`daytable` WHERE `date` = %s", intervalStop.strftime(DATE_FORMAT))
         row = cur.fetchone()

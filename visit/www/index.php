@@ -86,7 +86,7 @@ if (!empty($selectedDate) && validateDate($selectedDate)) {
 } else {
 	// bad or no date specified. Display calendar view
 	$list = $visits->getVisitsPerDay();
-	$nrYears = $visits->getNrOfYears();
+	$nrYears = $visits->getNrOfYearsFromFirstToLastVisit();
 	echo $templates->render('year', ['list' => $list, 'nrYears' => $nrYears]);
 }
 

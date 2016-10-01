@@ -5,12 +5,11 @@ SERVICE='visit.cron.py'
 
 if ps ax | grep -v grep | grep $SERVICE > /dev/null
 then
-    # Ony for troubleshooting. Log file size will increase a lot if this is uncommented
-    echo "$SERVICE service running, everything is fine"
+    # Log file size will increase a lot if next line is uncommented. Use for troubleshooting only
+    # echo "$SERVICE service running, everything is fine"
     cd /home/pi/piprojects/visit/cron
 else
     echo "Starting $SERVICE ..."
     cd /home/pi/piprojects/visit/cron
     sudo python $SERVICE
-
 fi
