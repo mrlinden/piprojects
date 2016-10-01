@@ -31,23 +31,21 @@ db_password = config.get('database','db_password')
 logMode     = config.get('logging','log_mode')
 logPath     = config.get('logging','log_path')
 
-# Some functions
+# Functions
 def log(message):
     if (logMode == "console"):
         print(message + "\n")
     elif (logMode == "file"):
-        if not hasattr(log, "logger"):
-            logger = logging.getLogger("Visit Log")
-            logger.setLevel(logging.INFO)
+        if (not hasattr(log, "logger")):
+            log.logger = logging.getLogger("Visit Log")
+            log.logger.setLevel(logging.INFO)
             handler = TimedRotatingFileHandler(logPath,
                                                when="midnight",
                                                interval=1,
                                                backupCount=10)
-            logger.addHandler(handler)
-            #log.logFile = open(logPath, "w")  # it doesn't exist yet, so initialize it
+            log.logger.addHandler(handler)
         log.logger.info(message + "\n")
-        #log.logFile.flush()
-
+        
 def actOnSensor(gpioIn):
     global sensorCnt
 
