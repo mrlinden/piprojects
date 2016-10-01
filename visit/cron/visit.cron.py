@@ -64,7 +64,7 @@ def actOnSensor(gpioIn):
 
 
 # Program start
-log("Started Visit sensor service\n\n")
+log(str(datetime.datetime.now()) + " Started Visit sensor service\n\n")
 GPIO.setmode(GPIO.BCM)
 con = False
 done = False
