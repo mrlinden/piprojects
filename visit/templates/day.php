@@ -1,6 +1,4 @@
-<?php $this->layout('template', ['title' => 'Besöksräknare '.$this->e($date),
-		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
-		'infotext2' => 'Notera att det går att zooma i diagrammet. Högerklicka för att zooma ut.'])?>
+<?php $this->layout('template', ['title' => 'Besöksräknare - '.$this->e($date)])?>
 
 <?php $this->start('script') ?>
   <script type="text/javascript">
@@ -71,8 +69,7 @@
 <?php $this->start('body') ?>
 	<div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
     <div class="space"></div>
-    <div class="infotext"><?=$this->e($infotext1)?></div>
-    <div class="infotext"><?=$this->e($infotext2)?></div>
+    <div class="infotext">Det g&aring;r att zooma i diagrammet. V&auml;nsterklicka och dra en rektangel runt det område du vill zooma in. H&ouml;gerklicka f&ouml;r att zooma ut igen.</div>
     <div class="space"></div>
     <div class="table">
   <table id="datatable">

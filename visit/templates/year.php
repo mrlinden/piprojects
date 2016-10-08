@@ -1,6 +1,4 @@
-<?php $this->layout('template', ['title' => 'Besöksräknare',
-		'infotext1' => 'In- och utpassager genom entre-dörrarna och dörren från innergården.',
-		'infotext2' => 'Notera att veckorna inleds med söndagen.'])?>
+<?php $this->layout('template', ['title' => 'Besöksräknare'])?>
 				
 <?php $this->start('script') ?>
   <script type="text/javascript">
