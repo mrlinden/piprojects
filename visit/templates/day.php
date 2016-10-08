@@ -13,7 +13,7 @@
       [ [<?= $row['h'] ?>,<?= $row['m'] ?>,0,0], <?= $row['doorDtot'] ?>, <?= $row['doorCtot'] ?>, <?= $row['doorBtot'] ?>, <?= $row['doorAtot'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
-  dataRows.pop(); // Remove the last row (dummy value)
+  dataRows.pop();
   
   function drawChart() {
       var data = new google.visualization.DataTable();
@@ -87,7 +87,7 @@
   </tr>
   <?php foreach ($list as $row): ?>
   <tr>
-    <td><?= $row['h'] ?>:<?= $row['m'] ?></td>
+    <td><?php if ($row['h'] < 10) { echo "0"; } ?><?= $row['h'] ?>:<?php if ($row['m'] < 10) { echo "0"; } ?><?= $row['m'] ?></td>
     <td><?= $row['doorA'] ?></td>
     <td><?= $row['doorB'] ?></td>
     <td><?= $row['doorC'] ?></td>
