@@ -71,6 +71,8 @@
     <div class="space"></div>
     <div class="infotext">Det g&aring;r att zooma i diagrammet. V&auml;nsterklicka och dra en rektangel runt det område du vill zooma in. H&ouml;gerklicka f&ouml;r att zooma ut igen.</div>
     <div class="space"></div>
+    <div class="space"></div>
+    <div class="space"></div>
     <div class="table">
   <table id="datatable">
   <tr>
