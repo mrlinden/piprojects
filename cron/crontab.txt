@@ -1,2 +1,2 @@
-* * * * *  /bin/sh /home/pi/piprojects/visit/cron/visit.cron.sh >>/home/pi/piprojects/log/visit.cron.log 2>&1
+*/10 * * * *  /bin/sh /home/pi/piprojects/visit/cron/visit.cron.sh >>/home/pi/piprojects/log/visit.cron.log 2>&1
 0 1 * * *  /bin/sh /home/pi/piprojects/cron/update.cron.sh >>/home/pi/piprojects/log/update.cron.log 2>&1

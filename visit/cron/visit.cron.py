@@ -79,7 +79,7 @@ try:
     intervalStart = datetime.datetime.now()
  
     while not done:
-        time.sleep(60)
+        time.sleep(600)
         intervalStop = datetime.datetime.now()
         # Transfer to local variables to not be interferred by new events
         sCnt = sensorCnt;
