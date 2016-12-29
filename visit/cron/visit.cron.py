@@ -79,7 +79,7 @@ try:
     intervalStart = datetime.datetime.now()
  
     while not done:
-        log ("seconds: " + intervalStart.second + "..\n")
+        log ("seconds: %d...\n" % (intervalStart.second))
         time.sleep(600)
         intervalStop = datetime.datetime.now()
         # Transfer to local variables to not be interferred by new events
