@@ -57,7 +57,7 @@
   create a symbolic link from /var/www/html to /home/pi/piprojects/visit/www
   
 12 Import database with myphpadmin
-  Create database "visits", slect it and import the content of the file db/visits.sql
+  Create database "visits", select it and import the content of the file db/visits.sql
 
   
 
