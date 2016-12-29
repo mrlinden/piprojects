@@ -3,6 +3,9 @@
 
 2 Setup wlan, locale, keyboard etc.
 
+  sudo apt-get install telnet
+  sudo apt-get install telnetd
+  
 3 install webserver
   sudo apt-get install lighttpd
   
@@ -51,9 +54,10 @@
   crontab -u pi ~/piprojects/cron/crontab.txt
   
 11 Deploy the application 
-  create a symbolic link from /var/www/html/visit to /home/pi/piprojects/visit/www
+  create a symbolic link from /var/www/html to /home/pi/piprojects/visit/www
   
-  
+12 Import database with myphpadmin
+  Create database "visits", slect it and import the content of the file db/visits.sql
 
   
 
