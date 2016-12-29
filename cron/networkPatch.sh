@@ -7,5 +7,5 @@ if grep -q wireless-power "/etc/network/interfacesML"; then
 else
 	echo "to be done"
 	sudo echo "wireless-power off" >> /etc/network/interfacesML
-	sudo /etc/init.d/networking restart
+	#sudo /etc/init.d/networking restart
 fi
