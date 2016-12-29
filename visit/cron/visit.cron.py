@@ -80,7 +80,7 @@ try:
  
     while not done:
         log ("seconds: %d...\n" % (intervalStart.second))
-        time.sleep(600)
+        time.sleep(600-intervalStart.second)
         intervalStop = datetime.datetime.now()
         # Transfer to local variables to not be interferred by new events
         sCnt = sensorCnt;
