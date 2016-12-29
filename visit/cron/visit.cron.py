@@ -79,8 +79,11 @@ try:
     intervalStart = datetime.datetime.now()
  
     while not done:
-        log ("seconds: %d...\n" % (intervalStart.second))
-        time.sleep(600-intervalStart.second)
+        sleepSeconds = 600-intervalStart.second
+        
+        log (str(intervalStart) + "sleep " + str(sleepSeconds) + " (seconds of interval start: %d)...\n" % (intervalStart.second))
+        
+        time.sleep(sleepSeconds)
         intervalStop = datetime.datetime.now()
         # Transfer to local variables to not be interferred by new events
         sCnt = sensorCnt;
