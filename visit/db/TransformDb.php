@@ -9,9 +9,12 @@ $sqlQuery = "SELECT * from `minutetable`";
 $old = $db->query($sqlQuery);
 
 foreach ($old as $row) {
-	
-	
 		print "date: " . $row['intervalStop'] . " A: " . $row['doorA'] . " B: " . $row['doorB'] . " C: " . $row['doorC'] . " D: " . $row['doorD'] . " visits \n" ;
-	}
+
+	$date = floor($row['intervalStop']/600)*600;
+	
+	print "floor " . $date;
+	
+}
 
 ?>
