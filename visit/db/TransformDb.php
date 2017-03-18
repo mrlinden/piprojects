@@ -45,8 +45,7 @@ foreach ($old as $row) {
 	}
 	
 	print "SQL: " . $sqlWrite . "\n";
-	print "Result: " . $db->query($sqlWrite) . "\n";
-	
+	$db->query($sqlWrite);
 }
 
 ?>
