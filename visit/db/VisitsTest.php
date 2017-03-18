@@ -25,6 +25,6 @@ print "Number of years; " . $visits->getNrOfYearsFromFirstToLastVisit(). " \n";
 
 print "Number of visits for 2016-09-25; " . $visits->getSumOfVisits("2016-09-25") . "\n";
 
-
+print "getVisitsPerMinute2 2016-09-25;".  $visits->getVisitsPerMinute2("2016-09-25") . "\n";
 
 ?>

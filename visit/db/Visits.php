@@ -81,6 +81,57 @@ class Visits
     	}
     	return $nrVisits;
     }
+    
+    
+
+    /* Get a list of all visits per minute reported for given date */
+    public function getVisitsPerMinute2($date) {
+    	$sqlQuery = "SELECT
+    			PreA.date,
+    			TIME(PreA.date) AS time,
+    			EXTRACT(HOUR FROM PreA.date) AS h,
+    			EXTRACT(MINUTE FROM PreA.date) AS m,
+    			EXTRACT(SECOND FROM PreA.date) AS s,
+    			PreA.count,
+    			PreB.count,
+    			PreC.count,
+    			PreD.count,
+    			@SumABCD  := PreA.count + PreB.count + PreC.count + PreD.count AS visits,
+    			@PrevSumA := @PrevSumA + PreA.count AS doorAtot,
+		    	@PrevSumB := @PrevSumB + PreB.count AS doorBtot,
+		    	@PrevSumC := @PrevSumC + PreC.count AS doorCtot,
+		    	@PrevSumD := @PrevSumD + PreD.count AS doorDtot,
+		    	@PrevSumVisits := @PrevSumVisits + PreA.count + PreB.count + PreC.count + PreD.count AS visitsSum
+		    	FROM ( SELECT
+    					MT.date,
+	    				MT.id,
+	    				MT.count
+	    				FROM `minutetable` AS MT
+	    				WHERE DATE(MT.date)='".$date."' AND MT.id='1'
+	    				ORDER BY MT.date
+	    			) AS PreA,
+	    			( SELECT
+	    				MT.count
+	    				FROM `minutetable` AS MT
+	    				WHERE DATE(MT.date)='".$date."' AND MT.id='2'
+	    				ORDER BY MT.date
+	    			) AS PreB,		
+	    			( SELECT
+	    				MT.count
+	    				FROM `minutetable` AS MT
+	    				WHERE DATE(MT.date)='".$date."' AND MT.id='3'
+	    				ORDER BY MT.date
+	    			) AS PreC,		
+	    			( SELECT
+	    				MT.count
+	    				FROM `minutetable` AS MT
+	    				WHERE DATE(MT.date)='".$date."' AND MT.id='4'
+	    				ORDER BY MT.date
+	    			) AS PreD	
+	    		( select @SumABCD := 0, @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
+    	return $this->db->query($sqlQuery);
+    }
+    
 }
 
 ?>
