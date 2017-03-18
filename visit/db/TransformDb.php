@@ -4,12 +4,9 @@ include 'Visits.php';
 
 $db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
 
-// Create an instance
-$visits = new Cupolen\Visits($db);
-
 // Get the old content
 $sqlQuery = "SELECT * from `minutetable`";
-$old = db->query($sqlQuery);
+$old = $db->query($sqlQuery);
 
 foreach ($old as $row) {
 	
