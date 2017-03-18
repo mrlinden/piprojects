@@ -22,25 +22,25 @@ foreach ($old as $row) {
 	$addedItem = 0;
 	
 	if ($a != 0) {
-		$sqlWrite .= " ('".$date."'), 1, ".$a.")";
+		$sqlWrite .= " ('".$date."', 1, ".$a.")";
 		$addedItem += 1;
 	}
 
 	if ($b != 0) {
 		if ($addedItem > 0) $sqlWrite .= ", ";
-		$sqlWrite .= " ('".$date."'), 2, ".$b.")";
+		$sqlWrite .= " ('".$date."', 2, ".$b.")";
 		$addedItem += 1;
 	}
 
 	if ($c != 0) {
 		if ($addedItem > 0) $sqlWrite .= ", ";
-		$sqlWrite .= " ('".$date."'), 3, ".$c.")";
+		$sqlWrite .= " ('".$date."', 3, ".$c.")";
 		$addedItem += 1;
 	}
 
 	if ($d != 0) {
 		if ($addedItem > 0) $sqlWrite .= ", ";
-		$sqlWrite .= " ('".$date."'), 4, ".$d.")";
+		$sqlWrite .= " ('".$date."', 4, ".$d.")";
 		$addedItem += 1;
 	}
 	
