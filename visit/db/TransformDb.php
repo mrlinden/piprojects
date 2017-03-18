@@ -5,7 +5,7 @@ include 'Visits.php';
 $db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
 
 // Get the old content
-$sqlQuery = "SELECT UNIX_TIMESTAMP(intervalStop), dorA, doorB, doorC, doorD from `minutetable`";
+$sqlQuery = "SELECT UNIX_TIMESTAMP(intervalStop), doorA, doorB, doorC, doorD from `minutetable`";
 $old = $db->query($sqlQuery);
 
 foreach ($old as $row) {
