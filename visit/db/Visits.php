@@ -92,22 +92,22 @@ class Visits
 						EXTRACT(HOUR FROM MT2.date) AS h,
 						EXTRACT(MINUTE FROM MT2.date) AS m,
 						EXTRACT(SECOND FROM MT2.date) AS s,
-						MT2.countA,
-						MT2.countB,
-						MT2.countC,
-						MT2.countD,
-						@SumABCD  := MT2.countA + MT2.countB + MT2.countC + MT2.countD AS visits,
-						@PrevSumA := @PrevSumA + MT2.countA AS doorAtot,
-						@PrevSumB := @PrevSumB + MT2.countB AS doorBtot,
-						@PrevSumC := @PrevSumC + MT2.countC AS doorCtot,
-						@PrevSumD := @PrevSumD + MT2.countD AS doorDtot,
-						@PrevSumVisits := @PrevSumVisits + MT2.countA + MT2.countB + MT2.countC + MT2.countD AS visitsSum
+						MT2.doorA,
+						MT2.doorB,
+						MT2.doorC,
+						MT2.doorD,
+						@SumABCD  := MT2.doorA + MT2.doorB + MT2.doorC + MT2.doorD AS visits,
+						@PrevSumA := @PrevSumA + MT2.doorA AS doorAtot,
+						@PrevSumB := @PrevSumB + MT2.doorB AS doorBtot,
+						@PrevSumC := @PrevSumC + MT2.doorC AS doorCtot,
+						@PrevSumD := @PrevSumD + MT2.doorD AS doorDtot,
+						@PrevSumVisits := @PrevSumVisits + MT2.doorA + MT2.doorB + MT2.doorC + MT2.doorD AS visitsSum
 						FROM (SELECT
     						MT.date,
-					    	sum(CASE WHEN MT.id = 1 THEN MT.count ELSE 0 END) as 'countA',
-    						sum(CASE WHEN MT.id = 2 THEN MT.count ELSE 0 END) as 'countB',
-    						sum(CASE WHEN MT.id = 3 THEN MT.count ELSE 0 END) as 'countC',
-    						sum(CASE WHEN MT.id = 4 THEN MT.count ELSE 0 END) as 'countD'
+					    	sum(CASE WHEN MT.id = 1 THEN MT.count ELSE 0 END) as 'doorA',
+    						sum(CASE WHEN MT.id = 2 THEN MT.count ELSE 0 END) as 'doorB',
+    						sum(CASE WHEN MT.id = 3 THEN MT.count ELSE 0 END) as 'doorC',
+    						sum(CASE WHEN MT.id = 4 THEN MT.count ELSE 0 END) as 'doorD'
    	    					FROM `minutetable` AS MT
 	    					WHERE DATE(MT.date)='".$date."'
                         	GROUP BY MT.date
