@@ -117,10 +117,6 @@ class Visits
     	return $this->db->query($sqlQuery);
     }   
     
-    public function getMinuteTable() {
-    	$sqlQuery = "SELECT * from `minutetable`";
-    	return $this->db->query($sqlQuery);
-    }
     
 }
 ?>
