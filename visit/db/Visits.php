@@ -116,5 +116,11 @@ class Visits
 						( select @SumABCD := 0, @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
     	return $this->db->query($sqlQuery);
     }   
+    
+    public function getMinuteTable() {
+    	$sqlQuery = "SELECT * from `minutetable`";
+    	return $this->db->query($sqlQuery);
+    }
+    
 }
 ?>
