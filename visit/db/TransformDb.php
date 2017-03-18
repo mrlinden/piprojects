@@ -24,40 +24,33 @@ foreach ($old as $row) {
 	if ($a != 0) {
 		$sqlWrite .= " (FROM_UNIXTIME(".$date."), 1, ".$a.")";
 		$addedItem += 1;
-		print "Write A" . $a;
 	}
 
 	if ($b != 0) {
-		if ($addedItem > 0) $sqlWrite .= ",\n";
+		if ($addedItem > 0) $sqlWrite .= ", ";
 		$sqlWrite .= " (FROM_UNIXTIME(".$date."), 2, ".$b.")";
 		$addedItem += 1;
-		
-		print "Write B" . $b;
 	}
 
 	if ($c != 0) {
-		if ($addedItem > 0) $sqlWrite .= ",\n";
+		if ($addedItem > 0) $sqlWrite .= ", ";
 		$sqlWrite .= " (FROM_UNIXTIME(".$date."), 3, ".$c.")";
 		$addedItem += 1;
-		
-		print "Write C" . $c;
 	}
 
 	if ($d != 0) {
-		if ($addedItem > 0) $sqlWrite .= ",\n";
+		if ($addedItem > 0) $sqlWrite .= ", ";
 		$sqlWrite .= " (FROM_UNIXTIME(".$date."), 4, ".$d.")";
 		$addedItem += 1;
-		
-		print "Write D" . $d;
 	}
 	
 	print "SQL: " . $sqlWrite;
 	
-	#if ($db->query($sqlWrite) === TRUE) {
-	#	echo "New record created successfully";
-	#} else {
-#		echo "Error: " . $sql . "<br>" . $conn->error;
-#	}
+	if ($db->query($sqlWrite) === TRUE) {
+		echo "New record created successfully";
+	} else {
+		echo "Error: " . $db->error;
+	}
 	
 }
 
