@@ -32,8 +32,9 @@ $db2 = new PDO('mysql:host=localhost;dbname=visits2;charset=utf8', 'root', 'lind
 // Create an instance
 $visits2 = new Cupolen\Visits($db);
 $minuteList = $visits2->getVisitsPerMinute2("2016-09-25");
+$arraylist = $dblist->fetchAll();
 
-foreach ($minuteList as $row2) {
+foreach ($arraylist as $row2) {
 	print "getVisitsPerMinute2 - Interval : " . $row2['h'] . "-" . $row2['m'] . "-" . $row2['s'] . " had " . $row2['visits'] . " visits \n" ;
 }
 ?>
