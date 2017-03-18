@@ -49,7 +49,7 @@ foreach ($old as $row) {
 	if ($db->query($sqlWrite) === TRUE) {
 		echo "New record created successfully";
 	} else {
-		echo "Error: " . $db->error;
+		echo "\nError: Failed to write " . $sqlWrite;
 	}
 	
 }
