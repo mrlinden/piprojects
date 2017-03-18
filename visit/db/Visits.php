@@ -17,7 +17,7 @@ class Visits
     }
 
 	/* Get a list of all visits per minute reported for given date */    
-    public function getVisitsPerMinute($date) {
+    public function getVisitsPerMinuteOld($date) {
     	$sqlQuery = "SELECT 
     			PreAgg.intervalStop,
     			TIME(PreAgg.intervalStop) AS time,
@@ -85,7 +85,7 @@ class Visits
     
 
     /* Get a list of all visits per minute reported for given date */
-    public function getVisitsPerMinute2($date) {
+    public function getVisitsPerMinute($date) {
     	$sqlQuery = "SELECT
 						MT2.date,
 						TIME(MT2.date) AS time,
@@ -108,7 +108,7 @@ class Visits
     						sum(CASE WHEN MT.id = 2 THEN MT.count ELSE 0 END) as 'doorB',
     						sum(CASE WHEN MT.id = 3 THEN MT.count ELSE 0 END) as 'doorC',
     						sum(CASE WHEN MT.id = 4 THEN MT.count ELSE 0 END) as 'doorD'
-   	    					FROM `minutetable` AS MT
+   	    					FROM `sensordata` AS MT
 	    					WHERE DATE(MT.date)='".$date."'
                         	GROUP BY MT.date
                         	ORDER BY MT.date
