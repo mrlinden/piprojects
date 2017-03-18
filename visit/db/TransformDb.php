@@ -44,13 +44,8 @@ foreach ($old as $row) {
 		$addedItem += 1;
 	}
 	
-	print "SQL: " . $sqlWrite;
-	
-	if ($db->query($sqlWrite) === TRUE) {
-		echo "New record created successfully";
-	} else {
-		echo "\nError: Failed to write " . $sqlWrite;
-	}
+	print "SQL: " . $sqlWrite . "\n";
+	print "Result: " . $db->query($sqlWrite) . "\n";
 	
 }
 
