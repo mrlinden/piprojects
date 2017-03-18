@@ -87,21 +87,21 @@ class Visits
     /* Get a list of all visits per minute reported for given date */
     public function getVisitsPerMinute2($date) {
     	$sqlQuery = "SELECT
-						Pre.date,
-						TIME(Pre.date) AS time,
-						EXTRACT(HOUR FROM Pre.date) AS h,
-						EXTRACT(MINUTE FROM Pre.date) AS m,
-						EXTRACT(SECOND FROM Pre.date) AS s,
-						Pre.countA,
-						Pre.countB,
-						Pre.countC,
-						Pre.countD,
-						@SumABCD  := Pre.countA + Pre.countB + Pre.countC + Pre.countD AS visits,
-						@PrevSumA := @PrevSumA + Pre.countA AS doorAtot,
-						@PrevSumB := @PrevSumB + Pre.countB AS doorBtot,
-						@PrevSumC := @PrevSumC + Pre.countC AS doorCtot,
-						@PrevSumD := @PrevSumD + Pre.countD AS doorDtot,
-						@PrevSumVisits := @PrevSumVisits + Pre.countA + Pre.countB + Pre.countC + Pre.countD AS visitsSum
+						MT2.date,
+						TIME(MT2.date) AS time,
+						EXTRACT(HOUR FROM MT2.date) AS h,
+						EXTRACT(MINUTE FROM MT2.date) AS m,
+						EXTRACT(SECOND FROM MT2.date) AS s,
+						MT2.countA,
+						MT2.countB,
+						MT2.countC,
+						MT2.countD,
+						@SumABCD  := MT2.countA + MT2.countB + MT2.countC + MT2.countD AS visits,
+						@PrevSumA := @PrevSumA + MT2.countA AS doorAtot,
+						@PrevSumB := @PrevSumB + MT2.countB AS doorBtot,
+						@PrevSumC := @PrevSumC + MT2.countC AS doorCtot,
+						@PrevSumD := @PrevSumD + MT2.countD AS doorDtot,
+						@PrevSumVisits := @PrevSumVisits + MT2.countA + MT2.countB + MT2.countC + MT2.countD AS visitsSum
 						FROM (SELECT
     						MT.date,
 					    	sum(CASE WHEN MT.id = 1 THEN MT.count ELSE 0 END) as 'countA',
@@ -112,44 +112,11 @@ class Visits
 	    					WHERE DATE(MT.date)='".$date."'
                         	GROUP BY MT.date
                         	ORDER BY MT.date
-                      	) AS Pre,
+                      	) AS MT2,
 						( select @SumABCD := 0, @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
     
     	echo "HEJ";
     	return $this->db->query($sqlQuery);
-    }
-    
+    }   
 }
-
-
-
-SELECT
-Pre.date,
-TIME(Pre.date) AS time,
-EXTRACT(HOUR FROM Pre.date) AS h,
-EXTRACT(MINUTE FROM Pre.date) AS m,
-EXTRACT(SECOND FROM Pre.date) AS s,
-Pre.countA,
-Pre.countB,
-Pre.countC,
-Pre.countD,
-@SumABCD  := Pre.countA + Pre.countB + Pre.countC + Pre.countD AS visits,
-@PrevSumA := @PrevSumA + Pre.countA AS doorAtot,
-@PrevSumB := @PrevSumB + Pre.countB AS doorBtot,
-@PrevSumC := @PrevSumC + Pre.countC AS doorCtot,
-@PrevSumD := @PrevSumD + Pre.countD AS doorDtot,
-@PrevSumVisits := @PrevSumVisits + Pre.countA + Pre.countB + Pre.countC + Pre.countD AS visitsSum
-FROM (SELECT
-		MT.date,
-		(CASE WHEN MT.id = 1 THEN MT.count ELSE 0 END) as 'countA',
-		(CASE WHEN MT.id = 2 THEN MT.count ELSE 0 END) as 'countB',
-		(CASE WHEN MT.id = 3 THEN MT.count ELSE 0 END) as 'countC',
-		(CASE WHEN MT.id = 4 THEN MT.count ELSE 0 END) as 'countD'
-		FROM `minutetable` AS MT
-		WHERE DATE(MT.date)='2016-09-25'
-		ORDER BY MT.date
-		) AS Pre,
-		( select @SumABCD := 0, @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars
-
-
 ?>
