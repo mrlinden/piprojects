@@ -129,6 +129,7 @@ class Visits
 	    				ORDER BY MT.date
 	    			) AS PreD	
 	    		( select @SumABCD := 0, @PrevSumA := 0, @PrevSumB := 0, @PrevSumC := 0, @PrevSumD := 0, @PrevSumVisits := 0) as SqlVars";
+    	echo "HEJ";
     	return $this->db->query($sqlQuery);
     }
     
