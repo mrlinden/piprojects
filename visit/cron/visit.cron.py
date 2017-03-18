@@ -107,12 +107,13 @@ try:
         log (str(intervalStop) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d dayTotal %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3], sensorDayTotal))
         
         if (sCntTot > 0):
-            sql_insert_sensor = "INSERT INTO `visits2`.`minutetable` (`date`, `id`, `count`) VALUES (%s,%s)"
+            sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`date`, `id`, `count`) VALUES (%s,%s,%s)"
             
             for sensorNr in range(0,3):
                 if (sensorIds[sensorNr] != "0"):
                     addedLines = cur.execute(sql_insert_sensor, (intervalStop.strftime(DATE_TIME_FORMAT), 
-                                                                 sensorIds[sensorNr], sCnt[sensorNr]))
+                                                                 sensorIds[sensorNr], 
+                                                                 sCnt[sensorNr]))
                     if (addedLines != 1):
                         log("ERROR. Did not add to database as expected. \nSQL was " + sql_insert_sensor + " \nResult was " + str(addedLines) + "...")
         

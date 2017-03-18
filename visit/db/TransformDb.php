@@ -9,11 +9,35 @@ $sqlQuery = "SELECT UNIX_TIMESTAMP(intervalStop) AS date, doorA, doorB, doorC, d
 $old = $db->query($sqlQuery);
 
 foreach ($old as $row) {
-		print "date: " . $row['date'] . " A: " . $row['doorA'] . " B: " . $row['doorB'] . " C: " . $row['doorC'] . " D: " . $row['doorD'] . " visits \n" ;
 
 	$date = floor($row['date']/600)*600;
+	$a = $row['doorA'];
+	$b = $row['doorB'];
+	$c = $row['doorC'];
+	$d = $row['doorD'];
+	
+	print "date: " . $row['date'] . " A: " . $row['doorA'] . " B: " . $row['doorB'] . " C: " . $row['doorC'] . " D: " . $row['doorD'] . " visits \n" ;
 	
 	print "floor " . $date . "\n";
+	
+	$sqlWrite = "INSERT INTO `visits`.`sensordata` (`date`, `id`, `count`) VALUES (%s,%s,%s)";
+	
+	if ($a != 0) {
+		print "Write A" . $a;
+	}
+
+	if ($b != 0) {
+		print "Write B" . $b;
+	}
+
+	if ($c != 0) {
+		print "Write C" . $c;
+	}
+
+	if ($d != 0) {
+		print "Write D" . $d;
+	}
+	
 	
 }
 
