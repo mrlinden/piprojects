@@ -10,7 +10,7 @@ $old = $db->query($sqlQuery);
 
 foreach ($old as $row) {
 
-	$date = floor($row['date']/600)*600;
+	$date = date("Y-m-d H:i:s", floor($row['date']/600)*600);
 	$a = $row['doorA'];
 	$b = $row['doorB'];
 	$c = $row['doorC'];
@@ -22,25 +22,25 @@ foreach ($old as $row) {
 	$addedItem = 0;
 	
 	if ($a != 0) {
-		$sqlWrite .= " (FROM_UNIXTIME(".$date."), 1, ".$a.")";
+		$sqlWrite .= " ('".$date."'), 1, ".$a.")";
 		$addedItem += 1;
 	}
 
 	if ($b != 0) {
 		if ($addedItem > 0) $sqlWrite .= ", ";
-		$sqlWrite .= " (FROM_UNIXTIME(".$date."), 2, ".$b.")";
+		$sqlWrite .= " ('".$date."'), 2, ".$b.")";
 		$addedItem += 1;
 	}
 
 	if ($c != 0) {
 		if ($addedItem > 0) $sqlWrite .= ", ";
-		$sqlWrite .= " (FROM_UNIXTIME(".$date."), 3, ".$c.")";
+		$sqlWrite .= " ('".$date."'), 3, ".$c.")";
 		$addedItem += 1;
 	}
 
 	if ($d != 0) {
 		if ($addedItem > 0) $sqlWrite .= ", ";
-		$sqlWrite .= " (FROM_UNIXTIME(".$date."), 4, ".$d.")";
+		$sqlWrite .= " ('".$date."'), 4, ".$d.")";
 		$addedItem += 1;
 	}
 	
