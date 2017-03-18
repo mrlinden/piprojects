@@ -25,6 +25,13 @@ print "Number of years; " . $visits->getNrOfYearsFromFirstToLastVisit(). " \n";
 
 print "Number of visits for 2016-09-25; " . $visits->getSumOfVisits("2016-09-25") . "\n";
 
-print "getVisitsPerMinute2 2016-09-25;".  $visits->getVisitsPerMinute2("2016-09-25") . "\n";
+
+
+$db2 = new PDO('mysql:host=localhost;dbname=visits2;charset=utf8', 'root', 'linden1mysql');
+
+// Create an instance
+$visits2 = new Cupolen\Visits($db);
+
+print "getVisitsPerMinute2 2016-09-25;".  $visits2->getVisitsPerMinute2("2016-09-25") . "\n";
 
 ?>
