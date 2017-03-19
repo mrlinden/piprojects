@@ -11,30 +11,22 @@ $visits = new Cupolen\Visits($db);
 $dayList = $visits->getVisitsPerDay();
 
 foreach ($dayList as $row) {
-  	print "Date : " . $row['date'] . " had " . $row['visits'] . " visits \n" ;
+  	print "Date : " . $row['date'] . " had " . $row['count'] . " visits \n" ;
 
 	// Get the list of visits for each day
-	$minuteList = $visits->getVisitsPerMinuteOld($row['date']);
+	$minuteList = $visits->getVisitsPerMinute($row['date']);
 	
 	foreach ($minuteList as $row2) {
-		print " - Interval : " . $row2['h'] . "-" . $row2['m'] . "-" . $row2['s'] . " had " . $row2['visits'] . " visits \n" ;
+		print " - Interval : " . $row2['h'] . "-" . $row2['m'] . "-" . $row2['s'] . " had " . $row2['count'] . " visits \n" ;
 	}
 }
 
 print "Number of years; " . $visits->getNrOfYearsFromFirstToLastVisit(). " \n";
 
-print "Number of visits for 2016-09-25; " . $visits->getSumOfVisits("2016-09-25") . "\n";
-
-
-
-$db2 = new PDO('mysql:host=localhost;dbname=visits2;charset=utf8', 'root', 'linden1mysql');
-
-// Create an instance
-$visits2 = new Cupolen\Visits($db);
 $minuteList = $visits2->getVisitsPerMinute("2016-09-25");
 $arraylist = $minuteList->fetchAll();
 
 foreach ($minuteList as $row2) {
-	print "getVisitsPerMinute - Interval : " . $row2['h'] . "-" . $row2['m'] . "-" . $row2['s'] . " had " . $row2['visits'] . " visits \n" ;
+	print "getVisitsPerMinute - Interval : " . $row2['h'] . "-" . $row2['m'] . "-" . $row2['s'] . " had " . $row2['count'] . " visits \n" ;
 }
 ?>

@@ -94,20 +94,9 @@ try:
         con = mdb.connect(db_host, db_user, db_password, db_name)
         cur = con.cursor(mdb.cursors.DictCursor)
         
-        # get current stored value for day (re-read it instead of incrementing local variable
-        # in this script to avoid getting tables out of sync if this script is stoped/restarted)
-        #oldSensorDayTotal = 0
-        #cur.execute("SELECT * from `visits`.`daytable` WHERE `date` = %s", intervalStop.strftime(DATE_FORMAT))
-        #row = cur.fetchone()
-        #if (row != None):
-        #    oldSensorDayTotal = row['visits']
-        
-        #sensorDayTotal = oldSensorDayTotal + sCntTot
-
-        log (str(intervalStop) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d dayTotal %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3], sensorDayTotal))
-        
+        log (str(intervalStop) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3]))       
         if (sCntTot > 0):
-            sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`date`, `id`, `count`) VALUES (%s,%s,%s)"
+            sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`timestamp`, `id`, `count`) VALUES (%s,%s,%s)"
             
             for sensorNr in range(0,3):
                 if (sensorIds[sensorNr] != "0"):
@@ -116,13 +105,7 @@ try:
                                                                  sCnt[sensorNr]))
                     if (addedLines != 1):
                         log("ERROR. Did not add to database as expected. \nSQL was " + sql_insert_sensor + " \nResult was " + str(addedLines) + "...")
-        
-        #if (oldSensorDayTotal != sensorDayTotal):
-        #    sql_insert_day = "INSERT INTO `visits`.`daytable` (`date`, `visits`) VALUES (%s,%s) ON DUPLICATE KEY UPDATE visits='%s'"
-        #    addedLines = cur.execute(sql_insert_day, (intervalStart.strftime(DATE_FORMAT), sensorDayTotal, sensorDayTotal))
-        #    if (addedLines < 1):
-        #        log("ERROR. Did not update database as expected. \nSQL was " + sql_insert_day + " \nResult was " + str(addedLines) + "...")
-        
+
         con.commit()
         
         intervalStart = intervalStop

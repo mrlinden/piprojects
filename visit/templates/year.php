@@ -7,7 +7,7 @@
 
   var dataRows = [
     <?php foreach ($list as $row): ?>
-      [ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>-1, <?= $row['d'] ?>), <?= $row['visits'] ?> ],
+      [ new Date(<?= $row['y'] ?>, <?= $row['m'] ?>-1, <?= $row['d'] ?>), <?= $row['count'] ?> ],
     <?php endforeach ?>
       [ null, 0 ] ];
   dataRows.pop();

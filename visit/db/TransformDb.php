@@ -16,9 +16,9 @@ foreach ($old as $row) {
 	$c = $row['doorC'];
 	$d = $row['doorD'];
 	
-	print "date: " . $date . " A: " . $a . " B: " . $b . " C: " . $c . " D: " . $d . " \n" ;
+	#print "date: " . $date . " A: " . $a . " B: " . $b . " C: " . $c . " D: " . $d . " \n" ;
 	
-	$sqlWrite = "INSERT INTO `visits`.`sensordata` (`date`, `id`, `count`) VALUES";
+	$sqlWrite = "INSERT INTO `visits`.`sensordata` (`timestamp`, `id`, `count`) VALUES";
 	$addedItem = 0;
 	
 	if ($a != 0) {
