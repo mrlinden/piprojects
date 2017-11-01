@@ -30,7 +30,7 @@ db_password = config.get('database','db_password')
 logMode     = config.get('logging','log_mode')
 logPath     = config.get('logging','log_path')
 sensorIds   = [ config.get('sensor','id_A'), config.get('sensor','id_B'), config.get('sensor','id_C'), config.get('sensor','id_D') ]
-allGpios    = [ config.get('sensor','gpio_A'), config.get('sensor','gpio_B'), config.get('sensor','gpio_C'), config.get('sensor','gpio_D') ]
+allGpios    = [ config.getint('sensor','gpio_A'), config.getint('sensor','gpio_B'), config.getint('sensor','gpio_C'), config.getint('sensor','gpio_D') ]
 
 # Functions
 def log(message):
@@ -51,14 +51,9 @@ def actOnSensor(gpioIn):
     global sensorCnt
 
     try:
-        time.sleep(0.05) # Needed because sometimes GPIO.input did not return True for rising events 
         sensorNr = allGpios.index(gpioIn)
-
-        if (GPIO.input(gpioIn)):
-            sensorCnt[sensorNr] = sensorCnt[sensorNr] + 1
-            log ("Sensor %d opened! Total counts this interval: %d." % (sensorNr, sensorCnt[sensorNr]))
-        else:
-            log ("Sensor %d closed!" % sensorNr)
+        sensorCnt[sensorNr] = sensorCnt[sensorNr] + 1
+        log ("Sensor %d opened! Total counts this interval: %d." % (sensorNr, sensorCnt[sensorNr]))
 
     except ValueError:
         log ("Unexpected sensor %d " % gpioIn)
@@ -74,7 +69,7 @@ for gpioInNr in allGpios:
     if (gpioInNr != 0):
         log ("Setup GPIO nr %s as input" % gpioInNr)
         GPIO.setup(gpioInNr, GPIO.IN, pull_up_down = GPIO.PUD_OFF )
-        GPIO.add_event_detect(gpioInNr, GPIO.RISING, callback=actOnSensor, bouncetime=20)
+        GPIO.add_event_detect(gpioInNr, GPIO.FALLING, callback=actOnSensor, bouncetime=500)
 
 try:
     sensorCnt = [0, 0, 0, 0]
