@@ -17,7 +17,6 @@ except ImportError:
     from ConfigParser import ConfigParser  # ver. < 3.0
 
 # Constants
-ALL_GPIO_IN = [16, 26, 20, 21]
 DATE_TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -31,6 +30,7 @@ db_password = config.get('database','db_password')
 logMode     = config.get('logging','log_mode')
 logPath     = config.get('logging','log_path')
 sensorIds   = [ config.get('sensor','id_A'), config.get('sensor','id_B'), config.get('sensor','id_C'), config.get('sensor','id_D') ]
+allGpios    = [ config.get('sensor','gpio_A'), config.get('sensor','gpio_B'), config.get('sensor','gpio_C'), config.get('sensor','gpio_D') ]
 
 # Functions
 def log(message):
@@ -52,7 +52,7 @@ def actOnSensor(gpioIn):
 
     try:
         time.sleep(0.05) # Needed because sometimes GPIO.input did not return True for rising events 
-        sensorNr = ALL_GPIO_IN.index(gpioIn)
+        sensorNr = allGpios.index(gpioIn)
 
         if (GPIO.input(gpioIn)):
             sensorCnt[sensorNr] = sensorCnt[sensorNr] + 1
@@ -70,10 +70,11 @@ GPIO.setmode(GPIO.BCM)
 con = False
 done = False
     
-for gpioInNr in ALL_GPIO_IN:
-    log ("Setup GPIO nr %s as input" % gpioInNr)
-    GPIO.setup(gpioInNr, GPIO.IN, pull_up_down = GPIO.PUD_OFF )
-    GPIO.add_event_detect(gpioInNr, GPIO.RISING, callback=actOnSensor, bouncetime=20)
+for gpioInNr in allGpios:
+    if (gpioInNr != 0):
+        log ("Setup GPIO nr %s as input" % gpioInNr)
+        GPIO.setup(gpioInNr, GPIO.IN, pull_up_down = GPIO.PUD_OFF )
+        GPIO.add_event_detect(gpioInNr, GPIO.RISING, callback=actOnSensor, bouncetime=20)
 
 try:
     sensorCnt = [0, 0, 0, 0]
@@ -86,7 +87,7 @@ try:
         
         time.sleep(sleepSeconds)
         intervalStop = floor(datetime.datetime.now()/600)*600   # Round to floor 10 minute interval
-        # Transfer to local variables to not be interferred by new events
+        # Transfer to local variables to not be interfered by new events
         sCnt = sensorCnt
         sensorCnt = [0, 0, 0, 0]
         sCntTot = sum(sCnt)
