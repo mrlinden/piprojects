@@ -13,6 +13,12 @@ class Visits
 
 	/* Get a list of all days and the number of visits for each day */    
     public function getVisitsPerDay() {
+        return $this->db->query('select date, SUM(count) as 'count', 
+                EXTRACT(YEAR FROM date) AS y, EXTRACT(MONTH FROM date) AS m, 
+                EXTRACT(DAY FROM date) AS d FROM `sensordata` group by date');
+    }
+       
+    public function getVisitsPerDayOld() {
         return $this->db->query('SELECT count, date, EXTRACT(YEAR FROM date) AS y, EXTRACT(MONTH FROM date) AS m, EXTRACT(DAY FROM date) AS d FROM overview');
     }
 
