@@ -12,6 +12,7 @@ import time
 import logging
 import math
 from logging.handlers import TimedRotatingFileHandler
+from datetime import timedelta
 try:
     from configparser import ConfigParser
 except ImportError:
@@ -20,7 +21,8 @@ except ImportError:
 # Constants
 DATE_TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 DATE_FORMAT = "%Y-%m-%d"
-SECONDS_PER_INTERVAL = 600
+MINUTES_PER_INTERVAL = 1
+SECONDS_PER_INTERVAL = (MINUTES_PER_INTERVAL * 60)
 SAVE_EMPTY_INTERVALS = True
 
 # Configuration
@@ -61,7 +63,12 @@ def actOnSensor(gpioIn):
     except ValueError:
         log ("Unexpected sensor %d " % gpioIn)
 
-
+def intervalStartTime(tm):
+    return tm - datetime.timedelta(minutes=tm.minute % MINUTES_PER_INTERVAL,
+                                   seconds=tm.second,
+                                   microseconds=tm.microsecond)
+    
+    
 # Program start
 log(str(datetime.datetime.now()) + " Started Visit sensor service\n\n")
 GPIO.setmode(GPIO.BCM)
@@ -76,15 +83,24 @@ for gpioInNr in allGpios:
 
 try:
     sensorCnt = [0, 0, 0, 0]
-    intervalStart = datetime.datetime.now()
- 
+    currentTime = datetime.datetime.now()
+    previousIntervalStart = intervalStartTime(currentTime);
+        
+#        currentTimeInSeconds = (currentTime - currentTime.min).seconds
+#        currentTimeInRoundedSeconds = math.floor(currentTimeInSeconds / SECONDS_PER_INTERVAL) * SECONDS_PER_INTERVAL   # Skip time accuracy below interval length
+
+    
     while not done:
-        sleepSeconds = SECONDS_PER_INTERVAL - intervalStart.second
+        # Sleep until next Interval shall start
+        nextIntervalStart = previousIntervalStart + timedelta(minutes=MINUTES_PER_INTERVAL)
+        sleepSeconds = (nextIntervalStart - previousIntervalStart).total_seconds();
         
-        log (str(intervalStart) + "sleep " + str(sleepSeconds) + " (seconds of interval start: %d)...\n" % (intervalStart.second))
-        
+        log (str(intervalStart) + "sleep " + str(sleepSeconds) + " seconds to next interval start (%d)\n" % (nextIntervalStart))
         time.sleep(sleepSeconds)
-        intervalStop = floor(datetime.datetime.now()/SECONDS_PER_INTERVAL)*SECONDS_PER_INTERVAL   # Skip time accuracy below interval length
+        
+        
+      #  intervalStop = math.floor(datetime.datetime.now() / SECONDS_PER_INTERVAL)*SECONDS_PER_INTERVAL   # Skip time accuracy below interval length
+
         # Transfer to local variables to not be interfered by new events
         sCnt = sensorCnt
         sensorCnt = [0, 0, 0, 0]
@@ -93,19 +109,19 @@ try:
         con = mdb.connect(db_host, db_user, db_password, db_name)
         cur = con.cursor(mdb.cursors.DictCursor)
         
-        log (str(intervalStop) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3]))       
+        log (str(nextIntervalStart) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3]))       
         sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`timestamp`, `sensorId`, `count`) VALUES (%s,%s,%s)"
             
         for sensorNr in range(0,3):
             if (sensorIds[sensorNr] != "0"):
                 if ((sCnt[sensorNr] > 0) or (SAVE_EMPTY_INTERVALS)):
-                    addedLines = cur.execute(sql_insert_sensor, (intervalStop.strftime(DATE_TIME_FORMAT), sensorIds[sensorNr], sCnt[sensorNr]))
+                    addedLines = cur.execute(sql_insert_sensor, (nextIntervalStart.strftime(DATE_TIME_FORMAT), sensorIds[sensorNr], sCnt[sensorNr]))
                     if (addedLines != 1):
                         log("ERROR. Did not add to database as expected. \nSQL was " + sql_insert_sensor + " \nResult was " + str(addedLines) + "...")
 
         con.commit()
         log ("Start next interval...");
-        intervalStart = intervalStop
+        previousIntervalStart = nextIntervalStart
         
 except mdb.Error, e:
 
