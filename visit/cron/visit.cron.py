@@ -83,23 +83,17 @@ for gpioInNr in allGpios:
 
 try:
     sensorCnt = [0, 0, 0, 0]
-    currentTime = datetime.datetime.now()
-    previousIntervalStart = intervalStartTime(currentTime);
-        
-#        currentTimeInSeconds = (currentTime - currentTime.min).seconds
-#        currentTimeInRoundedSeconds = math.floor(currentTimeInSeconds / SECONDS_PER_INTERVAL) * SECONDS_PER_INTERVAL   # Skip time accuracy below interval length
-
     
     while not done:
+        currentTime = datetime.datetime.now()
+        previousIntervalStart = intervalStartTime(currentTime);
+
         # Sleep until next Interval shall start
         nextIntervalStart = previousIntervalStart + timedelta(minutes=MINUTES_PER_INTERVAL)
-        sleepSeconds = (nextIntervalStart - previousIntervalStart).total_seconds();
+        sleepSeconds = (nextIntervalStart - currentTime).total_seconds() +1; # +1 just to be sure to pass border for MINUTES_PER_INTERVAL
         
-        log (str(intervalStart) + "sleep " + str(sleepSeconds) + " seconds to next interval start (%d)\n" % (nextIntervalStart))
+        log ("sleep " + str(sleepSeconds) + " seconds to next interval start at " + str(nextIntervalStart) + ".\n")
         time.sleep(sleepSeconds)
-        
-        
-      #  intervalStop = math.floor(datetime.datetime.now() / SECONDS_PER_INTERVAL)*SECONDS_PER_INTERVAL   # Skip time accuracy below interval length
 
         # Transfer to local variables to not be interfered by new events
         sCnt = sensorCnt
@@ -120,9 +114,7 @@ try:
                         log("ERROR. Did not add to database as expected. \nSQL was " + sql_insert_sensor + " \nResult was " + str(addedLines) + "...")
 
         con.commit()
-        log ("Start next interval...");
-        previousIntervalStart = nextIntervalStart
-        
+
 except mdb.Error, e:
 
     log ("Error %d: %s" % (e.args[0],e.args[1]))
