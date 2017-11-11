@@ -2,7 +2,8 @@
 <?php
 include 'Visits.php';
 
-$db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'root', 'linden1mysql');
+print "You need to fill in password!"
+$db = new PDO('mysql:host=localhost;dbname=visits;charset=utf8', 'visitDbAdmin', '');
 
 // Get the old content
 $sqlQuery = "SELECT UNIX_TIMESTAMP(intervalStop) AS date, doorA, doorB, doorC, doorD from `minutetable`";

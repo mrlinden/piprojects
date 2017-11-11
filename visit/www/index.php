@@ -50,8 +50,8 @@ spl_autoload_register(function ($className) {
 // Get configuration from file
 $db_host       =  $config['db_host'];
 $db_name       =  $config['db_name'];
-$db_user       =  $config['db_user'];
-$db_password   =  $config['db_password'];
+$db_user       =  $config['db_reader'];
+$db_password   =  "";
 
 
 // Open database and create model object
