@@ -10,6 +10,7 @@ import RPi.GPIO as GPIO
 import datetime
 import time
 import logging
+import math
 from logging.handlers import TimedRotatingFileHandler
 try:
     from configparser import ConfigParser
