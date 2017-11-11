@@ -77,8 +77,8 @@
 <?php $this->start('body') ?>
 	<div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
     <div class="space"></div>
-    <div class="infotext">In- och utpassager genom entre-d&ouml;rrarna och d&ouml;rren från innerg&aring;rden.</div>
-    <div class="infotext">Notera att veckorna inleds med s&ouml;ndagen.</div>
+    <div class="infotext">In- och utpassager genom entre-d&ouml;rrarna och d&ouml;rren fr&aring;n innerg&aring;rden.</div>
+    <div class="infotext">Notera att &ouml;versta raden &auml;r s&ouml;ndagar.</div>
 <?php $this->stop() ?>
 
 

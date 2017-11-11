@@ -69,7 +69,7 @@
 <?php $this->start('body') ?>
 	<div id="datadiv" style="border: 0px; height: 100px; width: 100px;"></div>
     <div class="space"></div>
-    <div class="infotext">Det g&aring;r att zooma i diagrammet. V&auml;nsterklicka och dra en rektangel runt det område du vill zooma in. H&ouml;gerklicka f&ouml;r att zooma ut igen.</div>
+    <div class="infotext">F&ouml;r att zooma i diagrammet, v&auml;nsterklicka och dra en rektangel runt det omr&aring;de du vill zooma in. H&ouml;gerklicka f&ouml;r att zooma ut igen.</div>
     <div class="space"></div>
     <div class="space"></div>
     <div class="space"></div>

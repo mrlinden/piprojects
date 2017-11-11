@@ -18,7 +18,7 @@ foreach ($old as $row) {
 	
 	#print "date: " . $date . " A: " . $a . " B: " . $b . " C: " . $c . " D: " . $d . " \n" ;
 	
-	$sqlWrite = "INSERT INTO `visits`.`sensordata` (`timestamp`, `id`, `count`) VALUES";
+	$sqlWrite = "INSERT INTO `visits`.`sensordata` (`timestamp`, `sensorId`, `count`) VALUES";
 	$addedItem = 0;
 	
 	if ($a != 0) {

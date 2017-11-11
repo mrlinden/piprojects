@@ -16,6 +16,6 @@
     <?=$this->section('body')?>
     <div class="space"></div>    	
 <hr>
-<div class="footer">Copyright Marcus Lind&eacute;n, Teknikgruppen 2016</div>
+<div class="footer">Copyright Marcus Lind&eacute;n, Teknikgruppen 2016-2017</div>
 </body>
 </html>

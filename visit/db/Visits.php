@@ -46,10 +46,10 @@ class Visits
 						@PrevSumVisits := @PrevSumVisits + MT2.doorA + MT2.doorB + MT2.doorC + MT2.doorD AS visitsSum
 						FROM (SELECT
     						MT.timestamp,
-					    	sum(CASE WHEN MT.id = 1 THEN MT.count ELSE 0 END) as 'doorA',
-    						sum(CASE WHEN MT.id = 2 THEN MT.count ELSE 0 END) as 'doorB',
-    						sum(CASE WHEN MT.id = 3 THEN MT.count ELSE 0 END) as 'doorC',
-    						sum(CASE WHEN MT.id = 4 THEN MT.count ELSE 0 END) as 'doorD'
+					    	sum(CASE WHEN MT.sensorId = 1 THEN MT.count ELSE 0 END) as 'doorA',
+    						sum(CASE WHEN MT.sensorId = 2 THEN MT.count ELSE 0 END) as 'doorB',
+    						sum(CASE WHEN MT.sensorId = 3 THEN MT.count ELSE 0 END) as 'doorC',
+    						sum(CASE WHEN MT.sensorId = 4 THEN MT.count ELSE 0 END) as 'doorD'
    	    					FROM `sensordata` AS MT
 	    					WHERE DATE(MT.timestamp)='".$date."'
                         	GROUP BY MT.timestamp

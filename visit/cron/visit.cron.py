@@ -97,7 +97,7 @@ try:
         
         log (str(intervalStop) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3]))       
         if (sCntTot > 0):
-            sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`timestamp`, `id`, `count`) VALUES (%s,%s,%s)"
+            sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`timestamp`, `sensorId`, `count`) VALUES (%s,%s,%s)"
             
             for sensorNr in range(0,3):
                 if (sensorIds[sensorNr] != "0"):
