@@ -19,6 +19,8 @@ except ImportError:
 # Constants
 DATE_TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 DATE_FORMAT = "%Y-%m-%d"
+SECONDS_PER_INTERVAL = 600
+SAVE_EMPTY_INTERVALS = True
 
 # Configuration
 config = ConfigParser()
@@ -53,7 +55,7 @@ def actOnSensor(gpioIn):
     try:
         sensorNr = allGpios.index(gpioIn)
         sensorCnt[sensorNr] = sensorCnt[sensorNr] + 1
-        log ("Sensor %d opened! Total counts this interval: %d." % (sensorNr, sensorCnt[sensorNr]))
+        log ("Act on sensor %d: Total counts this interval: %d." % (sensorNr, sensorCnt[sensorNr]))
 
     except ValueError:
         log ("Unexpected sensor %d " % gpioIn)
@@ -76,12 +78,12 @@ try:
     intervalStart = datetime.datetime.now()
  
     while not done:
-        sleepSeconds = 600-intervalStart.second
+        sleepSeconds = SECONDS_PER_INTERVAL - intervalStart.second
         
         log (str(intervalStart) + "sleep " + str(sleepSeconds) + " (seconds of interval start: %d)...\n" % (intervalStart.second))
         
         time.sleep(sleepSeconds)
-        intervalStop = floor(datetime.datetime.now()/600)*600   # Round to floor 10 minute interval
+        intervalStop = floor(datetime.datetime.now()/SECONDS_PER_INTERVAL)*SECONDS_PER_INTERVAL   # Skip time accuracy below interval length
         # Transfer to local variables to not be interfered by new events
         sCnt = sensorCnt
         sensorCnt = [0, 0, 0, 0]
@@ -91,19 +93,17 @@ try:
         cur = con.cursor(mdb.cursors.DictCursor)
         
         log (str(intervalStop) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3]))       
-        if (sCntTot > 0):
-            sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`timestamp`, `sensorId`, `count`) VALUES (%s,%s,%s)"
+        sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`timestamp`, `sensorId`, `count`) VALUES (%s,%s,%s)"
             
-            for sensorNr in range(0,3):
-                if (sensorIds[sensorNr] != "0"):
-                    addedLines = cur.execute(sql_insert_sensor, (intervalStop.strftime(DATE_TIME_FORMAT), 
-                                                                 sensorIds[sensorNr], 
-                                                                 sCnt[sensorNr]))
+        for sensorNr in range(0,3):
+            if (sensorIds[sensorNr] != "0"):
+                if ((sCnt[sensorNr] > 0) or (SAVE_EMPTY_INTERVALS)):
+                    addedLines = cur.execute(sql_insert_sensor, (intervalStop.strftime(DATE_TIME_FORMAT), sensorIds[sensorNr], sCnt[sensorNr]))
                     if (addedLines != 1):
                         log("ERROR. Did not add to database as expected. \nSQL was " + sql_insert_sensor + " \nResult was " + str(addedLines) + "...")
 
         con.commit()
-        
+        log ("Start next interval...");
         intervalStart = intervalStop
         
 except mdb.Error, e:
