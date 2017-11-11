@@ -12,5 +12,5 @@ else
     date
     echo "Starting $SERVICE ..."
     cd /home/pi/piprojects/visit/cron
-    sudo python $SERVICE
+    sudo python $SERVICE &
 fi
