@@ -106,7 +106,7 @@ try:
         log (str(nextIntervalStart) + " sensor A: %d sensor B: %d sensor C: %d sensor D: %d" % (sCnt[0], sCnt[1], sCnt[2], sCnt[3]))       
         sql_insert_sensor = "INSERT INTO `visits`.`sensordata` (`timestamp`, `sensorId`, `count`) VALUES (%s,%s,%s)"
             
-        for sensorNr in range(0,3):
+        for sensorNr in range(0,4):
             if (sensorIds[sensorNr] != "0"):
                 if ((sCnt[sensorNr] > 0) or (SAVE_EMPTY_INTERVALS)):
                     addedLines = cur.execute(sql_insert_sensor, (nextIntervalStart.strftime(DATE_TIME_FORMAT), sensorIds[sensorNr], sCnt[sensorNr]))
