@@ -21,9 +21,9 @@ except ImportError:
 # Constants
 DATE_TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 DATE_FORMAT = "%Y-%m-%d"
-MINUTES_PER_INTERVAL = 1
+MINUTES_PER_INTERVAL = 10
 SECONDS_PER_INTERVAL = (MINUTES_PER_INTERVAL * 60)
-SAVE_EMPTY_INTERVALS = True
+SAVE_EMPTY_INTERVALS = False
 
 # Configuration
 config = ConfigParser()

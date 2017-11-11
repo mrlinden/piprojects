@@ -12,5 +12,6 @@ else
     date
     echo "Starting $SERVICE ..."
     cd /home/pi/piprojects/visit/cron
-    sudo python $SERVICE &
+    # The following line is blocking but that is intended since then crashing python will print to visit.cron.log 
+    sudo python $SERVICE 
 fi
