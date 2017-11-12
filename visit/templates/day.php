@@ -82,7 +82,7 @@
     <th>Entre C</th> 
     <th>Innerg&aring;rd</th>
     <th>Totalt f&ouml;r tidpunkten</th>
-    <th>Totalt hittils under dagen</th>
+    <th>Totalt hittills under dagen</th>
   </tr>
   <?php foreach ($list as $row): ?>
   <tr>
