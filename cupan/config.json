@@ -1,0 +1,33 @@
+{
+
+  "log_mode" : "console",
+  "log_path" : "/home/pi/piprojects/log/cupan.log",
+
+  "udp_ip"   : "127.0.0.1",
+  "udp_port" : 5555,
+  "udp_buffer_size" : 1024,
+
+  "periodic_transmission_interval" : 10000,
+
+  "lamps" : {
+    "front_1" : { "dmx_universe" : 5, "dmx_channel" : 1 },
+    "front_2" : { "dmx_universe" : 5, "dmx_channel" : 6 },
+    "back_1"  : { "dmx_universe" : 5, "dmx_channel" : 12 }
+  },
+
+  "lamp_presets" : {
+    "octagon_warm_white_100percent" : [0, 255, 0, 0, 255 ],
+    "octagon_warm_white_50percent" : [0, 255, 0, 0, 128 ]
+  },
+
+  "scene_presets" : {
+    "scen_1" : [
+      { "lamp" : "front_1", "preset" : "octagon_warm_white_100percent" },
+      { "lamp" : "front_2", "preset" : "octagon_warm_white_100percent" } ],
+    "scen_2" : [
+      { "lamp" : "front_1", "preset" : "octagon_warm_white_50percent" },
+      { "lamp" : "front_2", "preset" : "octagon_warm_white_50percent" },
+      { "lamp" : "back_1",  "preset" : "octagon_warm_white_50percent" }
+    ]
+  }
+}
