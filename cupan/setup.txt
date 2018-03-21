@@ -1,0 +1,4 @@
+Setup instructions for Cupan
+
+
+add ola lib for python
