@@ -43,6 +43,25 @@ class UdpReceivingThread (threading.Thread):
                 time.sleep(0.5)
 
 
+class PeriodicArtNetSendingThread (threading.Thread):
+    def __init__(self, threadID, name):
+        threading.Thread.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.done = False
+        self.nrTransmissionsOfSameScene = 0
+    def stop(self):
+        self.done = True
+    def run(self):
+        if (config["periodic_transmission_interval"] > 0):
+            while not self.done:
+                if (self.nrTransmissionsOfSameScene < config["periodic_max_nr_retransmissions"]):
+                    sendAllUniverseValues()
+                    self.nrTransmissionsOfSameScene += 1
+                time.sleep(config["periodic_transmission_interval"])
+    def newSceneSet(self):
+        self.nrTransmissionsOfSameScene = 0
+        
 class ArtNetPacket(LittleEndianStructure):
     _fields_ = [("id", c_char * 8),
                 ("opcode", c_ushort),
@@ -67,14 +86,6 @@ with open('../config.json') as json_data_file:
     config = json.load(json_data_file)
 
 
-# Global data
-dmxUniverseAndValues = {}
-threadLock = threading.Lock()
-udpReceivingThread = UdpReceivingThread(1, "UdpReceivingThread")
-artNetSocket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-
-
-
 # Functions
 def log(message):
     logMode = config["log_mode"]
@@ -92,11 +103,6 @@ def log(message):
                                                backupCount=10)
             log.logger.addHandler(handler)
         log.logger.info(message)
-
-
-def breakHandler(signum, frame):
-    udpReceivingThread.stop()
-
 
 def getScenePreset(sceneName):
     if (sceneName in config["scene_presets"]):
@@ -117,6 +123,8 @@ def getLampPreset(presetName):
 
 
 def setScene(sceneName):
+    periodicArtNetSendingThread.newSceneSet()
+
     if (sceneName == "scen_av"):
         clearScene()
         sendAllUniverseValues()
@@ -157,22 +165,20 @@ def sendAllUniverseValues():
         packet = ArtNetPacket(universe, dmxUniverseAndValues[universe])
         print(binascii.hexlify(packet))
         artNetSocket.sendto(packet, (config["artnet_ip"], config["artnet_port"]))
-
-
-def sendAllUniverseValuesPeriodic():
-    if (config["periodic_transmission_interval"] > 0):
-        sendAllUniverseValues()
-        # TODO: Restart some timer.....
-
-
+      
 # Program start
-log(str(datetime.datetime.now()) + "\nStarted Cupan stage light service\n\n")
-signal.signal(signal.SIGINT, breakHandler)
+dmxUniverseAndValues = {}
+artNetSocket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+periodicArtNetSendingThread = PeriodicArtNetSendingThread(2, "PeriodicArtNetSendingThread")
+periodicArtNetSendingThread.start()
 
-sendAllUniverseValuesPeriodic()
+udpReceivingThread = UdpReceivingThread(1, "UdpReceivingThread")
 udpReceivingThread.start()
 
-# Wait for UDP thread to complete
+log(str(datetime.datetime.now()) + "\nStarted Cupan stage light service\n\n")
+
+# Wait for threads to complete
+periodicArtNetSendingThread.join()
 udpReceivingThread.join()
 
 log("Cupan stage light service ends")

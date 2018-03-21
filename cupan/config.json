@@ -10,7 +10,8 @@
   "artnet_ip": "10.0.0.4",
   "artnet_port": 6454,
   
-  "periodic_transmission_interval" : 10000,
+  "periodic_transmission_interval" : 10,
+  "periodic_max_nr_retransmissions" : 5,
 
   "lamps" : {
     "front_1" : { "dmx_universe" : 5, "dmx_channel" : 1 },
