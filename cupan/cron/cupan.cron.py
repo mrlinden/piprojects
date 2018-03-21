@@ -12,9 +12,11 @@ import threading
 import signal
 import time
 from logging.handlers import TimedRotatingFileHandler
-from ola.ClientWrapper import ClientWrapper
+import ctypes
+from ctypes import *
+import binascii
 
-
+# Classes
 
 class UdpReceivingThread (threading.Thread):
     def __init__(self, threadID, name):
@@ -41,6 +43,25 @@ class UdpReceivingThread (threading.Thread):
                 time.sleep(0.5)
 
 
+class ArtNetPacket(LittleEndianStructure):
+    _fields_ = [("id", c_char * 8),
+                ("opcode", c_ushort),
+                ("protverh", c_ubyte),
+                ("protver", c_ubyte),
+                ("sequence", c_ubyte),
+                ("physical", c_ubyte),         
+                ("universe", c_ushort),
+                ("payloadLength", c_ushort),
+                ("payload", c_ubyte * 512)]
+    def __init__(self, universe, payload):
+        self.id = b"Art-Net"
+        self.opcode = 0x5000
+        self.protver = 14
+        self.universe = universe
+        self.payloadLength = 512
+        self.payload = (ctypes.c_ubyte * len(payload))(*payload)
+
+
 # Configuration
 with open('../config.json') as json_data_file:
     config = json.load(json_data_file)
@@ -50,8 +71,8 @@ with open('../config.json') as json_data_file:
 dmxUniverseAndValues = {}
 threadLock = threading.Lock()
 udpReceivingThread = UdpReceivingThread(1, "UdpReceivingThread")
-wrapper = ClientWrapper()
-client = wrapper.Client()
+artNetSocket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+
 
 
 # Functions
@@ -74,7 +95,6 @@ def log(message):
 
 
 def breakHandler(signum, frame):
-    wrapper.Stop()
     udpReceivingThread.stop()
 
 
@@ -134,18 +154,15 @@ def updateUniverseValues(universe, startingChannel, values):
 
 def sendAllUniverseValues():
     for universe in dmxUniverseAndValues:
-        data = array.array('B', dmxUniverseAndValues[universe])
-        log (str(universe) + ":" + str(dmxUniverseAndValues[universe]))
-        threadLock.acquire()
-        client.SendDmx(universe, data)
-        threadLock.release()
+        packet = ArtNetPacket(universe, dmxUniverseAndValues[universe])
+        print(binascii.hexlify(packet))
+        artNetSocket.sendto(packet, (config["artnet_ip"], config["artnet_port"]))
 
 
 def sendAllUniverseValuesPeriodic():
     if (config["periodic_transmission_interval"] > 0):
-        wrapper.AddEvent(config["periodic_transmission_interval"], sendAllUniverseValuesPeriodic)
         sendAllUniverseValues()
-
+        # TODO: Restart some timer.....
 
 
 # Program start
@@ -154,10 +171,6 @@ signal.signal(signal.SIGINT, breakHandler)
 
 sendAllUniverseValuesPeriodic()
 udpReceivingThread.start()
-try:
-    wrapper.Run() # Blocking call that handles the DMX sending
-except:
-    udpReceivingThread.stop()
 
 # Wait for UDP thread to complete
 udpReceivingThread.join()
