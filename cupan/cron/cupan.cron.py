@@ -132,7 +132,12 @@ def setScene(sceneName):
     
     if (sceneName.startswith("dmx")):
         clearScene()
-        dmxUniverseAndValues[5] = sceneName[3:].split(",")
+        universe = 5
+        dmxValues = sceneName[3:].split(",")
+        
+        for i in range(len(dmxValues)):
+            dmxUniverseAndValues[universe][1+i] = dmxValues[i]
+            
         sendAllUniverseValues()
         return
     
