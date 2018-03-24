@@ -83,7 +83,7 @@ function updateCh(ch, val) {
 
 function setScene(name) {
     var http = new XMLHttpRequest();
-    http.open("POST", "setScene.php", true);
+    http.open("POST", "setScene.php/", true);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     var params = "scene=" + name
     console.log("Sending params " + params);
