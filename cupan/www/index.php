@@ -70,7 +70,7 @@ p {
 <div class="""slidecontainer">
 <?php 
 for ($ch = 1; $ch <= 512; $ch++) {
-    echo "<p>Ch ".$ch.": <span class=\"dmxVal\" id=\"val".$ch."\"></span> <input type=\"range\" min=\"0\" max=\"255\" value=\"0\" class=\"slider\" oninput=\"updateCh(".$ch.", this.value)\"></p>";
+    echo "<p>Ch ".$ch.": <span class=\"dmxVal\" id=\"val".$ch."\">0</span> <input type=\"range\" min=\"0\" max=\"255\" value=\"0\" class=\"slider\" oninput=\"updateCh(".$ch.", this.value)\"></p>";
 } 
 ?>
 </div>
@@ -79,13 +79,24 @@ for ($ch = 1; $ch <= 512; $ch++) {
 function updateCh(ch, val) {
 	var valueField = document.getElementById("val" + ch);
 	valueField.innerHTML = val;
+	setScene("dmx")
 }
 
 function setScene(name) {
     var http = new XMLHttpRequest();
     http.open("POST", "setScene.php/", true);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
     var params = "scene=" + name
+	if (name == "dmx") {
+		dmxValues = [];
+		for (ch = 1; ch <= 512; ch++) {
+			var valueField = document.getElementById("val" + ch);
+				dmxValues.push(valueFiled.innerHTML);
+		}
+		params = params + dmxValues;
+	}
+    
     console.log("Sending params " + params);
     http.send(params);
     http.onload = function() {
