@@ -110,7 +110,7 @@ function setScene(name) {
 function periodicSendDmxValues() {
 	if (doSendDmxValues) {
 		doSendDmxValues = false;
-		setScene(dmx);
+		setScene("dmx");
 	}
 }
 
