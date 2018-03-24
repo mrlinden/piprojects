@@ -70,7 +70,7 @@ p {
 <div class="""slidecontainer">
 <?php 
 for ($ch = 1; $ch <= 512; $ch++) {
-    echo "<p>Ch ".$ch.": <span class=\"dmxVal\" id=\"val".$ch."\"></span> <input type=\"range\" min=\"0\" max=\"255\" value=\"0\" class=\"slider\" oninput=\"updateCh(".$ch.", this.value)\"></p>"
+    echo "<p>Ch ".$ch.": <span class=\"dmxVal\" id=\"val".$ch."\"></span> <input type=\"range\" min=\"0\" max=\"255\" value=\"0\" class=\"slider\" oninput=\"updateCh(".$ch.", this.value)\"></p>";
 } 
 ?>
 </div>
