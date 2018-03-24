@@ -91,25 +91,39 @@ function setScene(name) {
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 
     var params = "scene=" + name
-	if (name == "dmx") {
-		dmxValues = [];
-		for (ch = 1; ch <= 512; ch++) {
-			var valueField = document.getElementById("val" + ch);
-				dmxValues.push(valueField.innerHTML);
-		}
-		params = params + dmxValues;
-	}
     console.log("params: " + params);
     http.send(params);
     http.onload = function() {
-        alert(http.responseText);
+        //alert(http.responseText);
+    }
+}
+
+function sendDmxValues(offset) {
+	var http = new XMLHttpRequest();
+    http.open("POST", "setScene.php/", true);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+    var params = "scene=dmx"
+	var dmxValues = [];
+	for (ch = offset; ch <= min(512, (offset + 100)); ch++) {
+		var valueField = document.getElementById("val" + ch);
+			dmxValues.push(valueField.innerHTML);
+	}
+	params = params + dmxValues;
+	
+    console.log("params: " + params);
+    http.send(params);
+    http.onload = function() {
+        //alert(http.responseText);
     }
 }
 
 function periodicSendDmxValues() {
 	if (doSendDmxValues) {
 		doSendDmxValues = false;
-		setScene("dmx");
+		sendDmxValues(1);
+		sendDmxValues(100);
+		sendDmxValues(200);
 	}
 }
 
