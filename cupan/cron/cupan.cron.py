@@ -167,8 +167,8 @@ def updateUniverseValues(universe, startingChannel, values):
         dmxUniverseAndValues[universe] = initValues
 
     for i in range(len(values)):
-        print ("update index " + str(startingChannel + i) + " from pos " + str(i))
-        dmxUniverseAndValues[universe][startingChannel + i] = values[i]
+        print ("update index " + str(startingChannel + i - 1) + " from pos " + str(i))
+        dmxUniverseAndValues[universe][startingChannel + i - 1] = values[i]
 
 
 def sendAllUniverseValues():
