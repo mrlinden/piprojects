@@ -131,12 +131,12 @@ def setScene(sceneName):
         return
     
     if (sceneName.startswith("dmx")):
-        universe = 5
         dmxValues = sceneName[3:].split(",")
-        start = int(dmxValues[0])
-        for i in range(len(dmxValues) - 1):
-            print("assign index " + str(start + i) + " value at pos " + str(1+i))
-            dmxUniverseAndValues[universe][start + i] = int(dmxValues[1 + i])
+        dmxValues = [int(i) for i in dmxValues]
+        startingChannel = dmxValues.pop(0)
+        universe = 5
+
+        updateUniverseValues(universe, startingChannel, dmxValues)
         sendAllUniverseValues()
         return
     
