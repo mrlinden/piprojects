@@ -76,10 +76,13 @@ for ($ch = 1; $ch <= 512; $ch++) {
 </div>
 
 <script>
+
+var doSendDmxValues = false;
+
 function updateCh(ch, val) {
 	var valueField = document.getElementById("val" + ch);
 	valueField.innerHTML = val;
-	setScene("dmx")
+	doSendDmxValues = true;
 }
 
 function setScene(name) {
@@ -103,6 +106,15 @@ function setScene(name) {
         alert(http.responseText);
     }
 }
+
+function periodicSendDmxValues() {
+	if (doSendDmxValues) {
+		doSendDmxValues = false;
+		setScene(dmx);
+	}
+}
+
+setInterval(periodicSendDmxValues, 2000);
 
 </script>
 
