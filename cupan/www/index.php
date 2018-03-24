@@ -105,13 +105,13 @@ function sendDmxValues(offset) {
 
     var params = "scene=dmx"
 	var dmxValues = [];
-	for (ch = offset; ch <= min(512, (offset + 100)); ch++) {
+	for (ch = offset; ch <= Math.min(512, (offset + 100)); ch++) {
 		var valueField = document.getElementById("val" + ch);
 			dmxValues.push(valueField.innerHTML);
 	}
 	params = params + dmxValues;
 	
-    console.log("params: " + params);
+    console.log("params: " + params + " from " + offset + " to " + Math.min(512, (offset + 100)));
     http.send(params);
     http.onload = function() {
         //alert(http.responseText);
