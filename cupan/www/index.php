@@ -92,7 +92,7 @@ function setScene(name) {
 		dmxValues = [];
 		for (ch = 1; ch <= 512; ch++) {
 			var valueField = document.getElementById("val" + ch);
-				dmxValues.push(valueFiled.innerHTML);
+				dmxValues.push(valueField.innerHTML);
 		}
 		params = params + dmxValues;
 	}
