@@ -122,7 +122,7 @@ function periodicSendDmxValues() {
 	if (doSendDmxValues) {
 		doSendDmxValues = false;
 		sendDmxValues(1, 199);
-		sendDmxValues(200, 299);
+		sendDmxValues(200, 399);
 		sendDmxValues(400, 512);
 	}
 }

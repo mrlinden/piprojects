@@ -138,7 +138,7 @@ def setScene(sceneName):
         print(dmxValues)
         start = int(dmxValues[0])
         print(start)
-        for i in range(start + len(dmxValues) - 1):
+        for i in range(len(dmxValues) - 1):
             print("assign index " + str(start + i) + " value at pos " + str(1+i))
             #dmxUniverseAndValues[universe][start + i] = int(dmxValues[1 + i])
             
