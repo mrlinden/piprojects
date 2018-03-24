@@ -7,6 +7,6 @@ $len = strlen($msg);
 socket_sendto($sock, $msg, $len, 0, '127.0.0.1', 5555);
 socket_close($sock);
 
-echo json_encode("Ok");
+echo json_encode("Ok " + $msg);
 
 ?>

@@ -102,7 +102,7 @@ function setScene(name) {
     
     http.send(params);
     http.onload = function() {
-        //alert(http.responseText);
+        alert(http.responseText);
     }
 }
 
