@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
-$scene = json_decode($_POST["scene"], false);
+$scene = $_POST["scene"];
 
 echo json_encode("Got Scene ".$scene."....");
 ?>
