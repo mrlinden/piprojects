@@ -134,7 +134,7 @@ def setScene(sceneName):
         clearScene()
         universe = 5
         dmxValues = sceneName[3:].split(",")
-        
+        print(dmxValues)
         for i in range(len(dmxValues)):
             dmxUniverseAndValues[universe][1+i] = int(dmxValues[i])
             
