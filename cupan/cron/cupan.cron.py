@@ -136,10 +136,10 @@ def setScene(sceneName):
         allValues = sceneName[3:]
         dmxValues = allValues.split(",")
         print(dmxValues)
-        offset = dmxValues[0]
-        print(offset)
-        for i in range(offset, offset + len(dmxValues)):
-            dmxUniverseAndValues[universe][i] = int(dmxValues[i])
+        start = int(dmxValues[0])
+        print(start)
+        for i in range(start + len(dmxValues) - 1):
+            dmxUniverseAndValues[universe][start + i] = int(dmxValues[1 + i])
             
         sendAllUniverseValues()
         return

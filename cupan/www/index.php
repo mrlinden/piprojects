@@ -98,20 +98,20 @@ function setScene(name) {
     }
 }
 
-function sendDmxValues(offset) {
+function sendDmxValues(start, stop) {
 	var http = new XMLHttpRequest();
     http.open("POST", "setScene.php/", true);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 
     var params = "scene=dmx"
-	var dmxValues = [];
-	for (ch = offset; ch <= Math.min(512, (offset + 100)); ch++) {
+	var dmxValues = [start];
+	for (ch = start; ch <= stop; ch++) {
 		var valueField = document.getElementById("val" + ch);
 			dmxValues.push(valueField.innerHTML);
 	}
 	params = params + dmxValues;
 	
-    console.log("params: " + params + " from " + offset + " to " + Math.min(512, (offset + 100)));
+    console.log("params: " + params + " from " + start + " to " + stop);
     http.send(params);
     http.onload = function() {
         //alert(http.responseText);
@@ -121,9 +121,9 @@ function sendDmxValues(offset) {
 function periodicSendDmxValues() {
 	if (doSendDmxValues) {
 		doSendDmxValues = false;
-		sendDmxValues(1);
-		sendDmxValues(100);
-		sendDmxValues(200);
+		sendDmxValues(1, 199);
+		sendDmxValues(200, 299);
+		sendDmxValues(400, 512);
 	}
 }
 
