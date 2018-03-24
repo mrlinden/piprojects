@@ -134,7 +134,7 @@ def setScene(sceneName):
         
         universe = 5
         allValues = sceneName[3:]
-        print("Got all " + len(allValues) + " values: " + allValues)
+        print("Got all " + str(len(allValues)) + " values: " + allValues)
         dmxValues = allValues.split(",")
         print(dmxValues)
         for i in range(len(dmxValues)):
