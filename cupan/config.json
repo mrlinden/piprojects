@@ -3,35 +3,131 @@
   "log_mode" : "console",
   "log_path" : "/home/pi/piprojects/log/cupan.log",
 
-  "udp_ip"   : "127.0.0.1",
+  "udp_ip"   : "0.0.0.0",
   "udp_port" : 5555,
   "udp_buffer_size" : 1024,
 
-  "artnet_ip": "10.0.0.4",
+  "artnet_ip": "10.0.0.3",
   "artnet_port": 6454,
   
-  "periodic_transmission_interval" : 10,
-  "periodic_max_nr_retransmissions" : 5,
+  "periodic_transmission_interval" : 1,
+  "periodic_max_nr_retransmissions" : 2,
 
   "lamps" : {
-    "front_1" : { "dmx_universe" : 5, "dmx_channel" : 1 },
-    "front_2" : { "dmx_universe" : 5, "dmx_channel" : 6 },
-    "back_1"  : { "dmx_universe" : 5, "dmx_channel" : 12 }
-  },
+    "MH_1" : { "dmx_universe" : 5, "dmx_channel" : 1 },
+    "MH_2" : { "dmx_universe" : 5, "dmx_channel" : 30 },
+    "MH_3" : { "dmx_universe" : 5, "dmx_channel" : 59 },
+    "MH_4" : { "dmx_universe" : 5, "dmx_channel" : 88 },
 
-  "lamp_presets" : {
-    "octagon_warm_white_100percent" : [0, 255, 0, 0, 255 ],
-    "octagon_warm_white_50percent" : [0, 255, 0, 0, 128 ]
+	"Octagon_5" : { "dmx_universe" : 5, "dmx_channel" : 120 },
+	"Octagon_6" : { "dmx_universe" : 5, "dmx_channel" : 125 },
+	"Octagon_7" : { "dmx_universe" : 5, "dmx_channel" : 130 },
+	"Octagon_8" : { "dmx_universe" : 5, "dmx_channel" : 125 },
+	
+	"Par_9" : { "dmx_universe" : 5, "dmx_channel" : 140 },
+	"Par_10" : { "dmx_universe" : 5, "dmx_channel" : 148 },
+	"Par_11" : { "dmx_universe" : 5, "dmx_channel" : 156 },
+	"Par_12" : { "dmx_universe" : 5, "dmx_channel" : 164 },
+	"Par_13" : { "dmx_universe" : 5, "dmx_channel" : 172 },
+	"Par_14" : { "dmx_universe" : 5, "dmx_channel" : 180 },
+	
+	"Spot_15" : { "dmx_universe" : 5, "dmx_channel" : 190 },
+	"Spot_16" : { "dmx_universe" : 5, "dmx_channel" : 204 },
+	"Spot_17" : { "dmx_universe" : 5, "dmx_channel" : 218 },
+	"Spot_18" : { "dmx_universe" : 5, "dmx_channel" : 232 },
+	
+	"Tribar_19" : { "dmx_universe" : 5, "dmx_channel" : 250 },
+	"Tribar_20" : { "dmx_universe" : 5, "dmx_channel" : 262 },
+	"Tribar_21" : { "dmx_universe" : 5, "dmx_channel" : 274 },
+	"Tribar_22" : { "dmx_universe" : 5, "dmx_channel" : 286 },
+	"Tribar_23" : { "dmx_universe" : 5, "dmx_channel" : 298 },
+	"Tribar_24" : { "dmx_universe" : 5, "dmx_channel" : 310 }
   },
-
+  
   "scene_presets" : {
     "scen_1" : [
-      { "lamp" : "front_1", "preset" : "octagon_warm_white_100percent" },
-      { "lamp" : "front_2", "preset" : "octagon_warm_white_100percent" } ],
+        { "lamp" : "Octagon_5", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_6", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_7", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_8", "preset" : "octagon_warm_white_30percent" } ],
     "scen_2" : [
-      { "lamp" : "front_1", "preset" : "octagon_warm_white_50percent" },
-      { "lamp" : "front_2", "preset" : "octagon_warm_white_50percent" },
-      { "lamp" : "back_1",  "preset" : "octagon_warm_white_50percent" }
-    ]
+        { "lamp" : "Octagon_5", "preset" : "octagon_warm_white_60percent" },
+        { "lamp" : "Octagon_6", "preset" : "octagon_warm_white_60percent" },
+        { "lamp" : "Octagon_7", "preset" : "octagon_warm_white_60percent" },
+        { "lamp" : "Octagon_8", "preset" : "octagon_warm_white_60percent" } ],
+    "scen_3" : [
+        { "lamp" : "Octagon_5", "preset" : "octagon_warm_white_100percent" },
+        { "lamp" : "Octagon_6", "preset" : "octagon_warm_white_100percent" },
+        { "lamp" : "Octagon_7", "preset" : "octagon_warm_white_100percent" },
+        { "lamp" : "Octagon_8", "preset" : "octagon_warm_white_100percent" } ],
+    "scen_4" : [
+      	{ "lamp" : "Octagon_5", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_6", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_7", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_8", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "par_9", "preset" : "par_purple" },
+        { "lamp" : "par_10", "preset" : "par_purple" },
+        { "lamp" : "par_11", "preset" : "par_purple" },
+        { "lamp" : "par_12", "preset" : "par_purple" },
+        { "lamp" : "par_13", "preset" : "par_purple" },
+        { "lamp" : "par_14", "preset" : "par_purple" } ]
+  },
+  
+  "lamp_presets" : {
+    "octagon_warm_white_100percent" : [0, 255, 0, 0, 255 ],
+    "octagon_warm_white_60percent" : [0, 255, 0, 0, 128 ],
+    "octagon_warm_white_30percent" : [0, 255, 0, 0, 128 ],
+    "par_purple" : [138,43,226, 20,0,0,0,40]
+  },
+
+  "lamp_description" : {
+	"MH" : "			1 0 … 255 Rotation (0° up to the maximum value of the Pan area: 180°, 270° or 540°)
+					2 0 … 255 Fine adjustment for rotation (pan)
+					3 0 … 255 Inclination (0° up to the maximum value of the Tilt area: 90°, 180° or 200°)
+					4 0 … 255 Fine adjustment for inclination (tilt)
+					5 0 … 255 Movement speed (fast to slow)
+					6 0 … 255 Intensity Red (0 % to 100 %), LED group 1 ( Ä ‘LED groups’ on page 68)
+					7 0 … 255 Intensity Green (0 % to 100 %), LED group 1
+					8 0 … 255 Intensity Blue (0 % to 100 %), LED group 1
+					9 0 … 255 Intensity White (0 % to 100 %), LED group 1
+					10 0 … 255 Intensity Red (0 % to 100 %), LED group 2
+					11 0 … 255 Intensity Green (0 % to 100 %), LED group 2
+					12 0 … 255 Intensity Blue (0 % to 100 %), LED group 2
+					13 0 … 255 Intensity White (0 % to 100 %), LED group 2
+					14 0 … 255 Intensity Red (0 % to 100 %), LED group 3
+					15 0 … 255 Intensity Green (0 % to 100 %), LED group 3
+					16 0 … 255 Intensity Blue (0 % to 100 %), LED group 3
+					17 0 … 255 Intensity White (0 % to 100 %), LED group 3
+					18 0 … 255 Intensity Red (0 % to 100 %), LED group 4
+					19 0 … 255 Intensity Green (0 % to 100 %), LED group 4
+					20 0 … 255 Intensity Blue (0 % to 100 %), LED group 4
+					21 0 … 255 Intensity White (0 % to 100 %), LED group 4
+					22 Colour setting
+					23 Preprogrammed light effects
+					24 0 … 255 Preprogrammed effects speed (from slow to fast)
+					25 0 … 255 Dimmer (0 % to 100 %)
+					26 Shutter
+					27 0 … 255 Optical zoom, large to small
+					28 Special settings
+					29 Preprogrammed movement pattern",
+  
+  	"ocatagon" : "	1 0…255 Intensity cold white (0 % to 100 %)
+					2 0…255 Intensity warm white (0 % to 100 %)
+					3 0…15 No function
+					  16…255 Strobe effect in 24 steps, increasing speed
+					4 0…15 No function
+					  16…255 31 fixed colour mixings (macros)
+					5 0…255 Dimmer (0 % to 100 %)",
+					
+	"Par" : "		1 0…255 Intensity red (0 % to 100 %), if channel 5 = 0…15 and channel 7 = 0…31
+					2 0…255 Intensity green (0 % to 100 %), if channel 5 = 0…15 and channel 7 = 0…31
+					3 0…255 Intensity blue (0 % to 100 %), if channel 5 = 0…15 and channel 7 = 0…31
+					4 0…255 Intensity white (0 % to 100 %), if channel 5 = 0…15 and channel 7 = 0…31
+					5 Fixed colour pattern
+						0…15 No fixed colour and movement pattern
+						16…255 One of 31 preprogrammed colours, channels 6 and 7 without function
+					6 Strobe effect
+					7 Operating mode selection
+					8 0…255 Dimmer (0 % to 100 %)"
   }
 }
