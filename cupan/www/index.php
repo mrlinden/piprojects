@@ -13,7 +13,7 @@ p {
 
 .dmxVal {
 	position: absolute;
-    left: 60px;
+    left: 80px;
 }
 
 .slidecontainer {
@@ -32,7 +32,7 @@ p {
     -webkit-transition: .2s;
     transition: opacity .2s;
     position:absolute;
-    left: 90px;
+    left: 120px;
 }
 
 .slider:hover {
@@ -86,6 +86,7 @@ function setScene(name) {
     http.open("POST", "setScene.php", true);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     var params = "scene=" + name
+    console.log("Sending params " + params);
     http.send(params);
     http.onload = function() {
         alert(http.responseText);
