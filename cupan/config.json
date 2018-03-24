@@ -81,12 +81,12 @@
   },
 
   "lamp_description" : {
-	"MH" : "			1 0 … 255 Rotation (0° up to the maximum value of the Pan area: 180°, 270° or 540°)
+	"MH" : "   		1 0 … 255 Rotation (0 up to the maximum value of the Pan area: 180, 270 or 540)
 					2 0 … 255 Fine adjustment for rotation (pan)
-					3 0 … 255 Inclination (0° up to the maximum value of the Tilt area: 90°, 180° or 200°)
+					3 0 … 255 Inclination (0 up to the maximum value of the Tilt area: 90, 180 or 200)
 					4 0 … 255 Fine adjustment for inclination (tilt)
 					5 0 … 255 Movement speed (fast to slow)
-					6 0 … 255 Intensity Red (0 % to 100 %), LED group 1 ( Ä ‘LED groups’ on page 68)
+					6 0 … 255 Intensity Red (0 % to 100 %), LED group 1
 					7 0 … 255 Intensity Green (0 % to 100 %), LED group 1
 					8 0 … 255 Intensity Blue (0 % to 100 %), LED group 1
 					9 0 … 255 Intensity White (0 % to 100 %), LED group 1
