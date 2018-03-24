@@ -99,7 +99,7 @@ function setScene(name) {
 		}
 		params = params + dmxValues;
 	}
-    
+    console.log("params: " + params);
     http.send(params);
     http.onload = function() {
         alert(http.responseText);
