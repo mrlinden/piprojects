@@ -129,7 +129,13 @@ def setScene(sceneName):
         clearScene()
         sendAllUniverseValues()
         return
-
+    
+    if (sceneName.startswith("dmx")):
+        clearScene()
+        dmxUniverseAndValues[5] = sceneName[3:].split(",")
+        sendAllUniverseValues()
+        return
+    
     preset = getScenePreset(sceneName)
     if (preset == None):
         log("Found no preset with name " + sceneName + ".")
