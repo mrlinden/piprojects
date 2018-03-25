@@ -1,0 +1,2 @@
+*/10 * * * *  /bin/sh /home/pi/piprojects/cupan/cron/cupan.cron.sh >>/home/pi/piprojects/log/cupan.cron.log 2>&1
+0 1 * * *  /bin/sh /home/pi/piprojects/cron/update.cron.sh >>/home/pi/piprojects/log/update.cron.log 2>&1
