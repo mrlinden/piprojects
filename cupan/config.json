@@ -1,6 +1,6 @@
 {
 
-  "log_mode" : "console",
+  "log_mode" : "file",
   "log_path" : "/home/pi/piprojects/log/cupan.log",
 
   "udp_ip"   : "0.0.0.0",
@@ -10,67 +10,85 @@
   "artnet_ip": "10.0.0.3",
   "artnet_port": 6454,
   
-  "periodic_transmission_interval" : 1,
+  "periodic_transmission_interval" : 10,
   "periodic_max_nr_retransmissions" : 2,
 
   "lamps" : {
-    "MH_1" : { "dmx_universe" : 5, "dmx_channel" : 1 },
-    "MH_2" : { "dmx_universe" : 5, "dmx_channel" : 30 },
-    "MH_3" : { "dmx_universe" : 5, "dmx_channel" : 59 },
-    "MH_4" : { "dmx_universe" : 5, "dmx_channel" : 88 },
+	"Octagon_1" : { "dmx_universe" : 5, "dmx_channel" : 1 },
+	"Octagon_2" : { "dmx_universe" : 5, "dmx_channel" : 6 },
+	"Octagon_3" : { "dmx_universe" : 5, "dmx_channel" : 11 },
+	"Octagon_4" : { "dmx_universe" : 5, "dmx_channel" : 16 },
+	
+	"MH_5" : { "dmx_universe" : 5, "dmx_channel" : 21 },
+    "MH_6" : { "dmx_universe" : 5, "dmx_channel" : 50 },
+    "MH_7" : { "dmx_universe" : 5, "dmx_channel" : 79 },
+    "MH_8" : { "dmx_universe" : 5, "dmx_channel" : 108 },
 
-	"Octagon_5" : { "dmx_universe" : 5, "dmx_channel" : 120 },
-	"Octagon_6" : { "dmx_universe" : 5, "dmx_channel" : 125 },
-	"Octagon_7" : { "dmx_universe" : 5, "dmx_channel" : 130 },
-	"Octagon_8" : { "dmx_universe" : 5, "dmx_channel" : 125 },
+	"Spot_9" : { "dmx_universe" : 5, "dmx_channel" : 137 },
+	"Spot_10" : { "dmx_universe" : 5, "dmx_channel" : 151 },
+	"Spot_11" : { "dmx_universe" : 5, "dmx_channel" : 165 },
+	"Spot_12" : { "dmx_universe" : 5, "dmx_channel" : 179 },
 	
-	"Par_9" : { "dmx_universe" : 5, "dmx_channel" : 140 },
-	"Par_10" : { "dmx_universe" : 5, "dmx_channel" : 148 },
-	"Par_11" : { "dmx_universe" : 5, "dmx_channel" : 156 },
-	"Par_12" : { "dmx_universe" : 5, "dmx_channel" : 164 },
-	"Par_13" : { "dmx_universe" : 5, "dmx_channel" : 172 },
-	"Par_14" : { "dmx_universe" : 5, "dmx_channel" : 180 },
+	"Par_13" : { "dmx_universe" : 5, "dmx_channel" : 193 },
+	"Par_14" : { "dmx_universe" : 5, "dmx_channel" : 201 },
+	"Par_15" : { "dmx_universe" : 5, "dmx_channel" : 209 },
+	"Par_16" : { "dmx_universe" : 5, "dmx_channel" : 217 },
+	"Par_17" : { "dmx_universe" : 5, "dmx_channel" : 225 },
+	"Par_18" : { "dmx_universe" : 5, "dmx_channel" : 233 },
+
+	"Tribar_21" : { "dmx_universe" : 5, "dmx_channel" : 241 },
+	"Tribar_22" : { "dmx_universe" : 5, "dmx_channel" : 253 },
+	"Tribar_23" : { "dmx_universe" : 5, "dmx_channel" : 265 },
+	"Tribar_24" : { "dmx_universe" : 5, "dmx_channel" : 277 }
+	"Tribar_25" : { "dmx_universe" : 5, "dmx_channel" : 289 },
+	"Tribar_26" : { "dmx_universe" : 5, "dmx_channel" : 301 },
 	
-	"Spot_15" : { "dmx_universe" : 5, "dmx_channel" : 190 },
-	"Spot_16" : { "dmx_universe" : 5, "dmx_channel" : 204 },
-	"Spot_17" : { "dmx_universe" : 5, "dmx_channel" : 218 },
-	"Spot_18" : { "dmx_universe" : 5, "dmx_channel" : 232 },
-	
-	"Tribar_19" : { "dmx_universe" : 5, "dmx_channel" : 250 },
-	"Tribar_20" : { "dmx_universe" : 5, "dmx_channel" : 262 },
-	"Tribar_21" : { "dmx_universe" : 5, "dmx_channel" : 274 },
-	"Tribar_22" : { "dmx_universe" : 5, "dmx_channel" : 286 },
-	"Tribar_23" : { "dmx_universe" : 5, "dmx_channel" : 298 },
-	"Tribar_24" : { "dmx_universe" : 5, "dmx_channel" : 310 }
+	"Ledbar_27" : { "dmx_universe" : 5, "dmx_channel" : 313 },
+	"Ledbar_28" : { "dmx_universe" : 5, "dmx_channel" : 318 },
+	"Ledbar_29" : { "dmx_universe" : 5, "dmx_channel" : 323 },
+	"Ledbar_30" : { "dmx_universe" : 5, "dmx_channel" : 328 },
+	"Ledbar_31" : { "dmx_universe" : 5, "dmx_channel" : 333 }
   },
   
+  "scene_subgroup" : [ "dmx", "scen", "dekor" ],
+  
   "scene_presets" : {
-    "scen_1" : [
-        { "lamp" : "Octagon_5", "preset" : "octagon_warm_white_30percent" },
-        { "lamp" : "Octagon_6", "preset" : "octagon_warm_white_30percent" },
-        { "lamp" : "Octagon_7", "preset" : "octagon_warm_white_30percent" },
-        { "lamp" : "Octagon_8", "preset" : "octagon_warm_white_30percent" } ],
-    "scen_2" : [
-        { "lamp" : "Octagon_5", "preset" : "octagon_warm_white_60percent" },
-        { "lamp" : "Octagon_6", "preset" : "octagon_warm_white_60percent" },
-        { "lamp" : "Octagon_7", "preset" : "octagon_warm_white_60percent" },
-        { "lamp" : "Octagon_8", "preset" : "octagon_warm_white_60percent" } ],
-    "scen_3" : [
-        { "lamp" : "Octagon_5", "preset" : "octagon_warm_white_100percent" },
-        { "lamp" : "Octagon_6", "preset" : "octagon_warm_white_100percent" },
-        { "lamp" : "Octagon_7", "preset" : "octagon_warm_white_100percent" },
-        { "lamp" : "Octagon_8", "preset" : "octagon_warm_white_100percent" } ],
-    "scen_4" : [
-      	{ "lamp" : "Octagon_5", "preset" : "octagon_warm_white_30percent" },
-        { "lamp" : "Octagon_6", "preset" : "octagon_warm_white_30percent" },
-        { "lamp" : "Octagon_7", "preset" : "octagon_warm_white_30percent" },
-        { "lamp" : "Octagon_8", "preset" : "octagon_warm_white_30percent" },
-        { "lamp" : "par_9", "preset" : "par_purple" },
-        { "lamp" : "par_10", "preset" : "par_purple" },
-        { "lamp" : "par_11", "preset" : "par_purple" },
-        { "lamp" : "par_12", "preset" : "par_purple" },
+    "scen1" : [
+        { "lamp" : "Octagon_1", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_2", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_3", "preset" : "octagon_warm_white_30percent" },
+        { "lamp" : "Octagon_4", "preset" : "octagon_warm_white_30percent" } ],
+    "scen2" : [
+        { "lamp" : "Octagon_1", "preset" : "octagon_warm_white_60percent" },
+        { "lamp" : "Octagon_2", "preset" : "octagon_warm_white_60percent" },
+        { "lamp" : "Octagon_3", "preset" : "octagon_warm_white_60percent" },
+        { "lamp" : "Octagon_4", "preset" : "octagon_warm_white_60percent" } ],
+    "scen3" : [
+        { "lamp" : "Octagon_1", "preset" : "octagon_warm_white_100percent" },
+        { "lamp" : "Octagon_2", "preset" : "octagon_warm_white_100percent" },
+        { "lamp" : "Octagon_3", "preset" : "octagon_warm_white_100percent" },
+        { "lamp" : "Octagon_4", "preset" : "octagon_warm_white_100percent" } ],
+    "dekor1" : [
         { "lamp" : "par_13", "preset" : "par_purple" },
-        { "lamp" : "par_14", "preset" : "par_purple" } ]
+        { "lamp" : "par_14", "preset" : "par_purple" },
+        { "lamp" : "par_15", "preset" : "par_purple" },
+        { "lamp" : "par_16", "preset" : "par_purple" },
+        { "lamp" : "par_17", "preset" : "par_purple" },
+        { "lamp" : "par_18", "preset" : "par_purple" } ]
+    "dekor2" : [
+        { "lamp" : "par_13", "preset" : "par_purple" },
+        { "lamp" : "par_14", "preset" : "par_purple" },
+        { "lamp" : "par_15", "preset" : "par_purple" },
+        { "lamp" : "par_16", "preset" : "par_purple" },
+        { "lamp" : "par_17", "preset" : "par_purple" },
+        { "lamp" : "par_18", "preset" : "par_purple" } ]
+    "dekor3" : [
+        { "lamp" : "par_13", "preset" : "par_purple" },
+        { "lamp" : "par_14", "preset" : "par_purple" },
+        { "lamp" : "par_15", "preset" : "par_purple" },
+        { "lamp" : "par_16", "preset" : "par_purple" },
+        { "lamp" : "par_17", "preset" : "par_purple" },
+        { "lamp" : "par_18", "preset" : "par_purple" } ]
   },
   
   "lamp_presets" : {

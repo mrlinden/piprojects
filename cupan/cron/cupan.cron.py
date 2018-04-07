@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Copyright Marcus Lindén 2018
-# Script that listens to UDP on port 5555 and sends artnet DMX messages
+# Script that listens to UDP port for commands from cretron and sends artnet DMX messages
 
 import json
 import socket
@@ -59,9 +59,10 @@ class PeriodicArtNetSendingThread (threading.Thread):
                     sendAllUniverseValues()
                     self.nrTransmissionsOfSameScene += 1
                 time.sleep(config["periodic_transmission_interval"])
-    def newSceneSet(self):
+    def newSceneHasBeenSet(self):
         self.nrTransmissionsOfSameScene = 0
-        
+
+
 class ArtNetPacket(LittleEndianStructure):
     _fields_ = [("id", c_char * 8),
                 ("opcode", c_ushort),
@@ -104,10 +105,22 @@ def log(message):
             log.logger.addHandler(handler)
         log.logger.info(message)
 
+
+def getSceneSubgroup(sceneName):
+    for subgroup in config["scen_subgroups"]:
+        if (sceneName.startswith(subgroup)):
+            return subgroup
+    return None
+        
+        
 def getScenePreset(sceneName):
     if (sceneName in config["scene_presets"]):
         return config["scene_presets"][sceneName]
     return None
+
+
+def isSceneOffCommand(sceneName):
+    return sceneName.endswith("av")
 
 
 def getLampChannel(lampName):
@@ -122,70 +135,94 @@ def getLampPreset(presetName):
     return config["lamp_presets"][presetName]
 
 
+def setSceneByDMXValuesInSceneName(sceneName):
+    subgroup = "dmx"
+    dmxValues = sceneName[3:].split(",")
+    dmxValues = [int(i) for i in dmxValues]
+    startingChannel = dmxValues.pop(0)
+    universe = 5
+
+    updateSubgroupUniverseValues(subgroup, universe, startingChannel, dmxValues)
+    sendAllUniverseValues()
+    return
+
+
 def setScene(sceneName):
     log(sceneName)
-    return
     
-
-
-    periodicArtNetSendingThread.newSceneSet()
-
-    if (sceneName == "scen_av"):
-        clearScene()
-        sendAllUniverseValues()
-        return
-    
-    if (sceneName.startswith("dmx")):
-        dmxValues = sceneName[3:].split(",")
-        dmxValues = [int(i) for i in dmxValues]
-        startingChannel = dmxValues.pop(0)
-        universe = 5
-
-        updateUniverseValues(universe, startingChannel, dmxValues)
-        sendAllUniverseValues()
-        return
-    
+    subgroup = getSceneSubgroup(sceneName)
     preset = getScenePreset(sceneName)
-    if (preset == None):
-        log("Found no preset with name " + sceneName + ".")
-        return
 
-    clearScene()
-    for scenePresetCommand in preset:
-        lampUniverse = getLampUniverse(scenePresetCommand["lamp"])
-        lampChannel = getLampChannel(scenePresetCommand["lamp"])
-        lampPreset = getLampPreset(scenePresetCommand["preset"])
-        updateUniverseValues(lampUniverse, lampChannel, lampPreset)
+    if (subgroup == "dmx"):
+        setSceneByDMXValuesInSceneName(scenName);
+        return
+    
+    if ((subgroup == None) or (preset == None)):
+        log("Found no preset or subgroup for scene name " + sceneName + ".")
+        return
+    
+    clearSceneSubgroup(subgroup)
+
+    if (not isSceneOffCommand(sceneName)):
+        for scenePresetCommand in preset:
+            lampUniverse = getLampUniverse(scenePresetCommand["lamp"])
+            lampChannel = getLampChannel(scenePresetCommand["lamp"])
+            lampPreset = getLampPreset(scenePresetCommand["preset"])
+            updateSubgroupUniverseValues(subgroup, lampUniverse, lampChannel, lampPreset)
 
     sendAllUniverseValues()
+    periodicArtNetSendingThread.newSceneHasBeenSet()
 
 
-def clearScene():
-    for universe in dmxUniverseAndValues:
+def clearSceneSubgroup(subgroup):
+    for universe in subgroupDmxUniverseAndValues[subgroup]:
         initValues = [0] * 512
-        dmxUniverseAndValues[universe] = initValues
-
-
-def updateUniverseValues(universe, startingChannel, values):
-    if (universe not in dmxUniverseAndValues):
+        subgroupDmxUniverseAndValues[subgroup][universe] = initValues
+ 
+ 
+def updateSubgroupUniverseValues(subgroup, universe, startingChannel, values):
+    if (subgroup not in subgroupDmxUniverseAndValues):
+        subgroupDmxUniverseAndValues[subgroup] = {}
+        
+    if (universe not in subgroupDmxUniverseAndValues[subgroup]):
         initValues = [0] * 512
-        dmxUniverseAndValues[universe] = initValues
+        subgroupDmxUniverseAndValues[subgroup][universe] = initValues
 
-    print("Starting ch :" +  str(startingChannel) + " and length is " + str(len(values)))
+    log("Starting ch :" +  str(startingChannel) + " and length is " + str(len(values)))
     startingIndex = startingChannel - 1;
     for i in range(len(values)):
-        print ("update index " + str(startingIndex + i) + " from pos " + str(i) + " with value " + str(values[i]))
-        dmxUniverseAndValues[universe][startingIndex + i] = values[i]
+        log ("update index " + str(startingIndex + i) + " from pos " + str(i) + " with value " + str(values[i]))
+        subgroupDmxUniverseAndValues[subgroup][universe][startingIndex + i] = values[i]
+
+
+def getMergedDmxUniverseAndValues():
+    mergedDmxUniverseAndValues = {}
+
+    for subgroup in config["scene_subgroups"]:
+        if (subgroup in subgroupDmxUniverseAndValues):
+            for universe in subgroupDmxUniverseAndValues[subgroup]:
+                if (universe not in mergedDmxUniverseAndValues[subgroup]):
+                    initValues = [0] * 512
+                    mergedDmxUniverseAndValues[universe] = initValues
+
+                for i in range(len(mergedDmxUniverseAndValues[universe])):
+                    if (subgroupDmxUniverseAndValues[subgroup][universe][i] > mergedDmxUniverseAndValues[universe][i]):
+                        mergedDmxUniverseAndValues[i] = subgroupDmxUniverseAndValues[subgroup][universe][i];
+        
+    return mergedDmxUniverseAndValues
 
 
 def sendAllUniverseValues():
-    for universe in dmxUniverseAndValues:
-        packet = ArtNetPacket(universe, dmxUniverseAndValues[universe])
-        print(binascii.hexlify(packet))
+    mergedDmxUniverseAndValues = getMergedDmxUniverseAndValues()
+    for universe in mergedDmxUniverseAndValues:
+        packet = ArtNetPacket(universe, mergedDmxUniverseAndValues[universe])
+        log(str(binascii.hexlify(packet)))
         artNetSocket.sendto(packet, (config["artnet_ip"], config["artnet_port"]))
+
       
 # Program start
-dmxUniverseAndValues = {}
+subgroupDmxUniverseAndValues = {}
+
 artNetSocket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 periodicArtNetSendingThread = PeriodicArtNetSendingThread(2, "PeriodicArtNetSendingThread")
 periodicArtNetSendingThread.start()
