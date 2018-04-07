@@ -9,7 +9,7 @@
 
   "artnet_ip": "10.0.0.3",
   "artnet_port": 6454,
-  
+
   "periodic_transmission_interval" : 10,
   "periodic_max_nr_retransmissions" : 2,
 
@@ -18,17 +18,17 @@
 	"Octagon_2" : { "dmx_universe" : 5, "dmx_channel" : 6 },
 	"Octagon_3" : { "dmx_universe" : 5, "dmx_channel" : 11 },
 	"Octagon_4" : { "dmx_universe" : 5, "dmx_channel" : 16 },
-	
+
 	"MH_5" : { "dmx_universe" : 5, "dmx_channel" : 21 },
-    "MH_6" : { "dmx_universe" : 5, "dmx_channel" : 50 },
-    "MH_7" : { "dmx_universe" : 5, "dmx_channel" : 79 },
-    "MH_8" : { "dmx_universe" : 5, "dmx_channel" : 108 },
+        "MH_6" : { "dmx_universe" : 5, "dmx_channel" : 50 },
+        "MH_7" : { "dmx_universe" : 5, "dmx_channel" : 79 },
+        "MH_8" : { "dmx_universe" : 5, "dmx_channel" : 108 },
 
 	"Spot_9" : { "dmx_universe" : 5, "dmx_channel" : 137 },
 	"Spot_10" : { "dmx_universe" : 5, "dmx_channel" : 151 },
 	"Spot_11" : { "dmx_universe" : 5, "dmx_channel" : 165 },
 	"Spot_12" : { "dmx_universe" : 5, "dmx_channel" : 179 },
-	
+
 	"Par_13" : { "dmx_universe" : 5, "dmx_channel" : 193 },
 	"Par_14" : { "dmx_universe" : 5, "dmx_channel" : 201 },
 	"Par_15" : { "dmx_universe" : 5, "dmx_channel" : 209 },
@@ -39,62 +39,66 @@
 	"Tribar_21" : { "dmx_universe" : 5, "dmx_channel" : 241 },
 	"Tribar_22" : { "dmx_universe" : 5, "dmx_channel" : 253 },
 	"Tribar_23" : { "dmx_universe" : 5, "dmx_channel" : 265 },
-	"Tribar_24" : { "dmx_universe" : 5, "dmx_channel" : 277 }
+	"Tribar_24" : { "dmx_universe" : 5, "dmx_channel" : 277 },
 	"Tribar_25" : { "dmx_universe" : 5, "dmx_channel" : 289 },
 	"Tribar_26" : { "dmx_universe" : 5, "dmx_channel" : 301 },
-	
+
 	"Ledbar_27" : { "dmx_universe" : 5, "dmx_channel" : 313 },
 	"Ledbar_28" : { "dmx_universe" : 5, "dmx_channel" : 318 },
 	"Ledbar_29" : { "dmx_universe" : 5, "dmx_channel" : 323 },
 	"Ledbar_30" : { "dmx_universe" : 5, "dmx_channel" : 328 },
 	"Ledbar_31" : { "dmx_universe" : 5, "dmx_channel" : 333 }
   },
-  
-  "scene_subgroup" : [ "dmx", "scen", "dekor" ],
-  
+
+  "scene_subgroups" : [ "dmx", "Scen", "Dekor" ],
+
   "scene_presets" : {
-    "scen1" : [
+    "ScenAv" : [ ],
+    "Scen1" : [
         { "lamp" : "Octagon_1", "preset" : "octagon_warm_white_30percent" },
         { "lamp" : "Octagon_2", "preset" : "octagon_warm_white_30percent" },
         { "lamp" : "Octagon_3", "preset" : "octagon_warm_white_30percent" },
         { "lamp" : "Octagon_4", "preset" : "octagon_warm_white_30percent" } ],
-    "scen2" : [
+    "Scen2" : [
         { "lamp" : "Octagon_1", "preset" : "octagon_warm_white_60percent" },
         { "lamp" : "Octagon_2", "preset" : "octagon_warm_white_60percent" },
         { "lamp" : "Octagon_3", "preset" : "octagon_warm_white_60percent" },
         { "lamp" : "Octagon_4", "preset" : "octagon_warm_white_60percent" } ],
-    "scen3" : [
+    "Scen3" : [
         { "lamp" : "Octagon_1", "preset" : "octagon_warm_white_100percent" },
         { "lamp" : "Octagon_2", "preset" : "octagon_warm_white_100percent" },
         { "lamp" : "Octagon_3", "preset" : "octagon_warm_white_100percent" },
         { "lamp" : "Octagon_4", "preset" : "octagon_warm_white_100percent" } ],
-    "dekor1" : [
-        { "lamp" : "par_13", "preset" : "par_purple" },
-        { "lamp" : "par_14", "preset" : "par_purple" },
-        { "lamp" : "par_15", "preset" : "par_purple" },
-        { "lamp" : "par_16", "preset" : "par_purple" },
-        { "lamp" : "par_17", "preset" : "par_purple" },
-        { "lamp" : "par_18", "preset" : "par_purple" } ]
-    "dekor2" : [
-        { "lamp" : "par_13", "preset" : "par_purple" },
-        { "lamp" : "par_14", "preset" : "par_purple" },
-        { "lamp" : "par_15", "preset" : "par_purple" },
-        { "lamp" : "par_16", "preset" : "par_purple" },
-        { "lamp" : "par_17", "preset" : "par_purple" },
-        { "lamp" : "par_18", "preset" : "par_purple" } ]
-    "dekor3" : [
-        { "lamp" : "par_13", "preset" : "par_purple" },
-        { "lamp" : "par_14", "preset" : "par_purple" },
-        { "lamp" : "par_15", "preset" : "par_purple" },
-        { "lamp" : "par_16", "preset" : "par_purple" },
-        { "lamp" : "par_17", "preset" : "par_purple" },
-        { "lamp" : "par_18", "preset" : "par_purple" } ]
+    "DekorAv" : [ ],
+    "Dekor1" : [
+        { "lamp" : "Par_13", "preset" : "par_purple" },
+        { "lamp" : "Par_14", "preset" : "par_purple" },
+        { "lamp" : "Par_15", "preset" : "par_purple" },
+        { "lamp" : "Par_16", "preset" : "par_purple" },
+        { "lamp" : "Par_17", "preset" : "par_purple" },
+        { "lamp" : "Par_18", "preset" : "par_purple" } ],
+    "Dekor2" : [
+        { "lamp" : "Par_13", "preset" : "par_blue" },
+        { "lamp" : "Par_14", "preset" : "par_blue" },
+        { "lamp" : "Par_15", "preset" : "par_blue" },
+        { "lamp" : "Par_16", "preset" : "par_blue" },
+        { "lamp" : "Par_17", "preset" : "par_blue" },
+        { "lamp" : "Par_18", "preset" : "par_blue" } ],
+    "Dekor3" : [
+        { "lamp" : "Par_13", "preset" : "par_cyan" },
+        { "lamp" : "Par_14", "preset" : "par_cyan" },
+        { "lamp" : "Par_15", "preset" : "par_cyan" },
+        { "lamp" : "Par_16", "preset" : "par_cyan" },
+        { "lamp" : "Par_17", "preset" : "par_cyan" },
+        { "lamp" : "Par_18", "preset" : "par_cyan" } ]
   },
-  
+
   "lamp_presets" : {
     "octagon_warm_white_100percent" : [0, 255, 0, 0, 255 ],
     "octagon_warm_white_60percent" : [0, 255, 0, 0, 128 ],
     "octagon_warm_white_30percent" : [0, 255, 0, 0, 128 ],
-    "par_purple" : [138,43,226, 20,0,0,0,40]
+    "par_purple" : [138,43,226, 20,0,0,0,40],
+    "par_cyan" : [50,255,255, 20,0,0,0,40],
+    "par_blue" : [0,0,255, 20,0,0,0,40]
   }
 }

@@ -62,11 +62,16 @@ p {
 
 <h1>Cupan DXM channel test</h1>
 
-<button onclick="setScene('scen_1')">Scen_1</button>
-<button onclick="setScene('scen_2')">Scen_2</button>
-<button onclick="setScene('scen_3')">Scen_3</button>
-<button onclick="setScene('scen_4')">Scen_4</button>
-<button onclick="setScene('scen_av')">Scen_av</button>
+<button onclick="setScene('Scen1')">Scen1</button>
+<button onclick="setScene('Scen2')">Scen2</button>
+<button onclick="setScene('Scen3')">Scen3</button>
+<button onclick="setScene('Scen4')">Scen4</button>
+<button onclick="setScene('ScenAv')">ScenAv</button>
+<button onclick="setScene('Dekor1')">Dekor1</button>
+<button onclick="setScene('Dekor2')">Dekor2</button>
+<button onclick="setScene('Dekor3')">Dekor3</button>
+<button onclick="setScene('Dekor4')">Dekor4</button>
+<button onclick="setScene('DekorAv')">DekorAv</button>
 
 <div class="""slidecontainer">
 <?php 
