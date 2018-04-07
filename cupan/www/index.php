@@ -66,6 +66,7 @@ p {
 <button onclick="setScene('scen_2')">Scen_2</button>
 <button onclick="setScene('scen_3')">Scen_3</button>
 <button onclick="setScene('scen_4')">Scen_4</button>
+<button onclick="setScene('scen_av')">Scen_av</button>
 
 <div class="""slidecontainer">
 <?php 

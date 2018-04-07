@@ -123,6 +123,11 @@ def getLampPreset(presetName):
 
 
 def setScene(sceneName):
+    log(sceneName)
+    return
+    
+
+
     periodicArtNetSendingThread.newSceneSet()
 
     if (sceneName == "scen_av"):

@@ -4,7 +4,7 @@
   "log_path" : "/home/pi/piprojects/log/cupan.log",
 
   "udp_ip"   : "0.0.0.0",
-  "udp_port" : 5555,
+  "udp_port" : 5000,
   "udp_buffer_size" : 1024,
 
   "artnet_ip": "10.0.0.3",
