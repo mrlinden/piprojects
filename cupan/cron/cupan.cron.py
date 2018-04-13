@@ -154,7 +154,7 @@ def setScene(sceneName):
     preset = getScenePreset(sceneName)
 
     if (subgroup == "dmx"):
-        setSceneByDMXValuesInSceneName(scenName);
+        setSceneByDMXValuesInSceneName(sceneName);
         return
 
     if ((subgroup == None) or (preset == None)):
