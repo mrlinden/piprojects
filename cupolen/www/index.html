@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+html {
+    margin: 0px;
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+    padding: 50px;
+    min-height: 100%;
+    background: #373234;
+    background: -webkit-radial-gradient(center, #373234, #222222);
+    background: -moz-radial-gradient(center, #373234, #222222);
+    background: radial-gradient(ellipse at center, #373234, #222222);
+}
+
+.labelFrame {
+    width: 700px;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.heading {
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-shadow: 1px 1px 20px #000000;
+    color: #DDDDDD;
+    margin-top: -12px;
+    margin-bottom: -12px;
+    margin-left: 12px;
+}
+
+.ceilingLamp {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+    padding: 10px;
+    width: 120px;
+    margin: 15px 15px 20px 15px;
+    box-shadow: 1px 1px 20px 0px #000000;
+    -webkit-box-shadow: 1px 1px 20px 0px #000000;
+    -moz-box-shadow: 1px 1px 20px 0px #000000;
+    text-shadow: 1px 1px 20px #000000;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.ceilingLamp0 {
+    background: #FFFFFF;
+    background-image: -webkit-linear-gradient(top, #373737, #080808);
+    background-image: -moz-linear-gradient(top, #373737, #080808);
+    background-image: -ms-linear-gradient(top, #373737, #080808);
+    background-image: -o-linear-gradient(top, #373737, #080808);
+    background-image: linear-gradient(to bottom, #373737, #080808);
+    border: solid #666666 1px;
+    color: #DDDDDD;
+}
+
+.ceilingLamp1 {
+    background: #FF2626;
+    background-image: -webkit-linear-gradient(top, #FF2626, #AB000B);
+    background-image: -moz-linear-gradient(top, #FF2626, #AB000B);
+    background-image: -ms-linear-gradient(top, #FF2626, #AB000B);
+    background-image: -o-linear-gradient(top, #FF2626, #AB000B);
+    background-image: linear-gradient(to bottom, #FF2626, #AB000B);
+    border: solid #DD380D 1px;
+    color: #DDDDDD;
+}
+
+.ceilingLamp2 {
+    background: #053DF6;
+    background-image: -webkit-linear-gradient(top, #053DF6, #000599);
+    background-image: -moz-linear-gradient(top, #053DF6, #000599);
+    background-image: -ms-linear-gradient(top, #053DF6, #000599);
+    background-image: -o-linear-gradient(top, #053DF6, #000599);
+    background-image: linear-gradient(to bottom, #053DF6, #000599);
+    border: solid #0059A0 1px;
+    color: #DDDDDD;
+}
+
+.ceilingLamp3 {
+    background: #FFB300;
+    background-image: -webkit-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -moz-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -ms-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -o-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: linear-gradient(to bottom, #FFB300, #AB6E03);
+    border: solid #FFAE00 1px;
+    color: #DDDDDD;
+}
+
+.ceilingLamp4 {
+    background: #FFFFFF;
+    background-image: -webkit-linear-gradient(top, #FFFFFF, #C9C9C9);
+    background-image: -moz-linear-gradient(top, #FFFFFF, #C9C9C9);
+    background-image: -ms-linear-gradient(top, #FFFFFF, #C9C9C9);
+    background-image: -o-linear-gradient(top, #FFFFFF, #C9C9C9);
+    background-image: linear-gradient(to bottom, #FFFFFF, #C9C9C9);
+    border: solid #FFFFFF 1px;
+    color: #000000;
+}
+
+.dimmerVal {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-shadow: 1px 1px 20px #000000;
+    color: #DDDDDD;
+    width: 50px;
+    margin: 10px 0px 20px 15px;
+    padding-left: 5px;
+    display: inline-block;
+
+}
+
+.dimmerSlider {
+    width: 605px;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 10px;
+}
+
+.dimmer {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 2px;
+    background: #939393;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.dimmer:hover {
+    opacity: 1;
+}
+
+.dimmer::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid cornsilk;
+    background: #777777;
+    cursor: pointer;
+}
+
+.dimmer::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #777777;
+    cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+    <div class="labelFrame">
+        <div class="heading">Takbelysning</div><br>
+        <a href="#" id="ceilingLamp1" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(1)">R&ouml;d</a>
+        <a href="#" id="ceilingLamp2" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(2)">Bl&aring;</a>
+        <a href="#" id="ceilingLamp3" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(3)">Orange</a>
+        <a href="#" id="ceilingLamp4" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(4)">Vit</a>
+    </div>
+    <div class="labelFrame">
+        <div class="heading">Lysr&ouml;r Scen</div><br>
+        <div class="dimmerVal" id="dimmerVal1">0</div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider1" min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(1, this.value)"></div>
+    </div>
+    <div class="labelFrame">
+        <div class="heading">Lysr&ouml;r Publik</div><br>
+        <div class="dimmerVal" id="dimmerVal2">0</div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider2"  min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(2, this.value)"></div>
+    </div>
+
+<script>
+var isCeilingLampOn = [0,0,0,0,0];
+var dimmerValue = [0,0,0];
+
+var cmdCeilingLamp = [
+    // Cmd Lamp Off
+    [ "NOT_USED",
+      ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
+      ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
+      ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
+      ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#" ],
+    // Cmd Lamp On
+    [ "NOT_USED",
+        ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
+        ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
+        ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
+        ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#" ]
+    ];
+
+function toggleCeilingLamp(i) {
+    isCeilingLampOn[i] = 1 - isCeilingLampOn[i];
+    var cmd = cmdCeilingLamp[isCeilingLampOn[i]][i];
+    sendHelvarUDPCommand(cmd);
+    updateButtonStyles();
+}
+
+function updateButtonStyles() {
+    for (var i = 1; i < isCeilingLampOn.length; i++)
+    {
+        var element = document.getElementById("ceilingLamp" + i);
+        if (element === undefined) return;
+        if (isCeilingLampOn[i]) {
+            element.className = "ceilingLamp ceilingLamp" + i;
+        } else {
+            element.className = "ceilingLamp ceilingLamp0";
+        }
+    }
+}
+
+function updateDimmer(i, val) {
+    dimmerValue[i] = val;
+    updateDimmerStyles();
+}
+
+function updateDimmerStyles()
+{
+    for (var i = 1; i <= 2; i++)
+    {
+        var dimmerValueElement = document.getElementById("dimmerVal" + i);
+        dimmerValueElement.innerHTML = dimmerValue[i];
+        var dimmerSliderElement = document.getElementById("dimmerSlider" + i);
+        dimmerSliderElement.value = dimmerValue[i];
+    }
+}
+
+function sendHelvarUDPCommand(cmd) {
+    return sendHelvarCommand(cmd, "sendHelvarUDPCommand.php/", false);
+}
+
+function sendHelvarTCPCommand(cmd) {
+    return sendHelvarCommand(cmd, "sendHelvarTCPCommand.php/", true);
+}
+
+function sendHelvarCommand(cmd, url, handleResponse) {
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    console.log("sendHelvarCommand " + cmd);
+    http.send("cmd=" + cmd);
+    if (handleResponse) {
+        http.onload = function() {
+            // TODO Parse result and update status and styles
+            alert(http.responseText);
+        };
+    } else {
+        http.onload = function() {
+            //alert(http.responseText);
+        };
+    }
+}
+
+function periodicRequestActualValues() {
+    var requestStatusForAllLamps = "cmd=>V:1,C:103,G:5,B:2#";  // Request last scene in group 5, block 2
+    sendHelvarTCPCommand(requestStatusForAllLamps);
+}
+
+//setInterval(periodicRequestActualValues, 2000);
+
+</script>
+
+</body>
+</html>
