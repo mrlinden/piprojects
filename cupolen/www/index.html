@@ -369,16 +369,16 @@ function sendCommand(cmd, url, handleResponse) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    console.log("sendCommand " + cmd);
+    console.log("sendCommand " + cmd + " to url " + url);
     http.send("cmd=" + cmd);
     if (handleResponse) {
         http.onload = function() {
             applyStatus(http.responseText);
-            console.log(http.responseText);
+            console.log("handle response: " + http.responseText);
         };
     } else {
         http.onload = function() {
-            //alert(http.responseText);
+            console.log("skip response: " + http.responseText);
         };
     }
 }
