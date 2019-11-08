@@ -385,7 +385,7 @@ function sendCommand(cmd, url, handleResponse) {
 
 function applyStatus(statusLine) {
     var status = statusLine.split(":");
-    for (var i = 0; i < a.length; i++) {
+    for (var i = 0; i < status.length; i++) {
         var itemAndValue = status[i].split("=");
         if (itemAndValue.size > 1) {
             var value = itemAndValue[1];
