@@ -387,10 +387,8 @@ function applyStatus(statusLine) {
     var status = statusLine.split(":");
     for (var i = 0; i < status.length; i++) {
         var itemAndValue = status[i].split("=");
-        if (itemAndValue.size > 1) {
+        if (itemAndValue.length > 1) {
             var value = itemAndValue[1];
-            console.log("itemAndValue[0]: " + itemAndValue[0]);
-
             switch(itemAndValue[0]) {
                 case "A0" : isAutomationOn[0] = (value == '1') ? 1 : 0; break;
                 case "A1" : isAutomationOn[1] = (value == '1') ? 1 : 0; break;
