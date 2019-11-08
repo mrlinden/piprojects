@@ -6,7 +6,10 @@ function getAutomationStatus($index)
 {
     list($scriptPath) = get_included_files();
     $fileName = dirname($scriptPath) . "/automation." . $index;
-    $fp = fopen($fileName, 'r') or die('0');
+    if (!file_exists($filename)) {
+        return '0';
+    }
+    $fp = fopen($fileName, 'r')
     $content = fgets($fp);
     fclose($fp);
     if ($content == '1') return '1';
