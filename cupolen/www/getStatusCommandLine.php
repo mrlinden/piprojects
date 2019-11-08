@@ -6,12 +6,17 @@ function getAutomationStatus($index)
 {
     list($scriptPath) = get_included_files();
     $fileName = dirname($scriptPath) . "/automation." . $index;
-    if (!file_exists($filename)) {
+
+    if (!file_exists($fileName)) {
         return '0';
     }
-    $fp = fopen($fileName, 'r')
+
+    $fp = fopen($fileName, 'r');
     $content = fgets($fp);
     fclose($fp);
+    $pattern = '/\s*/m';
+    $replace = '';
+    $content = preg_replace( $pattern, $replace, $content );
     if ($content == '1') return '1';
     return '0';
 }
