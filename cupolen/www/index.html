@@ -122,7 +122,6 @@ body {
     margin: 10px 0px 20px 15px;
     padding-left: 5px;
     display: inline-block;
-
 }
 
 .dimmerSlider {
@@ -167,6 +166,82 @@ body {
     cursor: pointer;
 }
 
+.automation {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-shadow: 1px 1px 20px #000000;
+    color: #DDDDDD;
+    padding-left: 15px;
+}
+/* Customize the label (the container) */
+.automationItem {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.automationItem input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #333333;
+}
+
+/* On mouse-over, add a grey background color */
+.automationItem:hover input ~ .checkmark {
+    background-color: #888888;
+}
+
+/* When the checkbox is checked, add a blue background */
+.automationItem input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.automationItem input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.automationItem .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
 </style>
 </head>
 <body>
@@ -180,38 +255,73 @@ body {
     <div class="labelFrame">
         <div class="heading">Lysr&ouml;r Scen</div><br>
         <div class="dimmerVal" id="dimmerVal1">0</div>
-        <div class="dimmerSlider"><input type="range" id="dimmerSlider1" min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(1, this.value)"></div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider1" min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(1, this.value)"/></div>
     </div>
     <div class="labelFrame">
         <div class="heading">Lysr&ouml;r Publik</div><br>
         <div class="dimmerVal" id="dimmerVal2">0</div>
-        <div class="dimmerSlider"><input type="range" id="dimmerSlider2"  min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(2, this.value)"></div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider2"  min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(2, this.value)"/></div>
+    </div>
+    <div class="labelFrame">
+        <div class="heading">Automation</div><br>
+        <div class="automation">
+            <label class="automationItem">10:00 Normalbelysning
+                <input type="checkbox" checked="checked" id="automation0" onclick="toggleAutomation(0, this)">
+                <span class="checkmark"></span>
+            </label>
+            <label class="automationItem">11:00 M&ouml;tesbelysning
+                <input type="checkbox" checked="checked" id="automation1" onclick="toggleAutomation(1, this)">
+                <span class="checkmark"></span>
+            </label>
+            <!--<label class="automationItem">15:00 Sl&auml;ck
+                <input type="checkbox" checked="checked" id="automation2" onclick="toggleAutomation(2, this)">
+                <span class="checkmark"></span>
+            </label> //-->
+        </div>
     </div>
 
 <script>
 var isCeilingLampOn = [0,0,0,0,0];
+var ceilingLampHelvarGroupNr = [0,133,131,130,132];
 var dimmerValue = [0,0,0];
+var dimmerHelvarGroupNr = [0,129,900];
+var isAutomationOn = [1,1,1];
 
-var cmdCeilingLamp = [
-    // Cmd Lamp Off
-    [ "NOT_USED",
-      ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
-      ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
-      ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
-      ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#" ],
-    // Cmd Lamp On
-    [ "NOT_USED",
-        ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
-        ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
-        ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#",
-        ">V:1,C:11,G:17,K:1,B:2,S:5,F:50#" ]
-    ];
+String.prototype.format = function() {
+    a = this;
+    for (k in arguments) {
+        a = a.replace("{" + k + "}", arguments[k])
+    }
+    return a
+};
+
+function toggleAutomation(i, element) {
+    isAutomationOn[i] = element.checked ? 1 : 0;
+    sendCommand(i + ":" + isAutomationOn[i], "setAutomationCommand.php", false);
+    //updateAutomationCheckboxes();
+}
 
 function toggleCeilingLamp(i) {
     isCeilingLampOn[i] = 1 - isCeilingLampOn[i];
-    var cmd = cmdCeilingLamp[isCeilingLampOn[i]][i];
-    sendHelvarUDPCommand(cmd);
+    sendHelvarUDPCommand(cmdSetCeilingLamp(i, isCeilingLampOn[i]));
     updateButtonStyles();
+}
+
+function updateDimmer(i, val) {
+    dimmerValue[i] = val;
+    sendHelvarUDPCommand(cmdSetDimmer(i, dimmerValue[i]));
+    updateDimmerStyles();
+}
+
+function cmdSetCeilingLamp(lampNr, isOn) {
+    var group = ceilingLampHelvarGroupNr[lampNr];
+    var scene = (isOn === 1) ? 1 : 15;
+    return ">V:1,C:11,G:{0},K:1,B:1,S:{1},F:50#".format(group, scene);
+}
+
+function cmdSetDimmer(dimmerNr, level) {
+    var group = dimmerHelvarGroupNr[dimmerNr];
+    return ">V:1,C:13,G:{0},L:{1},F:50#".format(group, level);
 }
 
 function updateButtonStyles() {
@@ -227,11 +337,6 @@ function updateButtonStyles() {
     }
 }
 
-function updateDimmer(i, val) {
-    dimmerValue[i] = val;
-    updateDimmerStyles();
-}
-
 function updateDimmerStyles()
 {
     for (var i = 1; i <= 2; i++)
@@ -243,24 +348,33 @@ function updateDimmerStyles()
     }
 }
 
+function updateAutomationCheckboxes()
+{
+    for (var i = 0; i < 2; i++)
+    {
+        var e = document.getElementById("automation" + i);
+        e.checked = (isAutomationOn[i] > 0);
+    }
+}
+
 function sendHelvarUDPCommand(cmd) {
-    return sendHelvarCommand(cmd, "sendHelvarUDPCommand.php/", false);
+    return sendCommand(cmd, "sendHelvarUDPCommand.php/", false);
 }
 
 function sendHelvarTCPCommand(cmd) {
-    return sendHelvarCommand(cmd, "sendHelvarTCPCommand.php/", true);
+    return sendCommand(cmd, "sendHelvarTCPCommand.php/", true);
 }
 
-function sendHelvarCommand(cmd, url, handleResponse) {
+function sendCommand(cmd, url, handleResponse) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    console.log("sendHelvarCommand " + cmd);
+    console.log("sendCommand " + cmd);
     http.send("cmd=" + cmd);
     if (handleResponse) {
         http.onload = function() {
-            // TODO Parse result and update status and styles
-            alert(http.responseText);
+            applyStatus(http.responseText);
+            console.log(http.responseText);
         };
     } else {
         http.onload = function() {
@@ -269,12 +383,29 @@ function sendHelvarCommand(cmd, url, handleResponse) {
     }
 }
 
-function periodicRequestActualValues() {
-    var requestStatusForAllLamps = "cmd=>V:1,C:103,G:5,B:2#";  // Request last scene in group 5, block 2
-    sendHelvarTCPCommand(requestStatusForAllLamps);
+function applyStatus(statusLine) {
+    var status = statusLine.split(":");
+    for (var i = 0; i < a.length; i++) {
+        var itemAndValue = status[i].split("=");
+        if (itemAndValue.size > 1) {
+            var value = itemAndValue[1];
+            switch(itemAndValue[0]) {
+                case "A0" : isAutomationOn[0] = (value == '1') ? 1 : 0; break;
+                case "A1" : isAutomationOn[1] = (value == '1') ? 1 : 0; break;
+                case "A2" : isAutomationOn[2] = (value == '1') ? 1 : 0; break;
+            }
+        }
+    }
+    updateAutomationCheckboxes();
 }
 
-//setInterval(periodicRequestActualValues, 2000);
+function periodicRequestActualValues() {
+    //var requestStatusForAllLamps = "cmd=>V:1,C:103,G:5,B:2#";  // Request last scene in group 5, block 2
+    //sendHelvarTCPCommand(requestStatusForAllLamps);
+    sendCommand("", "getStatusCommand.php", true);
+}
+
+setInterval(periodicRequestActualValues, 2000);
 
 </script>
 
