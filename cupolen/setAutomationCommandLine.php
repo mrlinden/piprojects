@@ -2,12 +2,12 @@
 #error_reporting(E_ERROR | E_PARSE);
 
 $cmd = $argv[1];
-list($auto, $status) = explode(":", $cmd);
+list($index, $status) = explode(":", $cmd);
 
-if ($auto == "0" || $auto == "1" || $auto == "2") {
+if ($index == "0" || $index == "1" || $index == "2") {
     list($scriptPath) = get_included_files();
-    $fileName = dirname($scriptPath) . "/automation." . $auto;
-    $content = ($status == "1") ? '1' : '0';
+    $fileName = dirname($scriptPath) . "/status/automation." . $index;
+    $content = ($status == "0") ? '0' : '1';
     $fp = fopen($fileName, 'w');
     fwrite($fp, $content);
     fclose($fp);

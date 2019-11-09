@@ -273,10 +273,6 @@ body {
                 <input type="checkbox" checked="checked" id="automation1" onclick="toggleAutomation(1, this)">
                 <span class="checkmark"></span>
             </label>
-            <!--<label class="automationItem">15:00 Sl&auml;ck
-                <input type="checkbox" checked="checked" id="automation2" onclick="toggleAutomation(2, this)">
-                <span class="checkmark"></span>
-            </label> //-->
         </div>
     </div>
 
@@ -298,7 +294,6 @@ String.prototype.format = function() {
 function toggleAutomation(i, element) {
     isAutomationOn[i] = element.checked ? 1 : 0;
     sendCommand(i + ":" + isAutomationOn[i], "setAutomationCommand.php", false);
-    //updateAutomationCheckboxes();
 }
 
 function toggleCeilingLamp(i) {
@@ -361,10 +356,6 @@ function sendHelvarUDPCommand(cmd) {
     return sendCommand(cmd, "sendHelvarUDPCommand.php/", false);
 }
 
-function sendHelvarTCPCommand(cmd) {
-    return sendCommand(cmd, "sendHelvarTCPCommand.php/", true);
-}
-
 function sendCommand(cmd, url, handleResponse) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
@@ -390,9 +381,9 @@ function applyStatus(statusLine) {
         if (itemAndValue.length > 1) {
             var value = itemAndValue[1];
             switch(itemAndValue[0]) {
-                case "A0" : isAutomationOn[0] = (value == '1') ? 1 : 0; break;
-                case "A1" : isAutomationOn[1] = (value == '1') ? 1 : 0; break;
-                case "A2" : isAutomationOn[2] = (value == '1') ? 1 : 0; break;
+                case "A0" : isAutomationOn[0] = (value == '0') ? 0 : 1; break;
+                case "A1" : isAutomationOn[1] = (value == '0') ? 0 : 1; break;
+                case "A2" : isAutomationOn[2] = (value == '0') ? 0 : 1; break;
             }
         }
     }
@@ -400,8 +391,6 @@ function applyStatus(statusLine) {
 }
 
 function periodicRequestActualValues() {
-    //var requestStatusForAllLamps = "cmd=>V:1,C:103,G:5,B:2#";  // Request last scene in group 5, block 2
-    //sendHelvarTCPCommand(requestStatusForAllLamps);
     sendCommand("", "getStatusCommand.php", true);
 }
 

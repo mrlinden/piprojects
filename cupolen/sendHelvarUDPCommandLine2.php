@@ -1,5 +1,5 @@
 <?php
-#error_reporting(E_ERROR | E_PARSE);
+error_reporting(E_ERROR | E_PARSE);
 
 $cmd = $argv[1];
 #$address = '127.0.0.1';

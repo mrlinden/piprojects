@@ -1,2 +1,5 @@
 */10 * * * *  /bin/sh /home/pi/piprojects/cupan/cron/cupan.cron.sh >>/home/pi/piprojects/log/cupan.cron.log 2>&1
 0 1 * * *  /bin/sh /home/pi/piprojects/cron/update.cron.sh >>/home/pi/piprojects/log/update.cron.log 2>&1
+0 2 * * 0 /bin/sh /home/pi/piprojects/cupolen/cron/cupolen.automation.cron.sh >>/home/pi/piprojects/log/cupolen.automation.cron.log 2>&1
+0 10 * * 0 /bin/sh /home/pi/piprojects/cupolen/cron/cupolen.automation.cron.sh 0 >>/home/pi/piprojects/log/cupolen.automation.cron.log 2>&1
+0 11 * * 0 /bin/sh /home/pi/piprojects/cupolen/cron/cupolen.automation.cron.sh 1 >>/home/pi/piprojects/log/cupolen.automation.cron.log 2>&1
