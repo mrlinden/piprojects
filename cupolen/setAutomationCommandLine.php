@@ -11,7 +11,7 @@ if ($index == "0" || $index == "1" || $index == "2") {
     $fp = fopen($fileName, 'w');
     fwrite($fp, $content);
     fclose($fp);
-    echo "Ok " . $cmd;
+    echo "Ok " . $cmd . $fileName;
 } else {
     echo "Fail";
 }
