@@ -280,8 +280,9 @@ body {
 var isCeilingLampOn = [0,0,0,0,0];
 var ceilingLampHelvarGroupNr = [0,133,131,130,132];
 var dimmerValue = [0,0,0];
-var dimmerHelvarGroupNr = [0,129,900];
+var dimmerHelvarGroupNr = [0,900,129];
 var isAutomationOn = [1,1,1];
+var skipNextPeriodicRequest = 0;
 
 String.prototype.format = function() {
     a = this;
@@ -292,17 +293,20 @@ String.prototype.format = function() {
 };
 
 function toggleAutomation(i, element) {
+    skipNextPeriodicRequest = 1;
     isAutomationOn[i] = element.checked ? 1 : 0;
     sendCommand(i + ":" + isAutomationOn[i], "setAutomationCommand.php", false);
 }
 
 function toggleCeilingLamp(i) {
+    skipNextPeriodicRequest = 2;
     isCeilingLampOn[i] = 1 - isCeilingLampOn[i];
     sendHelvarUDPCommand(cmdSetCeilingLamp(i, isCeilingLampOn[i]));
     updateButtonStyles();
 }
 
 function updateDimmer(i, val) {
+    skipNextPeriodicRequest = 2;
     dimmerValue[i] = val;
     sendHelvarUDPCommand(cmdSetDimmer(i, dimmerValue[i]));
     updateDimmerStyles();
@@ -316,7 +320,7 @@ function cmdSetCeilingLamp(lampNr, isOn) {
 
 function cmdSetDimmer(dimmerNr, level) {
     var group = dimmerHelvarGroupNr[dimmerNr];
-    return ">V:1,C:13,G:{0},L:{1},F:50#".format(group, level);
+    return ">V:1,C:13,G:{0},L:{1},F:500#".format(group, level);
 }
 
 function updateButtonStyles() {
@@ -360,18 +364,29 @@ function sendCommand(cmd, url, handleResponse) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
     http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    console.log("sendCommand " + cmd + " to url " + url);
+    //console.log("sendCommand " + cmd + " to url " + url);
     http.send("cmd=" + cmd);
     if (handleResponse) {
         http.onload = function() {
             applyStatus(http.responseText);
-            console.log("handle response: " + http.responseText);
+            //console.log("handle response: " + http.responseText);
         };
     } else {
         http.onload = function() {
-            console.log("skip response: " + http.responseText);
+            //console.log("skip response: " + http.responseText);
         };
     }
+}
+
+function getDimmerPercent(value) {
+    if (value == 1) return 100;
+    if (value == 2) return 75;
+    if (value == 3) return 50;
+    if (value == 4) return 25;
+    if (value < 129) return 0;
+    if (value == 130) return 100;
+    if (value >= 137 && value <= 237) return value - 137;
+    return 0;
 }
 
 function applyStatus(statusLine) {
@@ -380,21 +395,34 @@ function applyStatus(statusLine) {
         var itemAndValue = status[i].split("=");
         if (itemAndValue.length > 1) {
             var value = itemAndValue[1];
+	    var intValue = parseInt(value);
             switch(itemAndValue[0]) {
                 case "A0" : isAutomationOn[0] = (value == '0') ? 0 : 1; break;
                 case "A1" : isAutomationOn[1] = (value == '0') ? 0 : 1; break;
                 case "A2" : isAutomationOn[2] = (value == '0') ? 0 : 1; break;
+		case "L133" : isCeilingLampOn[1] = (value == '1') ? 1 : 0; break;
+		case "L131" : isCeilingLampOn[2] = (value == '1') ? 1 : 0; break;
+		case "L130" : isCeilingLampOn[3] = (value == '1') ? 1 : 0; break;
+		case "L132" : isCeilingLampOn[4] = (value == '1') ? 1 : 0; break;
+		case "L900" : dimmerValue[1] = getDimmerPercent(intValue); break;
+		case "L129" : dimmerValue[2] = getDimmerPercent(intValue); break;
             }
         }
     }
     updateAutomationCheckboxes();
+    updateButtonStyles();
+    updateDimmerStyles();
 }
 
 function periodicRequestActualValues() {
-    sendCommand("", "getStatusCommand.php", true);
+    if (skipNextPeriodicRequest > 0) {
+        skipNextPeriodicRequest--;
+    } else {
+        sendCommand("", "getStatusCommand.php", true);
+    }
 }
 
-setInterval(periodicRequestActualValues, 2000);
+setInterval(periodicRequestActualValues, 1000);
 
 </script>
 

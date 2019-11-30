@@ -1,0 +1,10 @@
+{
+  "debug_level" : 0,
+  "log_mode" : "console",
+  "log_path" : "/home/pi/piprojects/log/cupolen.log",
+
+  "tcp_ip"   : "10.254.1.1",
+  "tcp_port" : 50000,
+  "tcp_buffer_size" : 1024
+
+}
