@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 # Copyright Marcus Linden 2019
 # Script that periodically send TCP commands to Helvar system
-
-import re
+import os
 import sys
+import time
+import re
 import json
 import socket
 import logging
@@ -19,6 +20,12 @@ from ctypes import *
 import binascii
 from threading import Thread
 import socket, time
+
+# Global variables
+sock = None
+isConnected = False
+previousStatusTimestamp = 0
+
 
 # Classes
 
@@ -45,9 +52,9 @@ class Receiver(Thread):
             except:
                 raise Exception("Exception from blocking sock.recv()")
             data += blk
-	multipleReplies = data.strip().split("#")
-	for reply in multipleReplies:
-	    parseAndStore(reply)
+    multipleReplies = data.strip().split("#")
+    for reply in multipleReplies:
+        parseAndStore(reply)
 
 # Configuration
 with open('../config.json') as json_data_file:
@@ -74,31 +81,31 @@ def storeIfValidGroup(match, validGroups, filePrefix):
     m = match.groupdict()
     #print(json.dumps(m))
     if (m['group'] in validGroups):
-	fileName = '../status/' + filePrefix + '.' + m['group']
-	fr = open(fileName, "r")
-	oldValue = fr.read()
-	fr.close()
-	if (oldValue != m['value']):
+        fileName = '../status/' + filePrefix + '.' + m['group']
+        fr = open(fileName, "r")
+        oldValue = fr.read()
+        fr.close()
+        if (oldValue != m['value']):
             log('Stored Group ' + m['group'] + ' with value ' + m['value'])
             f = open('../status/' + filePrefix + '.' + m['group'], "w")
             f.write(m['value'])
             f.close()
 
 def debug(message):
-    debugLevel = config["debug_level"]
-    if (debug == "1"): log(message)
+    debug_level = config["debug_level"]
+    if debug_level == "1": log(message)
 
 def log(message):
-    logMode = config["log_mode"]
-    logPath = config["log_path"]
+    log_mode = config["log_mode"]
+    log_path = config["log_path"]
 
-    if (logMode == "console"):
+    if log_mode == "console":
         print(message + "\n")
-    elif (logMode == "file"):
-        if (not hasattr(log, "logger")):
+    elif log_mode == "file":
+        if not hasattr(log, "logger"):
             log.logger = logging.getLogger("Cupolen Helvar UDP Listener Log")
             log.logger.setLevel(logging.INFO)
-            handler = TimedRotatingFileHandler(logPath,
+            handler = TimedRotatingFileHandler(log_path,
                                                when="midnight",
                                                interval=1,
                                                backupCount=10)
@@ -139,24 +146,35 @@ def connect():
     startReceiver()
     return True
 
+def isStatusRecentlyRequested():
+    global previousStatusTimestamp
+    timestamp_file = '../status/statusRequested.txt'
+
+    try:
+        modification_time = os.path.getmtime(timestamp_file)
+        if (previousStatusTimestamp != modification_time):
+            previousStatusTimestamp = modification_time
+            return True
+    except OSError:
+        previousStatusTimestamp = 0
+    return False
+
 
 # Program start
 log(str(datetime.datetime.now()) + "\nStarted Cupolen Helvar UDP Listener service\n\n")
-
-sock = None
-isConnected = False
 
 if connect():
     isConnected = True
     log("Connection established")
     time.sleep(1)
     while isConnected:
-        sendCommand(">V:1,C:103,G:130,B:1#")
-        sendCommand(">V:1,C:103,G:131,B:1#")
-        sendCommand(">V:1,C:103,G:132,B:1#")
-        sendCommand(">V:1,C:103,G:133,B:1#")
-        sendCommand(">V:1,C:103,G:129,B:1#")
-        sendCommand(">V:1,C:103,G:900,B:1#")
+        if isStatusRecentlyRequested():
+            sendCommand(">V:1,C:103,G:130,B:1#")
+            sendCommand(">V:1,C:103,G:131,B:1#")
+            sendCommand(">V:1,C:103,G:132,B:1#")
+            sendCommand(">V:1,C:103,G:133,B:1#")
+            sendCommand(">V:1,C:103,G:129,B:1#")
+            sendCommand(">V:1,C:103,G:900,B:1#")
         time.sleep(1)
 else:
     log("Connection failed")

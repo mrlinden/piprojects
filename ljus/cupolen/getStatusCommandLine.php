@@ -1,6 +1,16 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 
+function markStatusRequested()
+{
+    list($scriptPath) = get_included_files();
+    $fileName = dirname($scriptPath) . "/status/statusRequested.txt";
+    if (!touch($filename)) {
+        return 'NOT_UPDATING_' . $filename;
+    }
+    return '';
+}
+
 function getStatusFromFile($fileName)
 {
     list($scriptPath) = get_included_files();
@@ -49,5 +59,6 @@ echo "A0=" . getAutomationStatus(0) .
      ":L132=" . getOnOffLampScene(132) .
      ":L133=" . getOnOffLampScene(133) .
      ":L900=" . getDimmerLampLevel(900) .
-     ":L129=" . getDimmerLampLevel(129) ;
+     ":L129=" . getDimmerLampLevel(129) .
+     ":" . markStatusRequested();
 ?>

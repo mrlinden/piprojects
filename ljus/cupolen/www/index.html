@@ -57,6 +57,28 @@ body {
     cursor: pointer;
 }
 
+.setScene {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+    padding: 10px;
+    width: 250px;
+    margin: 15px 15px 20px 15px;
+    alignment: right;
+    box-shadow: 1px 1px 20px 0px #000000;
+    -webkit-box-shadow: 1px 1px 20px 0px #000000;
+    -moz-box-shadow: 1px 1px 20px 0px #000000;
+    text-shadow: 1px 1px 20px #000000;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    color: #DDDDDD;
+}
+
 .ceilingLamp0 {
     background: #FFFFFF;
     background-image: -webkit-linear-gradient(top, #373737, #080808);
@@ -172,12 +194,13 @@ body {
     font-weight: 100;
     text-shadow: 1px 1px 20px #000000;
     color: #DDDDDD;
-    padding-left: 15px;
 }
+
 /* Customize the label (the container) */
 .automationItem {
-    display: block;
+    display: inline-block;
     position: relative;
+    left: 5%;
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
@@ -246,6 +269,23 @@ body {
 </head>
 <body>
     <div class="labelFrame">
+        <div class="heading">Belysningsautomation Cupolen-salen</div><br>
+        <div class="automation">
+            <a href="#" id="setScene0" class="setScene" onclick="setScene(0)">Normalbelysning</a>
+            <label class="automationItem">S&ouml;ndag 10:00
+                <input type="checkbox" checked="checked" id="automation0" onclick="toggleAutomation(0, this)">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="automation">
+            <a href="#" id="setScene1" class="setScene" onclick="setScene(1)">M&ouml;tesbelysning</a>
+            <label class="automationItem">S&ouml;ndag 11:00
+                <input type="checkbox" checked="checked" id="automation1" onclick="toggleAutomation(1, this)">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <div class="labelFrame">
         <div class="heading">Takbelysning</div><br>
         <a href="#" id="ceilingLamp1" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(1)">R&ouml;d</a>
         <a href="#" id="ceilingLamp2" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(2)">Bl&aring;</a>
@@ -253,34 +293,26 @@ body {
         <a href="#" id="ceilingLamp4" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(4)">Vit</a>
     </div>
     <div class="labelFrame">
-        <div class="heading">Lysr&ouml;r Scen</div><br>
-        <div class="dimmerVal" id="dimmerVal1">0</div>
-        <div class="dimmerSlider"><input type="range" id="dimmerSlider1" min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(1, this.value)"/></div>
-    </div>
-    <div class="labelFrame">
         <div class="heading">Lysr&ouml;r Publik</div><br>
         <div class="dimmerVal" id="dimmerVal2">0</div>
         <div class="dimmerSlider"><input type="range" id="dimmerSlider2"  min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(2, this.value)"/></div>
     </div>
     <div class="labelFrame">
-        <div class="heading">Automation</div><br>
-        <div class="automation">
-            <label class="automationItem">10:00 Normalbelysning
-                <input type="checkbox" checked="checked" id="automation0" onclick="toggleAutomation(0, this)">
-                <span class="checkmark"></span>
-            </label>
-            <label class="automationItem">11:00 M&ouml;tesbelysning
-                <input type="checkbox" checked="checked" id="automation1" onclick="toggleAutomation(1, this)">
-                <span class="checkmark"></span>
-            </label>
-        </div>
+        <div class="heading">Lysr&ouml;r Nedre Scen</div><br>
+        <div class="dimmerVal" id="dimmerVal1">0</div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider1" min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(1, this.value)"/></div>
     </div>
-
+    <div class="labelFrame">
+        <div class="heading">Lysr&ouml;r &Ouml;vre Scen</div><br>
+        <div class="dimmerVal" id="dimmerVal3">0</div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider3" min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(3, this.value)"/></div>
+    </div>
 <script>
+
 var isCeilingLampOn = [0,0,0,0,0];
 var ceilingLampHelvarGroupNr = [0,133,131,130,132];
-var dimmerValue = [0,0,0];
-var dimmerHelvarGroupNr = [0,900,129];
+var dimmerValue = [0,0,0,0];
+var dimmerHelvarGroupNr = [0,900,129,900];
 var isAutomationOn = [1,1,1];
 var skipNextPeriodicRequest = 0;
 
@@ -296,6 +328,10 @@ function toggleAutomation(i, element) {
     skipNextPeriodicRequest = 1;
     isAutomationOn[i] = element.checked ? 1 : 0;
     sendCommand(i + ":" + isAutomationOn[i], "setAutomationCommand.php", false);
+}
+
+function setScene(i) {
+    sendCommand(i, "setScene.php", false);
 }
 
 function toggleCeilingLamp(i) {
@@ -338,7 +374,7 @@ function updateButtonStyles() {
 
 function updateDimmerStyles()
 {
-    for (var i = 1; i <= 2; i++)
+    for (var i = 1; i <= dimmerValue.length; i++)
     {
         var dimmerValueElement = document.getElementById("dimmerVal" + i);
         dimmerValueElement.innerHTML = dimmerValue[i];
@@ -400,12 +436,12 @@ function applyStatus(statusLine) {
                 case "A0" : isAutomationOn[0] = (value == '0') ? 0 : 1; break;
                 case "A1" : isAutomationOn[1] = (value == '0') ? 0 : 1; break;
                 case "A2" : isAutomationOn[2] = (value == '0') ? 0 : 1; break;
-		case "L133" : isCeilingLampOn[1] = (value == '1') ? 1 : 0; break;
-		case "L131" : isCeilingLampOn[2] = (value == '1') ? 1 : 0; break;
-		case "L130" : isCeilingLampOn[3] = (value == '1') ? 1 : 0; break;
-		case "L132" : isCeilingLampOn[4] = (value == '1') ? 1 : 0; break;
-		case "L900" : dimmerValue[1] = getDimmerPercent(intValue); break;
-		case "L129" : dimmerValue[2] = getDimmerPercent(intValue); break;
+                case "L133" : isCeilingLampOn[1] = (value == '1') ? 1 : 0; break;
+                case "L131" : isCeilingLampOn[2] = (value == '1') ? 1 : 0; break;
+                case "L130" : isCeilingLampOn[3] = (value == '1') ? 1 : 0; break;
+                case "L132" : isCeilingLampOn[4] = (value == '1') ? 1 : 0; break;
+                case "L900" : dimmerValue[1] = getDimmerPercent(intValue); break;
+                case "L129" : dimmerValue[2] = getDimmerPercent(intValue); break;
             }
         }
     }
