@@ -60,5 +60,7 @@ echo "A0=" . getAutomationStatus(0) .
      ":L133=" . getOnOffLampScene(133) .
      ":L900=" . getDimmerLampLevel(900) .
      ":L129=" . getDimmerLampLevel(129) .
+     ":L500=" . getOnOffLampScene(500) .
+     ":L501=" . getOnOffLampScene(501) .
      ":" . markStatusRequested();
 ?>

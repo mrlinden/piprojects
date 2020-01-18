@@ -25,6 +25,7 @@ import socket, time
 sock = None
 isConnected = False
 previousStatusTimestamp = 0
+timestamp_file = '../status/statusRequested.txt'
 
 
 # Classes
@@ -57,7 +58,7 @@ class Receiver(Thread):
             parseAndStore(reply)
 
 # Configuration
-with open('../config.json') as json_data_file:
+with open('helvar.config.json') as json_data_file:
     config = json.load(json_data_file)
 
 
@@ -65,7 +66,7 @@ with open('../config.json') as json_data_file:
 def parseAndStore(reply):
     if (reply == ""): return
     debug('Reply ' + reply)
-    onOffLampGroups = ["130","131","132","133"]
+    onOffLampGroups = ["130","131","132","133","500","501"]
     onOffLampRegexp = re.compile(r'.*?V:1,C:103,G:(?P<group>\d*),.*\=(?P<value>\d*)$')
     onOffLampMatch = onOffLampRegexp.match(reply)
     storeIfValidGroup(onOffLampMatch, onOffLampGroups, 'onOffLamp')
@@ -81,7 +82,7 @@ def storeIfValidGroup(match, validGroups, filePrefix):
     m = match.groupdict()
     #print(json.dumps(m))
     if (m['group'] in validGroups):
-        fileName = '../../status/' + filePrefix + '.' + m['group']
+        fileName = '../status/' + filePrefix + '.' + m['group']
         fr = open(fileName, "r")
         oldValue = fr.read()
         fr.close()
@@ -92,18 +93,20 @@ def storeIfValidGroup(match, validGroups, filePrefix):
             f.close()
 
 def debug(message):
-    debug_level = config["debug_level"]
-    if debug_level == "1": log(message)
+    do_debug = config["debug"]
+    if do_debug == "1": log(message)
 
 def log(message):
     log_mode = config["log_mode"]
     log_path = config["log_path"]
+    log_level = config["log_level"]
+    if log_level == "0": return
 
     if log_mode == "console":
         print(message + "\n")
     elif log_mode == "file":
         if not hasattr(log, "logger"):
-            log.logger = logging.getLogger("Cupolen Helvar UDP Listener Log")
+            log.logger = logging.getLogger("Helvar TCP Client Log")
             log.logger.setLevel(logging.INFO)
             handler = TimedRotatingFileHandler(log_path,
                                                when="midnight",
@@ -148,7 +151,7 @@ def connect():
 
 def isStatusRecentlyRequested():
     global previousStatusTimestamp
-    timestamp_file = '../../status/statusRequested.txt'
+    global timestamp_file
 
     try:
         modification_time = os.path.getmtime(timestamp_file)
@@ -159,9 +162,13 @@ def isStatusRecentlyRequested():
         previousStatusTimestamp = 0
     return False
 
+def touch(path):
+    open(path, 'a').close()
+    os.utime(path, None)
 
 # Program start
-log(str(datetime.datetime.now()) + "\nStarted Cupolen Helvar UDP Listener service\n\n")
+log(str(datetime.datetime.now()) + "\nStarted Helvar TCP Client service\n\n")
+touch(timestamp_file)
 
 if connect():
     isConnected = True
@@ -175,11 +182,13 @@ if connect():
             sendCommand(">V:1,C:103,G:133,B:1#")
             sendCommand(">V:1,C:103,G:129,B:1#")
             sendCommand(">V:1,C:103,G:900,B:1#")
+            sendCommand(">V:1,C:103,G:500,B:1#")
+            sendCommand(">V:1,C:103,G:501,B:1#")
         time.sleep(1)
 else:
     log("Connection failed")
 
 # Wait for threads to complete
 
-log("Cupolen Helvar UDP Listener service ends")
+log("Helvar TCP Client service ends")
 

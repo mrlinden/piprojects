@@ -101,7 +101,7 @@ body {
 <script>
 
 var isLampOn = [0,0,0];
-var lampHelvarGroupNr = [0,133,131];
+var lampHelvarGroupNr = [0,500,501];
 var skipNextPeriodicRequest = 0;
 
 String.prototype.format = function() {
@@ -167,8 +167,8 @@ function applyStatus(statusLine) {
         if (itemAndValue.length > 1) {
             var value = itemAndValue[1];
             switch(itemAndValue[0]) {
-                case "L133" : isLampOn[1] = (value == '1') ? 1 : 0; break;
-                case "L131" : isLampOn[2] = (value == '1') ? 1 : 0; break;
+                case "L500" : isLampOn[1] = (value == '1') ? 1 : 0; break;
+                case "L501" : isLampOn[2] = (value == '1') ? 1 : 0; break;
             }
         }
     }
