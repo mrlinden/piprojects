@@ -76,6 +76,42 @@ body {
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
+    background: #FFFFFF;
+    background-image: -webkit-linear-gradient(top, #373737, #080808);
+    background-image: -moz-linear-gradient(top, #373737, #080808);
+    background-image: -ms-linear-gradient(top, #373737, #080808);
+    background-image: -o-linear-gradient(top, #373737, #080808);
+    background-image: linear-gradient(to bottom, #373737, #080808);
+    border: solid #666666 1px;
+    color: #DDDDDD;
+}
+
+.setSceneClick {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+    padding: 10px;
+    width: 250px;
+    margin: 15px 15px 20px 15px;
+    alignment: right;
+    box-shadow: 1px 1px 20px 0px #000000;
+    -webkit-box-shadow: 1px 1px 20px 0px #000000;
+    -moz-box-shadow: 1px 1px 20px 0px #000000;
+    text-shadow: 1px 1px 20px #000000;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    background: #FFB300;
+    background-image: -webkit-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -moz-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -ms-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -o-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: linear-gradient(to bottom, #FFB300, #AB6E03);
+    border: solid #FFAE00 1px;
     color: #DDDDDD;
 }
 
@@ -332,6 +368,14 @@ function toggleAutomation(i, element) {
 
 function setScene(i) {
     sendCommand(i, "../setScene.php", false);
+
+    var element = document.getElementById("setScene" + i);
+    if (element === undefined) return;
+
+    element.setAttribute('class', 'setSceneClick');
+    setTimeout(function() {
+        element.setAttribute('class', 'setScene');
+    }, 500);
 }
 
 function toggleCeilingLamp(i) {

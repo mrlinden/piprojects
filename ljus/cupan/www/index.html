@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+html {
+    margin: 0px;
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+    padding: 50px;
+    min-height: 100%;
+    background: #373234;
+    background: -webkit-radial-gradient(center, #373234, #222222);
+    background: -moz-radial-gradient(center, #373234, #222222);
+    background: radial-gradient(ellipse at center, #373234, #222222);
+}
+
+.labelFrame {
+    width: 700px;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.heading {
+	font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-shadow: 1px 1px 20px #000000;
+    color: #DDDDDD;
+    margin-top: -12px;
+    margin-bottom: -12px;
+    margin-left: 12px;
+}
+
+.lamp {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 6px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    text-align: center;
+    padding: 10px;
+    width: 120px;
+    margin: 15px 15px 20px 15px;
+    box-shadow: 1px 1px 20px 0px #000000;
+    -webkit-box-shadow: 1px 1px 20px 0px #000000;
+    -moz-box-shadow: 1px 1px 20px 0px #000000;
+    text-shadow: 1px 1px 20px #000000;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.lamp0 {
+    background: #FFFFFF;
+    background-image: -webkit-linear-gradient(top, #373737, #080808);
+    background-image: -moz-linear-gradient(top, #373737, #080808);
+    background-image: -ms-linear-gradient(top, #373737, #080808);
+    background-image: -o-linear-gradient(top, #373737, #080808);
+    background-image: linear-gradient(to bottom, #373737, #080808);
+    border: solid #666666 1px;
+    color: #DDDDDD;
+}
+
+.lamp1 {
+    background: #FFB300;
+    background-image: -webkit-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -moz-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -ms-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -o-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: linear-gradient(to bottom, #FFB300, #AB6E03);
+    border: solid #FFAE00 1px;
+    color: #DDDDDD;
+}
+
+.lamp2 {
+    background: #FFB300;
+    background-image: -webkit-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -moz-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -ms-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -o-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: linear-gradient(to bottom, #FFB300, #AB6E03);
+    border: solid #FFAE00 1px;
+    color: #DDDDDD;
+}
+
+</style>
+</head>
+<body>
+    <div class="labelFrame">
+        <div class="heading">Frontljus</div><br>
+        <a href="#" id="ScenAv" class="lamp lamp0" onclick="setDmxScene('ScenAv')">Av</a>
+        <a href="#" id="Scen1" class="lamp lamp0" onclick="setDmxScene('Scen1')">1</a>
+        <a href="#" id="Scen2" class="lamp lamp0" onclick="setDmxScene('Scen2')">2</a>
+        <a href="#" id="Scen3" class="lamp lamp0" onclick="setDmxScene('Scen3')">3</a>
+    </div>
+    <div class="labelFrame">
+        <div class="heading">Dekorbelysning</div><br>
+        <a href="#" id="DekorAv" class="lamp lamp0" onclick="setDmxScene('DekorAv')">Av</a>
+        <a href="#" id="Dekor1" class="lamp lamp0" onclick="setDmxScene('Dekor1')">1</a>
+        <a href="#" id="Dekor2" class="lamp lamp0" onclick="setDmxScene('Dekor2')">2</a>
+        <a href="#" id="Dekor3" class="lamp lamp0" onclick="setDmxScene('Dekor3')">3</a>
+    </div>
+<script>
+
+
+function setDmxScene(name) {
+
+    var http = new XMLHttpRequest();
+    http.open("POST", "setScene.php/", true);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+    var params = "scene=" + name;
+    console.log("params: " + params);
+    http.send(params);
+    http.onload = function() {
+        //alert(http.responseText);
+    };
+
+    var element = document.getElementById(name);
+    if (element === undefined) return;
+
+    element.setAttribute('class', 'lamp lamp1');
+    setTimeout(function() {
+        element.setAttribute('class', 'lamp lamp0');
+    }, 500);
+
+}
+
+/*
+var isLampOn = [0,0,0];
+var lampHelvarGroupNr = [0,500,501];
+var skipNextPeriodicRequest = 0;
+
+String.prototype.format = function() {
+    a = this;
+    for (k in arguments) {
+        a = a.replace("{" + k + "}", arguments[k])
+    }
+    return a
+};
+
+function toggleLamp(i) {
+    skipNextPeriodicRequest = 2;
+    isLampOn[i] = 1 - isLampOn[i];
+    sendHelvarUDPCommand(cmdSetLamp(i, isLampOn[i]));
+    updateButtonStyles();
+}
+
+function cmdSetLamp(lampNr, isOn) {
+    var group = lampHelvarGroupNr[lampNr];
+    var scene = (isOn === 1) ? 1 : 15;
+    return ">V:1,C:11,G:{0},K:1,B:1,S:{1},F:50#".format(group, scene);
+}
+
+function updateButtonStyles() {
+    for (var i = 1; i < isLampOn.length; i++)
+    {
+        var element = document.getElementById("lamp" + i);
+        if (element === undefined) return;
+        if (isLampOn[i]) {
+            element.className = "lamp lamp" + i;
+        } else {
+            element.className = "lamp lamp0";
+        }
+    }
+}
+
+function sendHelvarUDPCommand(cmd) {
+    return sendCommand(cmd, "../sendHelvarUDPCommand.php/", false);
+}
+
+function sendCommand(cmd, url, handleResponse) {
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    //console.log("sendCommand " + cmd + " to url " + url);
+    http.send("cmd=" + cmd);
+    if (handleResponse) {
+        http.onload = function() {
+            applyStatus(http.responseText);
+            //console.log("handle response: " + http.responseText);
+        };
+    } else {
+        http.onload = function() {
+            //console.log("skip response: " + http.responseText);
+        };
+    }
+}
+
+function applyStatus(statusLine) {
+    var status = statusLine.split(":");
+    for (var i = 0; i < status.length; i++) {
+        var itemAndValue = status[i].split("=");
+        if (itemAndValue.length > 1) {
+            var value = itemAndValue[1];
+            switch(itemAndValue[0]) {
+                case "L500" : isLampOn[1] = (value == '1') ? 1 : 0; break;
+                case "L501" : isLampOn[2] = (value == '1') ? 1 : 0; break;
+            }
+        }
+    }
+    updateButtonStyles();
+}
+
+function periodicRequestActualValues() {
+    if (skipNextPeriodicRequest > 0) {
+        skipNextPeriodicRequest--;
+    } else {
+        sendCommand("", "../getStatusCommand.php", true);
+    }
+}
+
+setInterval(periodicRequestActualValues, 1000);
+
+*/
+</script>
+
+</body>
+</html>
