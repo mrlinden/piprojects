@@ -374,7 +374,7 @@ function updateButtonStyles() {
 
 function updateDimmerStyles()
 {
-    for (var i = 1; i <= dimmerValue.length; i++)
+    for (var i = 1; i < dimmerValue.length; i++)
     {
         var dimmerValueElement = document.getElementById("dimmerVal" + i);
         dimmerValueElement.innerHTML = dimmerValue[i];

@@ -5,8 +5,8 @@ function markStatusRequested()
 {
     list($scriptPath) = get_included_files();
     $fileName = dirname($scriptPath) . "/status/statusRequested.txt";
-    if (!touch($filename)) {
-        return 'NOT_UPDATING_' . $filename;
+    if (!touch($fileName)) {
+        return 'FAILED_TO_UPDATE_' . $fileName;
     }
     return '';
 }

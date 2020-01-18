@@ -52,9 +52,9 @@ class Receiver(Thread):
             except:
                 raise Exception("Exception from blocking sock.recv()")
             data += blk
-    multipleReplies = data.strip().split("#")
-    for reply in multipleReplies:
-        parseAndStore(reply)
+        multipleReplies = data.strip().split("#")
+        for reply in multipleReplies:
+            parseAndStore(reply)
 
 # Configuration
 with open('../config.json') as json_data_file:
