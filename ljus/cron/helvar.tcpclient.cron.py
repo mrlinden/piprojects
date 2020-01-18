@@ -164,6 +164,7 @@ def isStatusRecentlyRequested():
 
 def touch(path):
     open(path, 'a').close()
+    os.chmod(path, 0o666)
     os.utime(path, None)
 
 # Program start
