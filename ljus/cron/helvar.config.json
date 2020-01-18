@@ -2,7 +2,7 @@
   "debug" : 0,
   "log_level" : 1,
   "log_mode" : "file",
-  "log_path" : "/home/pi/piprojects/log/cupolen.log",
+  "log_path" : "/home/pi/piprojects/log/helvar.log",
 
   "tcp_ip"   : "10.254.1.1",
   "tcp_port" : 50000,

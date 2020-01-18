@@ -82,25 +82,27 @@ def storeIfValidGroup(match, validGroups, filePrefix):
     m = match.groupdict()
     #print(json.dumps(m))
     if (m['group'] in validGroups):
+        oldValue = ""
         fileName = '../status/' + filePrefix + '.' + m['group']
-        fr = open(fileName, "r")
-        oldValue = fr.read()
-        fr.close()
+        if (os.path.exists(fileName)):
+            fr = open(fileName, "r")
+            oldValue = fr.read()
+            fr.close()
         if (oldValue != m['value']):
             log('Stored Group ' + m['group'] + ' with value ' + m['value'])
-            f = open('../status/' + filePrefix + '.' + m['group'], "w")
+            f = open(fileName, "w")
             f.write(m['value'])
             f.close()
 
 def debug(message):
     do_debug = config["debug"]
-    if do_debug == "1": log(message)
+    if do_debug > 0: log(message)
 
 def log(message):
     log_mode = config["log_mode"]
     log_path = config["log_path"]
     log_level = config["log_level"]
-    if log_level == "0": return
+    if log_level == 0: return
 
     if log_mode == "console":
         print(message + "\n")
