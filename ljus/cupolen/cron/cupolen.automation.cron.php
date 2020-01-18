@@ -9,7 +9,7 @@ if ($argc > 1) {
 function getAutomationStatus($index)
 {
     list($scriptPath) = get_included_files();
-    $fileName = dirname($scriptPath) . "/../status/automation." . $index;
+    $fileName = dirname($scriptPath) . "/../../status/automation." . $index;
 
     if (!file_exists($fileName)) {
         return '1';
@@ -28,9 +28,9 @@ function getAutomationStatus($index)
 
 if ($index == '') {
     // Restore to "Automation On" by removing the status files (On is default when no file exist)
-    $result = `rm -rf ../status/automation*`;
+    $result = `rm -rf ../../status/automation*`;
 } else if (getAutomationStatus($index) == '1') {
-    $result =  `php ../setSceneCommandLine.php "$index"`;
+    $result =  `php ../../setSceneCommandLine.php "$index"`;
 }
 echo $result;
 ?>

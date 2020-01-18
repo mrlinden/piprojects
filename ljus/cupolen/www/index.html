@@ -327,11 +327,11 @@ String.prototype.format = function() {
 function toggleAutomation(i, element) {
     skipNextPeriodicRequest = 1;
     isAutomationOn[i] = element.checked ? 1 : 0;
-    sendCommand(i + ":" + isAutomationOn[i], "setAutomationCommand.php", false);
+    sendCommand(i + ":" + isAutomationOn[i], "../setAutomationCommand.php", false);
 }
 
 function setScene(i) {
-    sendCommand(i, "setScene.php", false);
+    sendCommand(i, "../setScene.php", false);
 }
 
 function toggleCeilingLamp(i) {
@@ -393,7 +393,7 @@ function updateAutomationCheckboxes()
 }
 
 function sendHelvarUDPCommand(cmd) {
-    return sendCommand(cmd, "sendHelvarUDPCommand.php/", false);
+    return sendCommand(cmd, "../sendHelvarUDPCommand.php/", false);
 }
 
 function sendCommand(cmd, url, handleResponse) {
@@ -454,7 +454,7 @@ function periodicRequestActualValues() {
     if (skipNextPeriodicRequest > 0) {
         skipNextPeriodicRequest--;
     } else {
-        sendCommand("", "getStatusCommand.php", true);
+        sendCommand("", "../getStatusCommand.php", true);
     }
 }
 

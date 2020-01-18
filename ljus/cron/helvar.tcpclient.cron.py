@@ -81,7 +81,7 @@ def storeIfValidGroup(match, validGroups, filePrefix):
     m = match.groupdict()
     #print(json.dumps(m))
     if (m['group'] in validGroups):
-        fileName = '../status/' + filePrefix + '.' + m['group']
+        fileName = '../../status/' + filePrefix + '.' + m['group']
         fr = open(fileName, "r")
         oldValue = fr.read()
         fr.close()
@@ -148,7 +148,7 @@ def connect():
 
 def isStatusRecentlyRequested():
     global previousStatusTimestamp
-    timestamp_file = '../status/statusRequested.txt'
+    timestamp_file = '../../status/statusRequested.txt'
 
     try:
         modification_time = os.path.getmtime(timestamp_file)

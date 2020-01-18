@@ -37,7 +37,7 @@ body {
     margin-left: 12px;
 }
 
-.ceilingLamp {
+.lamp {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 6px;
@@ -57,29 +57,7 @@ body {
     cursor: pointer;
 }
 
-.setScene {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 6px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: 100;
-    text-align: center;
-    padding: 10px;
-    width: 250px;
-    margin: 15px 15px 20px 15px;
-    alignment: right;
-    box-shadow: 1px 1px 20px 0px #000000;
-    -webkit-box-shadow: 1px 1px 20px 0px #000000;
-    -moz-box-shadow: 1px 1px 20px 0px #000000;
-    text-shadow: 1px 1px 20px #000000;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-    color: #DDDDDD;
-}
-
-.ceilingLamp0 {
+.lamp0 {
     background: #FFFFFF;
     background-image: -webkit-linear-gradient(top, #373737, #080808);
     background-image: -moz-linear-gradient(top, #373737, #080808);
@@ -90,29 +68,7 @@ body {
     color: #DDDDDD;
 }
 
-.ceilingLamp1 {
-    background: #FF2626;
-    background-image: -webkit-linear-gradient(top, #FF2626, #AB000B);
-    background-image: -moz-linear-gradient(top, #FF2626, #AB000B);
-    background-image: -ms-linear-gradient(top, #FF2626, #AB000B);
-    background-image: -o-linear-gradient(top, #FF2626, #AB000B);
-    background-image: linear-gradient(to bottom, #FF2626, #AB000B);
-    border: solid #DD380D 1px;
-    color: #DDDDDD;
-}
-
-.ceilingLamp2 {
-    background: #053DF6;
-    background-image: -webkit-linear-gradient(top, #053DF6, #000599);
-    background-image: -moz-linear-gradient(top, #053DF6, #000599);
-    background-image: -ms-linear-gradient(top, #053DF6, #000599);
-    background-image: -o-linear-gradient(top, #053DF6, #000599);
-    background-image: linear-gradient(to bottom, #053DF6, #000599);
-    border: solid #0059A0 1px;
-    color: #DDDDDD;
-}
-
-.ceilingLamp3 {
+.lamp1 {
     background: #FFB300;
     background-image: -webkit-linear-gradient(top, #FFB300, #AB6E03);
     background-image: -moz-linear-gradient(top, #FFB300, #AB6E03);
@@ -123,146 +79,15 @@ body {
     color: #DDDDDD;
 }
 
-.ceilingLamp4 {
-    background: #FFFFFF;
-    background-image: -webkit-linear-gradient(top, #FFFFFF, #C9C9C9);
-    background-image: -moz-linear-gradient(top, #FFFFFF, #C9C9C9);
-    background-image: -ms-linear-gradient(top, #FFFFFF, #C9C9C9);
-    background-image: -o-linear-gradient(top, #FFFFFF, #C9C9C9);
-    background-image: linear-gradient(to bottom, #FFFFFF, #C9C9C9);
-    border: solid #FFFFFF 1px;
-    color: #000000;
-}
-
-.dimmerVal {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: 100;
-    text-shadow: 1px 1px 20px #000000;
+.lamp2 {
+    background: #FFB300;
+    background-image: -webkit-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -moz-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -ms-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: -o-linear-gradient(top, #FFB300, #AB6E03);
+    background-image: linear-gradient(to bottom, #FFB300, #AB6E03);
+    border: solid #FFAE00 1px;
     color: #DDDDDD;
-    width: 50px;
-    margin: 10px 0px 20px 15px;
-    padding-left: 5px;
-    display: inline-block;
-}
-
-.dimmerSlider {
-    width: 605px;
-    display: inline-block;
-    vertical-align: top;
-    padding-top: 10px;
-}
-
-.dimmer {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 5px;
-    border-radius: 2px;
-    background: #939393;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-.dimmer:hover {
-    opacity: 1;
-}
-
-.dimmer::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid cornsilk;
-    background: #777777;
-    cursor: pointer;
-}
-
-.dimmer::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #777777;
-    cursor: pointer;
-}
-
-.automation {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    font-weight: 100;
-    text-shadow: 1px 1px 20px #000000;
-    color: #DDDDDD;
-}
-
-/* Customize the label (the container) */
-.automationItem {
-    display: inline-block;
-    position: relative;
-    left: 5%;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.automationItem input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #333333;
-}
-
-/* On mouse-over, add a grey background color */
-.automationItem:hover input ~ .checkmark {
-    background-color: #888888;
-}
-
-/* When the checkbox is checked, add a blue background */
-.automationItem input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-/* Show the checkmark when checked */
-.automationItem input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* Style the checkmark/indicator */
-.automationItem .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
 }
 
 </style>
@@ -270,16 +95,13 @@ body {
 <body>
     <div class="labelFrame">
         <div class="heading">Timerstyrd belysning</div><br>
-        <a href="#" id="ceilingLamp1" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(1)">Dagis</a>
-        <a href="#" id="ceilingLamp2" class="ceilingLamp ceilingLamp0" onclick="toggleCeilingLamp(2)">Utebelysning</a>
+        <a href="#" id="lamp1" class="lamp lamp0" onclick="toggleLamp(1)">Dagis</a>
+        <a href="#" id="lamp2" class="lamp lamp0" onclick="toggleLamp(2)">Utebelysning</a>
     </div>
 <script>
 
-var isCeilingLampOn = [0,0,0,0,0];
-var ceilingLampHelvarGroupNr = [0,133,131,130,132];
-var dimmerValue = [0,0,0,0];
-var dimmerHelvarGroupNr = [0,900,129,900];
-var isAutomationOn = [1,1,1];
+var isLampOn = [0,0,0];
+var lampHelvarGroupNr = [0,133,131];
 var skipNextPeriodicRequest = 0;
 
 String.prototype.format = function() {
@@ -290,76 +112,34 @@ String.prototype.format = function() {
     return a
 };
 
-function toggleAutomation(i, element) {
-    skipNextPeriodicRequest = 1;
-    isAutomationOn[i] = element.checked ? 1 : 0;
-    sendCommand(i + ":" + isAutomationOn[i], "setAutomationCommand.php", false);
-}
-
-function setScene(i) {
-    sendCommand(i, "setScene.php", false);
-}
-
-function toggleCeilingLamp(i) {
+function toggleLamp(i) {
     skipNextPeriodicRequest = 2;
-    isCeilingLampOn[i] = 1 - isCeilingLampOn[i];
-    sendHelvarUDPCommand(cmdSetCeilingLamp(i, isCeilingLampOn[i]));
+    isLampOn[i] = 1 - isLampOn[i];
+    sendHelvarUDPCommand(cmdSetLamp(i, isLampOn[i]));
     updateButtonStyles();
 }
 
-function updateDimmer(i, val) {
-    skipNextPeriodicRequest = 2;
-    dimmerValue[i] = val;
-    sendHelvarUDPCommand(cmdSetDimmer(i, dimmerValue[i]));
-    updateDimmerStyles();
-}
-
-function cmdSetCeilingLamp(lampNr, isOn) {
-    var group = ceilingLampHelvarGroupNr[lampNr];
+function cmdSetLamp(lampNr, isOn) {
+    var group = lampHelvarGroupNr[lampNr];
     var scene = (isOn === 1) ? 1 : 15;
     return ">V:1,C:11,G:{0},K:1,B:1,S:{1},F:50#".format(group, scene);
 }
 
-function cmdSetDimmer(dimmerNr, level) {
-    var group = dimmerHelvarGroupNr[dimmerNr];
-    return ">V:1,C:13,G:{0},L:{1},F:500#".format(group, level);
-}
-
 function updateButtonStyles() {
-    for (var i = 1; i < isCeilingLampOn.length; i++)
+    for (var i = 1; i < isLampOn.length; i++)
     {
-        var element = document.getElementById("ceilingLamp" + i);
+        var element = document.getElementById("lamp" + i);
         if (element === undefined) return;
-        if (isCeilingLampOn[i]) {
-            element.className = "ceilingLamp ceilingLamp" + i;
+        if (isLampOn[i]) {
+            element.className = "lamp lamp" + i;
         } else {
-            element.className = "ceilingLamp ceilingLamp0";
+            element.className = "lamp lamp0";
         }
     }
 }
 
-function updateDimmerStyles()
-{
-    for (var i = 1; i <= dimmerValue.length; i++)
-    {
-        var dimmerValueElement = document.getElementById("dimmerVal" + i);
-        dimmerValueElement.innerHTML = dimmerValue[i];
-        var dimmerSliderElement = document.getElementById("dimmerSlider" + i);
-        dimmerSliderElement.value = dimmerValue[i];
-    }
-}
-
-function updateAutomationCheckboxes()
-{
-    for (var i = 0; i < 2; i++)
-    {
-        var e = document.getElementById("automation" + i);
-        e.checked = (isAutomationOn[i] > 0);
-    }
-}
-
 function sendHelvarUDPCommand(cmd) {
-    return sendCommand(cmd, "sendHelvarUDPCommand.php/", false);
+    return sendCommand(cmd, "../sendHelvarUDPCommand.php/", false);
 }
 
 function sendCommand(cmd, url, handleResponse) {
@@ -380,47 +160,26 @@ function sendCommand(cmd, url, handleResponse) {
     }
 }
 
-function getDimmerPercent(value) {
-    if (value == 1) return 100;
-    if (value == 2) return 75;
-    if (value == 3) return 50;
-    if (value == 4) return 25;
-    if (value < 129) return 0;
-    if (value == 130) return 100;
-    if (value >= 137 && value <= 237) return value - 137;
-    return 0;
-}
-
 function applyStatus(statusLine) {
     var status = statusLine.split(":");
     for (var i = 0; i < status.length; i++) {
         var itemAndValue = status[i].split("=");
         if (itemAndValue.length > 1) {
             var value = itemAndValue[1];
-	    var intValue = parseInt(value);
             switch(itemAndValue[0]) {
-                case "A0" : isAutomationOn[0] = (value == '0') ? 0 : 1; break;
-                case "A1" : isAutomationOn[1] = (value == '0') ? 0 : 1; break;
-                case "A2" : isAutomationOn[2] = (value == '0') ? 0 : 1; break;
-                case "L133" : isCeilingLampOn[1] = (value == '1') ? 1 : 0; break;
-                case "L131" : isCeilingLampOn[2] = (value == '1') ? 1 : 0; break;
-                case "L130" : isCeilingLampOn[3] = (value == '1') ? 1 : 0; break;
-                case "L132" : isCeilingLampOn[4] = (value == '1') ? 1 : 0; break;
-                case "L900" : dimmerValue[1] = getDimmerPercent(intValue); break;
-                case "L129" : dimmerValue[2] = getDimmerPercent(intValue); break;
+                case "L133" : isLampOn[1] = (value == '1') ? 1 : 0; break;
+                case "L131" : isLampOn[2] = (value == '1') ? 1 : 0; break;
             }
         }
     }
-    updateAutomationCheckboxes();
     updateButtonStyles();
-    updateDimmerStyles();
 }
 
 function periodicRequestActualValues() {
     if (skipNextPeriodicRequest > 0) {
         skipNextPeriodicRequest--;
     } else {
-        sendCommand("", "getStatusCommand.php", true);
+        sendCommand("", "../getStatusCommand.php", true);
     }
 }
 
