@@ -173,25 +173,26 @@ def touch(path):
 log(str(datetime.datetime.now()) + "\nStarted Helvar TCP Client service\n\n")
 touch(timestamp_file)
 
-if connect():
-    isConnected = True
-    log("Connection established")
-    time.sleep(1)
-    while isConnected:
-        if isStatusRecentlyRequested():
-            sendCommand(">V:1,C:103,G:130,B:1#")
-            sendCommand(">V:1,C:103,G:131,B:1#")
-            sendCommand(">V:1,C:103,G:132,B:1#")
-            sendCommand(">V:1,C:103,G:133,B:1#")
-            sendCommand(">V:1,C:103,G:129,B:1#")
-            sendCommand(">V:1,C:103,G:900,B:1#")
-            sendCommand(">V:1,C:103,G:500,B:1#")
-            sendCommand(">V:1,C:103,G:501,B:1#")
+while True:
+    if connect():
+        isConnected = True
+        log("Connection established")
         time.sleep(1)
-else:
-    log("Connection failed")
+        while isConnected:
+            if isStatusRecentlyRequested():
+                sendCommand(">V:1,C:103,G:130,B:1#")
+                sendCommand(">V:1,C:103,G:131,B:1#")
+                sendCommand(">V:1,C:103,G:132,B:1#")
+                sendCommand(">V:1,C:103,G:133,B:1#")
+                sendCommand(">V:1,C:103,G:129,B:1#")
+                sendCommand(">V:1,C:103,G:900,B:1#")
+                sendCommand(">V:1,C:103,G:500,B:1#")
+                sendCommand(">V:1,C:103,G:501,B:1#")
+            time.sleep(1)
+    else:
+        log("Connection failed")
+    log("Helvar TCP Client reconnect")
 
 # Wait for threads to complete
-
 log("Helvar TCP Client service ends")
 
