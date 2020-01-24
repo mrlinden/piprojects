@@ -4,7 +4,7 @@
   "log_mode" : "file",
   "log_path" : "/home/pi/piprojects/log/helvar.log",
 
-  "tcp_ip"   : "10.254.1.1",
+  "tcp_ip"   : "10.254.1.2",
   "tcp_port" : 50000,
   "tcp_buffer_size" : 1024
 

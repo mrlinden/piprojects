@@ -331,17 +331,23 @@ body {
     <div class="labelFrame">
         <div class="heading">Lysr&ouml;r Publik</div><br>
         <div class="dimmerVal" id="dimmerVal2">0</div>
-        <div class="dimmerSlider"><input type="range" id="dimmerSlider2"  min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(2, this.value)"/></div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider2"  min="0" max="100" value="0" class="dimmer" onmouseup="updateDimmer(2, this.value)" ontouchend="updateDimmer(2, this.value)" 
+onmousedown="slideStart()" onmouseout="slideStop()" onmouseleave="slideStop()" ontouchstart="slideStart()" ontouchcancel="slideStop()"
+/></div>
     </div>
     <div class="labelFrame">
         <div class="heading">Lysr&ouml;r Nedre Scen</div><br>
         <div class="dimmerVal" id="dimmerVal1">0</div>
-        <div class="dimmerSlider"><input type="range" id="dimmerSlider1" min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(1, this.value)"/></div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider1" min="0" max="100" value="0" class="dimmer" onmouseup="updateDimmer(1, this.value)" ontouchend="updateDimmer(1, this.value)"
+onmousedown="slideStart()" onmouseout="slideStop()" onmouseleave="slideStop()" ontouchstart="slideStart()" ontouchcancel="slideStop()"
+/></div>
     </div>
     <div class="labelFrame">
         <div class="heading">Lysr&ouml;r &Ouml;vre Scen</div><br>
         <div class="dimmerVal" id="dimmerVal3">0</div>
-        <div class="dimmerSlider"><input type="range" id="dimmerSlider3" min="0" max="100" value="0" class="dimmer" oninput="updateDimmer(3, this.value)"/></div>
+        <div class="dimmerSlider"><input type="range" id="dimmerSlider3" min="0" max="100" value="0" class="dimmer" onmouseup="updateDimmer(3, this.value)" ontouchend="updateDimmer(3, this.value)"
+onmousedown="slideStart()" onmouseout="slideStop()" onmouseleave="slideStop()" ontouchstart="slideStart()" ontouchcancel="slideStop()"
+/></div>
     </div>
 <script>
 
@@ -351,6 +357,7 @@ var dimmerValue = [0,0,0,0];
 var dimmerHelvarGroupNr = [0,900,129,900];
 var isAutomationOn = [1,1,1];
 var skipNextPeriodicRequest = 0;
+var sliding = false;
 
 String.prototype.format = function() {
     a = this;
@@ -389,6 +396,7 @@ function updateDimmer(i, val) {
     skipNextPeriodicRequest = 2;
     dimmerValue[i] = val;
     sendHelvarUDPCommand(cmdSetDimmer(i, dimmerValue[i]));
+    slideStop();
     updateDimmerStyles();
 }
 
@@ -418,6 +426,7 @@ function updateButtonStyles() {
 
 function updateDimmerStyles()
 {
+    if (sliding) return;
     for (var i = 1; i < dimmerValue.length; i++)
     {
         var dimmerValueElement = document.getElementById("dimmerVal" + i);
@@ -434,6 +443,16 @@ function updateAutomationCheckboxes()
         var e = document.getElementById("automation" + i);
         e.checked = (isAutomationOn[i] > 0);
     }
+}
+
+function slideStart() {
+    sliding = true;
+    //console.log("Start sliding");
+}
+
+function slideStop() {
+    sliding = false;
+    //console.log("Stop sliding");
 }
 
 function sendHelvarUDPCommand(cmd) {
@@ -464,8 +483,8 @@ function getDimmerPercent(value) {
     if (value == 3) return 50;
     if (value == 4) return 25;
     if (value < 129) return 0;
-    if (value == 130) return 100;
-    if (value >= 137 && value <= 237) return value - 137;
+    if (value == 130 || value == 131) return 100;
+    if (value >= 138 && value <= 237) return value - 138;
     return 0;
 }
 
@@ -497,6 +516,7 @@ function applyStatus(statusLine) {
 function periodicRequestActualValues() {
     if (skipNextPeriodicRequest > 0) {
         skipNextPeriodicRequest--;
+        sendCommand("", "../getStatusCommand.php", false);
     } else {
         sendCommand("", "../getStatusCommand.php", true);
     }
