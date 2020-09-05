@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cupolen Camera Controller</title>
+<style>
+    html {
+        margin: 0;
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 50px;
+        min-height: 100%;
+        background: #373234;
+        background: -webkit-radial-gradient(circle at center, #373234, #222222);
+        background: -moz-radial-gradient(circle at center, #373234, #222222);
+        background: radial-gradient(ellipse at center, #373234, #222222);
+    }
+
+    div {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .mainFrame {
+        display: flex;
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 6px;
+        margin-bottom: 50px;
+        max-height: 235px;
+    }
+
+    .labelFrame {
+        max-height: 235px;
+        max-width: 510px;
+        min-width: 510px;
+    }
+
+    .presetFrame {
+        max-height: 235px;
+        max-width: 900px;
+        overflow: scroll;
+    }
+
+    .heading {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 100;
+        text-shadow: 1px 1px 20px #000000;
+        color: #DDDDDD;
+        margin-top: -12px;
+        margin-bottom: -12px;
+        margin-left: 12px;
+    }
+
+    .subHeadingText {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: 100;
+        text-align: center;
+        padding: 10px;
+        margin: 10px 10px 10px 10px;
+        text-shadow: 1px 1px 20px #000000;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        color: #DDDDDD;
+    }
+
+    .subheadingZoom {
+        width: 50px;
+        padding: 10px 0 10px 0;
+    }
+
+    .subheadingFocus {
+        width: 105px;
+    }
+
+    .buttonDiv {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 100;
+        text-shadow: 1px 1px 20px #000000;
+        color: #DDDDDD;
+        overflow: hidden;
+        max-height: 66px;
+    }
+
+    .buttonLink {
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 6px;
+        border-color: #000000;
+        border-width: 1px;
+        border-style: double;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 100;
+        text-align: center;
+        padding: 10px;
+        width: 30px;
+        height: 26px;
+        vertical-align: top;
+        margin: 10px 10px 10px 10px;
+        box-shadow: 1px 1px 10px 0 #000000;
+        -webkit-box-shadow: 1px 1px 10px 0 #000000;
+        -moz-box-shadow: 1px 1px 10px 0 #000000;
+        text-shadow: 1px 1px 20px #000000;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        color: #DDDDDD;
+    }
+
+    .buttonLink:active {
+        border-color: #EEEEEE;
+    }
+
+    .presetDiv {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 100;
+        text-shadow: 1px 1px 20px #000000;
+        color: #DDDDDD;
+        overflow: hidden;
+    }
+
+    .presetLink {
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 6px;
+        border-color: #000000;
+        border-width: 1px;
+        border-style: double;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 100;
+        text-align: center;
+        vertical-align: top;
+        padding: 10px;
+        width: 150px;
+        height: 73px;
+        margin: 10px 10px 15px 10px;
+        box-shadow: 1px 1px 10px 0 #000000;
+        -webkit-box-shadow: 1px 1px 10px 0 #000000;
+        -moz-box-shadow: 1px 1px 10px 0 #000000;
+        text-shadow: 1px 1px 20px #000000;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        color: #DDDDDD;
+    }
+
+    .presetLink:active {
+         border-color: #EEEEEE;
+    }
+
+    .horizontalSpace {
+        width: 15px;
+        display: inline-block;
+    }
+
+    .copyright {
+        color: #DDDDDD;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    @keyframes blink {
+        50% { border-color: #fcc600; }
+    }
+
+    .blinkFrame {
+        animation: blink .5s step-end infinite alternate;
+    }
+
+    .markFrame {
+        border-color: #EEEEEE;
+    }
+    
+    .selectFrame {
+        border-color: #fcc600;
+    }
+</style>
+</head>
+<body>
+<span class="copyright">Cupolen Camera Controller v 0.1</span>
+
+<div class="mainFrame">
+    <div class="labelFrame">
+        <div class="heading">Camera 3 </div><br>
+        <div class="buttonDiv">
+            <div id="pan-UpLeft-1" class="buttonLink">&#8598;</div>
+            <div id="pan-Up-1" class="buttonLink">&#8593;</div>
+            <div id="pan-UpRight-1" class="buttonLink">&#8599;</div>
+            <div class="horizontalSpace"></div>
+            <div class="subHeadingText subheadingZoom">Zoom</div>
+            <div class="horizontalSpace"></div>
+            <div class="subHeadingText subheadingFocus">Focus</div>
+        </div>
+
+        <div class="buttonDiv">
+            <div id="pan-Left-1" class="buttonLink">&#8592;</div>
+            <div id="pan-Home-1" class="buttonLink">0</div>
+            <div id="pan-Right-1" class="buttonLink">&#8594;</div>
+            <div class="horizontalSpace"></div>
+            <div id="zoom-In-1" class="buttonLink">&#8593;</div>
+            <div class="horizontalSpace"></div>
+            <div id="focus-Auto-1" class="buttonLink">A</div>
+            <div id="focus-Near-1" class="buttonLink">&#8593;</div>
+            <div class="horizontalSpace"></div>
+        </div>
+
+        <div class="buttonDiv">
+            <div id="pan-DownLeft-1" class="buttonLink">&#8601;</div>
+            <div id="pan-Down-1" class="buttonLink">&#8595;</div>
+            <div id="pan-DownRight-1" class="buttonLink">&#8600;</div>
+            <div class="horizontalSpace"></div>
+            <div id="zoom-Out-1" class="buttonLink">&#8595;</div>
+            <div class="horizontalSpace"></div>
+            <div id="focus-Manual-1" class="buttonLink">M</div>
+            <div id="focus-Far-1" class="buttonLink">&#8595;</div>
+        </div>
+    </div>
+
+    <div class="presetFrame">
+        <div class="presetDiv">
+            <div id="preset-1-0" class="presetLink">Store</div>
+            <div id="preset-1-1" class="presetLink">1</div>
+            <div id="preset-1-2" class="presetLink">2</div>
+            <div id="preset-1-3" class="presetLink">3</div>
+            <div id="preset-1-4" class="presetLink">4</div>
+            <div id="preset-1-5" class="presetLink">5</div>
+            <div id="preset-1-6" class="presetLink">6</div>
+            <div id="preset-1-7" class="presetLink">7</div>
+        </div>
+    </div>
+</div>
+
+<div class="mainFrame">
+    <div class="labelFrame">
+        <div class="heading">Camera 3 </div><br>
+        <div class="buttonDiv">
+            <div id="pan-UpLeft-2" class="buttonLink">&#8598;</div>
+            <div id="pan-Up-2" class="buttonLink">&#8593;</div>
+            <div id="pan-UpRight-2" class="buttonLink">&#8599;</div>
+            <div class="horizontalSpace"></div>
+            <div class="subHeadingText subheadingZoom">Zoom</div>
+            <div class="horizontalSpace"></div>
+            <div class="subHeadingText subheadingFocus">Focus</div>
+        </div>
+
+        <div class="buttonDiv">
+            <div id="pan-Left-2" class="buttonLink">&#8592;</div>
+            <div id="pan-Home-2" class="buttonLink">0</div>
+            <div id="pan-Right-2" class="buttonLink">&#8594;</div>
+            <div class="horizontalSpace"></div>
+            <div id="zoom-In-2" class="buttonLink">&#8593;</div>
+            <div class="horizontalSpace"></div>
+            <div id="focus-Auto-2" class="buttonLink">A</div>
+            <div id="focus-Near-2" class="buttonLink">&#8593;</div>
+            <div class="horizontalSpace"></div>
+        </div>
+
+        <div class="buttonDiv">
+            <div id="pan-DownLeft-2" class="buttonLink">&#8601;</div>
+            <div id="pan-Down-2" class="buttonLink">&#8595;</div>
+            <div id="pan-DownRight-2" class="buttonLink">&#8600;</div>
+            <div class="horizontalSpace"></div>
+            <div id="zoom-Out-2" class="buttonLink">&#8595;</div>
+            <div class="horizontalSpace"></div>
+            <div id="focus-Manual-2" class="buttonLink">M</div>
+            <div id="focus-Far-2" class="buttonLink">&#8595;</div>
+        </div>
+    </div>
+
+    <div class="presetFrame">
+        <div class="presetDiv">
+            <div id="preset-2-0" class="presetLink">Store</div>
+            <div id="preset-2-1" class="presetLink">1</div>
+            <div id="preset-2-2" class="presetLink">2</div>
+            <div id="preset-2-3" class="presetLink">3</div>
+            <div id="preset-2-4" class="presetLink">4</div>
+            <div id="preset-2-5" class="presetLink">5</div>
+            <div id="preset-2-6" class="presetLink">6</div>
+            <div id="preset-2-7" class="presetLink">7</div>
+        </div>
+    </div>
+</div>
+
+<div class="mainFrame">
+    <div class="labelFrame">
+        <div class="heading">Camera 3 </div><br>
+        <div class="buttonDiv">
+            <div id="pan-UpLeft-3" class="buttonLink">&#8598;</div>
+            <div id="pan-Up-3" class="buttonLink">&#8593;</div>
+            <div id="pan-UpRight-3" class="buttonLink">&#8599;</div>
+            <div class="horizontalSpace"></div>
+            <div class="subHeadingText subheadingZoom">Zoom</div>
+            <div class="horizontalSpace"></div>
+            <div class="subHeadingText subheadingFocus">Focus</div>
+        </div>
+
+        <div class="buttonDiv">
+            <div id="pan-Left-3" class="buttonLink">&#8592;</div>
+            <div id="pan-Home-3" class="buttonLink">0</div>
+            <div id="pan-Right-3" class="buttonLink">&#8594;</div>
+            <div class="horizontalSpace"></div>
+            <div id="zoom-In-3" class="buttonLink">&#8593;</div>
+            <div class="horizontalSpace"></div>
+            <div id="focus-Auto-3" class="buttonLink">A</div>
+            <div id="focus-Near-3" class="buttonLink">&#8593;</div>
+            <div class="horizontalSpace"></div>
+        </div>
+
+        <div class="buttonDiv">
+            <div id="pan-DownLeft-3" class="buttonLink">&#8601;</div>
+            <div id="pan-Down-3" class="buttonLink">&#8595;</div>
+            <div id="pan-DownRight-3" class="buttonLink">&#8600;</div>
+            <div class="horizontalSpace"></div>
+            <div id="zoom-Out-3" class="buttonLink">&#8595;</div>
+            <div class="horizontalSpace"></div>
+            <div id="focus-Manual-3" class="buttonLink">M</div>
+            <div id="focus-Far-3" class="buttonLink">&#8595;</div>
+        </div>
+    </div>
+
+    <div class="presetFrame">
+        <div class="presetDiv">
+            <div id="preset-3-0" class="presetLink">Store</div>
+            <div id="preset-3-1" class="presetLink">1</div>
+            <div id="preset-3-2" class="presetLink">2</div>
+            <div id="preset-3-3" class="presetLink">3</div>
+            <div id="preset-3-4" class="presetLink">4</div>
+            <div id="preset-3-5" class="presetLink">5</div>
+            <div id="preset-3-6" class="presetLink">6</div>
+            <div id="preset-3-7" class="presetLink">7</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const DEBUG = 1;
+    const MAX_PRESETS = 7;
+    const PAN_SPEED = 0x12;
+    const TILT_SPEED = 0x12;
+    const ZOOM_SPEED = 0x7;
+
+    let isStoreSelected = [false,false,false,false];
+    let selectedPreset = [0,0,0,0];
+    let focusMode = [[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0]];
+
+    // CMD_PTZ_POSITION parameters: 0=presetNr
+    const CMD_PTZ_POSITION_SET = "81 01 04 3F 01 0{0} FF";
+    const CMD_PTZ_POSITION_RECALL = "81 01 04 3F 02 0{0} FF";
+
+    // CMD_PTZ_PAN parameters: 0=PanSpeed [1-12h]; 1=TiltSpeed [1-12h]
+    const CMD_PTZ_PAN_UP = "81 01 06 01 {0} {1} 03 01 FF";
+    const CMD_PTZ_PAN_DOWN = "81 01 06 01 {0} {1} 03 02 FF";
+    const CMD_PTZ_PAN_LEFT = "81 01 06 01 {0} {1} 01 03 FF";
+    const CMD_PTZ_PAN_RIGHT = "81 01 06 01 {0} {1} 02 03 FF";
+    const CMD_PTZ_PAN_UP_LEFT = "81 01 06 01 {0} {1} 01 01 FF";
+    const CMD_PTZ_PAN_UP_RIGHT = "81 01 06 01 {0} {1} 02 01 FF";
+    const CMD_PTZ_PAN_DOWN_LEFT = "81 01 06 01 {0} {1} 01 02 FF";
+    const CMD_PTZ_PAN_DOWN_RIGHT = "81 01 06 01 {0} {1} 02 02 FF";
+    const CMD_PTZ_PAN_STOP = "81 01 06 01 {0} {1} 03 03 FF";
+    const CMD_PTZ_PAN_HOME = "81 01 06 04 FF";
+
+    // CMD_PTZ_ZOOM parameters: 0=ZoomSpeed [0-7, where 7 is fast]
+    const CMD_PTZ_ZOOM_IN = "81 01 04 07 2{0} FF";
+    const CMD_PTZ_ZOOM_OUT = "81 01 04 07 3{0} FF";
+    const CMD_PTZ_ZOOM_STOP = "81 01 04 07 00 FF";
+
+    // CMD_PTZ_FOCUS have no parameters
+    const CMD_PTZ_FOCUS_AUTO = "81 01 04 38 02 FF";
+    const CMD_PTZ_FOCUS_MANUAL = "81 01 04 38 03 FF";
+    const CMD_PTZ_FOCUS_FAR = "81 01 04 08 02 FF";
+    const CMD_PTZ_FOCUS_NEAR = "81 01 04 08 03 FF";
+    
+    String.prototype.format = function() {
+        let a = this;
+        for (let k in arguments) {
+            a = a.replace("{" + k + "}", arguments[k])
+        }
+        return a
+    };
+
+    String.prototype.stripAllSpaces = function() {
+        let a = this;
+        return a.replace(/\s+/g, '')
+    }
+
+    function debug(s) {
+        if (DEBUG !== 0) console.log(s);
+    }
+
+    function updatePresetBorders(camNr) {
+        for (let presetNr = 0; presetNr <= MAX_PRESETS; presetNr++) {
+            let element = document.getElementById("preset-" + camNr + "-" + presetNr);
+            if (element === undefined) continue;
+
+            let className = "";
+            if (isStoreSelected[camNr]) {
+                if (presetNr === 0) {
+                    className = "markFrame";
+                } else {
+                    className = "blinkFrame";
+                }
+            } else if ((presetNr > 0) && (presetNr === selectedPreset[camNr])) {
+                className = "markFrame";
+            }
+            element.className = "presetLink " + className;
+        }
+    }
+
+    function updateFocusMode(camNr) {
+        let mode = focusMode[camNr][selectedPreset[camNr]];
+        let autoFocusElement = document.getElementById("focus-Auto-"+camNr);
+        let manualFocusElement = document.getElementById("focus-Manual-"+camNr);
+        if (autoFocusElement === undefined) return;
+        if (manualFocusElement === undefined) return;
+
+        if (mode === 0) {
+            autoFocusElement.className = "buttonLink";
+            manualFocusElement.className = "buttonLink";
+        } else if (mode === 1) {
+            autoFocusElement.className = "buttonLink markFrame";
+            manualFocusElement.className = "buttonLink";
+        } else {
+            autoFocusElement.className = "buttonLink";
+            manualFocusElement.className = "buttonLink markFrame";
+        }
+    }
+
+    function clearSelectedPreset(camNr) {
+        selectedPreset[camNr] = 0;
+        updatePresetBorders(camNr);
+    }
+
+    function sendCameraUDPCommand(camNr, cmdBytes) {
+        return sendCommand(camNr, cmdBytes, "sendCameraUDPCommand.php/", false);
+    }
+
+    function sendCommand(camNr, cmdBytes, url, handleResponse) {
+        let cmd = cmdBytes.toString().stripAllSpaces();
+        let cmdLength = 2 + cmd.length / 2; // 2 bytes length indicator. Div by 2 due to 2 chars per byte in string
+        let lengthHeader = ((cmdLength < 0x10) ? "000" : "00") + cmdLength.toString(16); // 1 or 2 hex digits
+        let httpData = "camNr=" + camNr + "&cmd=" + lengthHeader + cmd;
+        let http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        debug("sendCommand " + httpData + " to url " + url);
+        http.send(httpData);
+        if (handleResponse) {
+            http.onload = function() {
+                applyStatus(http.responseText);
+                //debug("handle response: " + http.responseText);
+            };
+        } else {
+            http.onload = function() {
+                //debug("skip response: " + http.responseText);
+            };
+        }
+    }
+
+    function ptzPan(camNr, panCmd)
+    {
+        debug("Pan " + camNr + " panCmd " + panCmd);
+        clearSelectedPreset(camNr);
+        sendCameraUDPCommand(camNr, panCmd.format(PAN_SPEED, TILT_SPEED));
+    }
+
+    function ptzPanStop(camNr)
+    {
+        debug("Pan stop " + camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_PAN_STOP.format(PAN_SPEED, TILT_SPEED));
+    }
+
+    function ptzPanHome(camNr)
+    {
+        debug("Pan home " + camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_PAN_HOME);
+    }
+
+    function ptzZoomIn(camNr)
+    {
+        debug("Zoom In " + camNr);
+        clearSelectedPreset(camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_ZOOM_IN.format(ZOOM_SPEED));
+    }
+
+    function ptzZoomOut(camNr)
+    {
+        debug("Zoom Out " + camNr);
+        clearSelectedPreset(camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_ZOOM_OUT.format(ZOOM_SPEED));
+    }
+
+    function ptzZoomStop(camNr)
+    {
+        debug("Zoom Stop " + camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_ZOOM_STOP);
+    }
+
+    function ptzFocusAuto(camNr)
+    {
+        debug("Auto focus " + camNr);
+        clearSelectedPreset(camNr);
+        focusMode[camNr][0] = 1;
+        updateFocusMode(camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_AUTO);
+    }
+
+    function ptzFocusManual(camNr)
+    {
+        debug("Manual focus " + camNr);
+        clearSelectedPreset(camNr);
+        focusMode[camNr][0] = 2;
+        updateFocusMode(camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_MANUAL);
+    }
+
+    function ptzFocusNear(camNr)
+    {
+        debug("Focus Near " + camNr);
+        if (focusMode[camNr][0] === 0) {
+            ptzFocusManual(camNr);
+        }
+        clearSelectedPreset(camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_NEAR);
+    }
+
+    function ptzFocusFar(camNr)
+    {
+        debug("Focus Far " + camNr);
+        if (focusMode[camNr][0] === 0) {
+            ptzFocusManual(camNr);
+        }
+        clearSelectedPreset(camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_FAR);
+    }
+
+    function sendStorePreset(camNr, presetNr) {
+        debug("Store pos for " + camNr + " to preset " + presetNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_POSITION_SET.format(presetNr));
+    }
+
+    function sendRecallPreset(camNr, presetNr) {
+        debug("Recall pos for " + camNr + " to preset " + presetNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_POSITION_RECALL.format(presetNr));
+    }
+
+    function presetClick(camNr, presetNr)
+    {
+        selectedPreset[camNr] = presetNr;
+        if (isStoreSelected[camNr]) {
+            isStoreSelected[camNr] = false;
+            focusMode[camNr][presetNr] = focusMode[camNr][0];
+            sendStorePreset(camNr, presetNr);
+        } else {
+            focusMode[camNr][0] = focusMode[camNr][presetNr];
+            sendRecallPreset(camNr, presetNr);
+        }
+        updatePresetBorders(camNr);
+        updateFocusMode(camNr);
+    }
+
+    function storeClick(camNr)
+    {
+        isStoreSelected[camNr] = !isStoreSelected[camNr]; // Toggle
+        updatePresetBorders(camNr);
+    }
+
+
+    // Register event listeners
+    for (let camNr = 1; camNr <= 3; camNr++)
+    {
+        let element = document.getElementById("pan-UpLeft-" + camNr);
+        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_UP_LEFT); });
+        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
+
+        element = document.getElementById("pan-Left-" + camNr);
+        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_LEFT); });
+        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
+
+        element = document.getElementById("pan-DownLeft-" + camNr);
+        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_DOWN_LEFT); });
+        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
+
+        element = document.getElementById("pan-Up-" + camNr);
+        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_UP); });
+        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
+
+        element = document.getElementById("pan-Home-" + camNr);
+        element.addEventListener('click', () => { ptzPanHome(camNr); });
+
+        element = document.getElementById("pan-Down-" + camNr);
+        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_DOWN); });
+        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
+
+        element = document.getElementById("pan-UpRight-" + camNr);
+        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_UP_RIGHT); });
+        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
+
+        element = document.getElementById("pan-Right-" + camNr);
+        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_RIGHT); });
+        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
+
+        element = document.getElementById("pan-DownRight-" + camNr);
+        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_DOWN_RIGHT); });
+        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
+
+        element = document.getElementById("zoom-In-" + camNr);
+        element.addEventListener('mousedown', () => { ptzZoomIn(camNr); });
+        element.addEventListener('mouseup', () => { ptzZoomStop(camNr); });
+
+        element = document.getElementById("zoom-Out-" + camNr);
+        element.addEventListener('mousedown', () => { ptzZoomOut(camNr, 1, 1); });
+        element.addEventListener('mouseup', () => { ptzZoomStop(camNr); });
+
+        element = document.getElementById("focus-Auto-" + camNr);
+        element.addEventListener('click', () => { ptzFocusAuto(camNr); });
+
+        element = document.getElementById("focus-Manual-" + camNr);
+        element.addEventListener('click', () => { ptzFocusManual(camNr); });
+        
+        element = document.getElementById("focus-Near-" + camNr);
+        element.addEventListener('click', () => { ptzFocusNear(camNr); });
+
+        element = document.getElementById("focus-Far-" + camNr);
+        element.addEventListener('click', () => { ptzFocusFar(camNr); });
+        
+        element = document.getElementById("preset-" + camNr + "-0");
+        element.addEventListener('click', () => { storeClick(camNr); });
+        
+        for (let presetNr = 1; presetNr <= MAX_PRESETS; presetNr++) {
+            element = document.getElementById("preset-" + camNr + "-" + presetNr);
+            element.addEventListener('click', () => { presetClick(camNr, presetNr); });
+        }
+    }
+</script>
+</body>
+</html>
+
+
+
+
