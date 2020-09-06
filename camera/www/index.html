@@ -34,7 +34,7 @@
         border: 1px solid black;
         border-radius: 6px;
         margin-bottom: 50px;
-        max-height: 235px;
+        max-height: 250px;
     }
 
     .labelFrame {
@@ -44,9 +44,9 @@
     }
 
     .presetFrame {
-        max-height: 235px;
+        max-height: 230px;
         max-width: 900px;
-        overflow: scroll;
+        overflow: auto;
     }
 
     .heading {
@@ -147,7 +147,7 @@
         padding: 10px;
         width: 150px;
         height: 73px;
-        margin: 10px 10px 15px 10px;
+        margin: 10px 10px 10px 10px;
         box-shadow: 1px 1px 10px 0 #000000;
         -webkit-box-shadow: 1px 1px 10px 0 #000000;
         -moz-box-shadow: 1px 1px 10px 0 #000000;
@@ -457,11 +457,11 @@
         let http = new XMLHttpRequest();
         http.open("POST", url, true);
         http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        debug("sendCommand " + httpData + " to url " + url);
+        //debug("sendCommand " + httpData + " to url " + url);
         http.send(httpData);
         if (handleResponse) {
             http.onload = function() {
-                applyStatus(http.responseText);
+                //applyStatus(http.responseText);
                 //debug("handle response: " + http.responseText);
             };
         } else {
@@ -473,7 +473,7 @@
 
     function ptzPan(camNr, panCmd)
     {
-        debug("Pan " + camNr + " panCmd " + panCmd);
+        debug("PanTilt " + camNr);
         clearSelectedPreset(camNr);
         sendCameraUDPCommand(camNr, panCmd.format(PAN_SPEED, TILT_SPEED));
     }
@@ -558,7 +558,7 @@
         sendCameraUDPCommand(camNr, CMD_PTZ_POSITION_RECALL.format(presetNr));
     }
 
-    function presetClick(camNr, presetNr)
+    function presetClicked(camNr, presetNr)
     {
         selectedPreset[camNr] = presetNr;
         if (isStoreSelected[camNr]) {
@@ -573,7 +573,7 @@
         updateFocusMode(camNr);
     }
 
-    function storeClick(camNr)
+    function storeClicked(camNr)
     {
         isStoreSelected[camNr] = !isStoreSelected[camNr]; // Toggle
         updatePresetBorders(camNr);
@@ -633,17 +633,17 @@
         element.addEventListener('click', () => { ptzFocusManual(camNr); });
         
         element = document.getElementById("focus-Near-" + camNr);
-        element.addEventListener('click', () => { ptzFocusNear(camNr); });
+        element.addEventListener('mousedown', () => { ptzFocusNear(camNr); });
 
         element = document.getElementById("focus-Far-" + camNr);
-        element.addEventListener('click', () => { ptzFocusFar(camNr); });
+        element.addEventListener('mousedown', () => { ptzFocusFar(camNr); });
         
         element = document.getElementById("preset-" + camNr + "-0");
-        element.addEventListener('click', () => { storeClick(camNr); });
+        element.addEventListener('click', () => { storeClicked(camNr); });
         
         for (let presetNr = 1; presetNr <= MAX_PRESETS; presetNr++) {
             element = document.getElementById("preset-" + camNr + "-" + presetNr);
-            element.addEventListener('click', () => { presetClick(camNr, presetNr); });
+            element.addEventListener('click', () => { presetClicked(camNr, presetNr); });
         }
     }
 </script>
