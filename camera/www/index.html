@@ -196,7 +196,7 @@
 
 <div class="mainFrame">
     <div class="labelFrame">
-        <div class="heading">Camera 3 </div><br>
+        <div class="heading">Camera 1 </div><br>
         <div class="buttonDiv">
             <div id="pan-UpLeft-1" class="buttonLink">&#8598;</div>
             <div id="pan-Up-1" class="buttonLink">&#8593;</div>
@@ -247,7 +247,7 @@
 
 <div class="mainFrame">
     <div class="labelFrame">
-        <div class="heading">Camera 3 </div><br>
+        <div class="heading">Camera 2 </div><br>
         <div class="buttonDiv">
             <div id="pan-UpLeft-2" class="buttonLink">&#8598;</div>
             <div id="pan-Up-2" class="buttonLink">&#8593;</div>
@@ -384,6 +384,7 @@
     const CMD_PTZ_FOCUS_MANUAL = "81 01 04 38 03 FF";
     const CMD_PTZ_FOCUS_FAR = "81 01 04 08 02 FF";
     const CMD_PTZ_FOCUS_NEAR = "81 01 04 08 03 FF";
+    const CMD_PTZ_FOCUS_STOP = "81 01 04 08 00 FF";
     
     String.prototype.format = function() {
         let a = this;
@@ -548,6 +549,12 @@
         sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_FAR);
     }
 
+    function ptzFocusStop(camNr)
+    {
+        debug("Focus Stop " + camNr);
+        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_STOP);
+    }
+
     function sendStorePreset(camNr, presetNr) {
         debug("Store pos for " + camNr + " to preset " + presetNr);
         sendCameraUDPCommand(camNr, CMD_PTZ_POSITION_SET.format(presetNr));
@@ -634,9 +641,11 @@
         
         element = document.getElementById("focus-Near-" + camNr);
         element.addEventListener('mousedown', () => { ptzFocusNear(camNr); });
+        element.addEventListener('mouseup', () => { ptzFocusStop(camNr); });
 
         element = document.getElementById("focus-Far-" + camNr);
         element.addEventListener('mousedown', () => { ptzFocusFar(camNr); });
+        element.addEventListener('mouseup', () => { ptzFocusStop(camNr); });
         
         element = document.getElementById("preset-" + camNr + "-0");
         element.addEventListener('click', () => { storeClicked(camNr); });
