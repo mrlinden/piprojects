@@ -6,13 +6,11 @@
 <style>
     html {
         margin: 0;
-        height: 100%;
     }
 
     body {
         margin: 0;
-        padding: 50px;
-        min-height: 100%;
+        padding: 20px 20px 0px 20px;
         background: #373234;
         background: -webkit-radial-gradient(circle at center, #373234, #222222);
         background: -moz-radial-gradient(circle at center, #373234, #222222);
@@ -28,19 +26,47 @@
         user-select: none;
     }
 
-    .mainFrame {
-        display: flex;
-        width: 100%;
+    .headingFrame {
         border: 1px solid black;
         border-radius: 6px;
         margin-bottom: 50px;
         max-height: 250px;
+        max-width: 1450px
     }
 
-    .labelFrame {
-        max-height: 235px;
-        max-width: 510px;
-        min-width: 510px;
+    .headingFrameLast {
+        margin-bottom: 0px;
+    }
+
+    .panelFrame {
+        display: flex;
+        border: 0px solid #DDDDDD;
+    }
+
+    .joystickFrame {
+        position: relative;
+        margin-top: 20px;
+        border: 0px solid #fcc600;
+        width: 250px;
+        min-width: 180px;
+        height: 200px;
+        overflow: visible;
+    }
+
+    .zoomFrame {
+        border: 0px solid #fcc600;
+        width: 100px;
+    }
+
+    .irisFrame {
+        border: 0px solid #fcc600;
+        width: 100px;
+    }
+
+    .fokusFrame {
+        border: 0px solid #fcc600;
+        width: 200px;
+        min-width: 150px;
     }
 
     .presetFrame {
@@ -65,22 +91,13 @@
         font-size: 16px;
         font-weight: 100;
         text-align: center;
-        padding: 10px;
+        padding: 10px 0 10px 0;
         margin: 10px 10px 10px 10px;
         text-shadow: 1px 1px 20px #000000;
         text-decoration: none;
         display: inline-block;
         cursor: pointer;
         color: #DDDDDD;
-    }
-
-    .subheadingZoom {
-        width: 50px;
-        padding: 10px 0 10px 0;
-    }
-
-    .subheadingFocus {
-        width: 105px;
     }
 
     .buttonDiv {
@@ -192,161 +209,138 @@
 </style>
 </head>
 <body>
-<span class="copyright">Cupolen Camera Controller v 0.1</span>
+<span class="copyright">Cupolen Camera Controller v 0.2</span>
 
-<div class="mainFrame">
-    <div class="labelFrame">
-        <div class="heading">Camera 1 </div><br>
-        <div class="buttonDiv">
-            <div id="pan-UpLeft-1" class="buttonLink">&#8598;</div>
-            <div id="pan-Up-1" class="buttonLink">&#8593;</div>
-            <div id="pan-UpRight-1" class="buttonLink">&#8599;</div>
-            <div class="horizontalSpace"></div>
-            <div class="subHeadingText subheadingZoom">Zoom</div>
-            <div class="horizontalSpace"></div>
-            <div class="subHeadingText subheadingFocus">Focus</div>
+<fieldset class="headingFrame">
+    <legend class="heading">Camera 1</legend>
+    <div class="panelFrame">
+        <div id="joystick-1" class="joystickFrame"></div>
+        <div class="horizontalSpace"></div>
+        <div class="zoomFrame">
+            <div class="subHeadingText">Zoom</div>
+            <div class="buttonDiv"><div id="zoom-In-1" class="buttonLink">&#8593;</div></div>
+            <div class="buttonDiv"><div id="zoom-Out-1" class="buttonLink">&#8595;</div></div>
         </div>
-
-        <div class="buttonDiv">
-            <div id="pan-Left-1" class="buttonLink">&#8592;</div>
-            <div id="pan-Home-1" class="buttonLink">0</div>
-            <div id="pan-Right-1" class="buttonLink">&#8594;</div>
-            <div class="horizontalSpace"></div>
-            <div id="zoom-In-1" class="buttonLink">&#8593;</div>
-            <div class="horizontalSpace"></div>
-            <div id="focus-Auto-1" class="buttonLink">A</div>
-            <div id="focus-Near-1" class="buttonLink">&#8593;</div>
-            <div class="horizontalSpace"></div>
+        <div class="horizontalSpace"></div>
+        <div class="fokusFrame">
+            <div class="subHeadingText">Fokus</div>
+            <div class="buttonDiv">
+                <div id="focus-Auto-1" class="buttonLink">A</div>
+                <div id="focus-Near-1" class="buttonLink">&#8593;</div>
+            </div>
+            <div class="buttonDiv">
+                <div id="focus-Manual-1" class="buttonLink">M</div>
+                <div id="focus-Far-1" class="buttonLink">&#8595;</div>
+            </div>
         </div>
-
-        <div class="buttonDiv">
-            <div id="pan-DownLeft-1" class="buttonLink">&#8601;</div>
-            <div id="pan-Down-1" class="buttonLink">&#8595;</div>
-            <div id="pan-DownRight-1" class="buttonLink">&#8600;</div>
-            <div class="horizontalSpace"></div>
-            <div id="zoom-Out-1" class="buttonLink">&#8595;</div>
-            <div class="horizontalSpace"></div>
-            <div id="focus-Manual-1" class="buttonLink">M</div>
-            <div id="focus-Far-1" class="buttonLink">&#8595;</div>
+        <div class="irisFrame">
+            <div class="subHeadingText">Iris</div>
+            <div class="buttonDiv"><div id="iris-Up-1" class="buttonLink">&#8593;</div></div>
+            <div class="buttonDiv"><div id="iris-Down-1" class="buttonLink">&#8595;</div></div>
         </div>
-    </div>
-
-    <div class="presetFrame">
-        <div class="presetDiv">
-            <div id="preset-1-0" class="presetLink">Store</div>
-            <div id="preset-1-1" class="presetLink">1</div>
-            <div id="preset-1-2" class="presetLink">2</div>
-            <div id="preset-1-3" class="presetLink">3</div>
-            <div id="preset-1-4" class="presetLink">4</div>
-            <div id="preset-1-5" class="presetLink">5</div>
-            <div id="preset-1-6" class="presetLink">6</div>
-            <div id="preset-1-7" class="presetLink">7</div>
+        <div class="horizontalSpace"></div>
+        <div class="presetFrame">
+            <div class="presetDiv">
+                <div id="preset-10" class="presetLink">Store</div>
+                <div id="preset-11" class="presetLink">1</div>
+                <div id="preset-12" class="presetLink">2</div>
+                <div id="preset-13" class="presetLink">3</div>
+                <div id="preset-14" class="presetLink">4</div>
+                <div id="preset-15" class="presetLink">5</div>
+                <div id="preset-16" class="presetLink">6</div>
+                <div id="preset-17" class="presetLink">7</div>
+            </div>
         </div>
     </div>
-</div>
+</fieldset>
 
-<div class="mainFrame">
-    <div class="labelFrame">
-        <div class="heading">Camera 2 </div><br>
-        <div class="buttonDiv">
-            <div id="pan-UpLeft-2" class="buttonLink">&#8598;</div>
-            <div id="pan-Up-2" class="buttonLink">&#8593;</div>
-            <div id="pan-UpRight-2" class="buttonLink">&#8599;</div>
-            <div class="horizontalSpace"></div>
-            <div class="subHeadingText subheadingZoom">Zoom</div>
-            <div class="horizontalSpace"></div>
-            <div class="subHeadingText subheadingFocus">Focus</div>
+<fieldset class="headingFrame">
+    <legend class="heading">Camera 2</legend>
+    <div class="panelFrame">
+        <div id="joystick-2" class="joystickFrame"></div>
+        <div class="horizontalSpace"></div>
+        <div class="zoomFrame">
+            <div class="subHeadingText">Zoom</div>
+            <div class="buttonDiv"><div id="zoom-In-2" class="buttonLink">&#8593;</div></div>
+            <div class="buttonDiv"><div id="zoom-Out-2" class="buttonLink">&#8595;</div></div>
         </div>
-
-        <div class="buttonDiv">
-            <div id="pan-Left-2" class="buttonLink">&#8592;</div>
-            <div id="pan-Home-2" class="buttonLink">0</div>
-            <div id="pan-Right-2" class="buttonLink">&#8594;</div>
-            <div class="horizontalSpace"></div>
-            <div id="zoom-In-2" class="buttonLink">&#8593;</div>
-            <div class="horizontalSpace"></div>
-            <div id="focus-Auto-2" class="buttonLink">A</div>
-            <div id="focus-Near-2" class="buttonLink">&#8593;</div>
-            <div class="horizontalSpace"></div>
+        <div class="horizontalSpace"></div>
+        <div class="fokusFrame">
+            <div class="subHeadingText">Fokus</div>
+            <div class="buttonDiv">
+                <div id="focus-Auto-2" class="buttonLink">A</div>
+                <div id="focus-Near-2" class="buttonLink">&#8593;</div>
+            </div>
+            <div class="buttonDiv">
+                <div id="focus-Manual-2" class="buttonLink">M</div>
+                <div id="focus-Far-2" class="buttonLink">&#8595;</div>
+            </div>
         </div>
-
-        <div class="buttonDiv">
-            <div id="pan-DownLeft-2" class="buttonLink">&#8601;</div>
-            <div id="pan-Down-2" class="buttonLink">&#8595;</div>
-            <div id="pan-DownRight-2" class="buttonLink">&#8600;</div>
-            <div class="horizontalSpace"></div>
-            <div id="zoom-Out-2" class="buttonLink">&#8595;</div>
-            <div class="horizontalSpace"></div>
-            <div id="focus-Manual-2" class="buttonLink">M</div>
-            <div id="focus-Far-2" class="buttonLink">&#8595;</div>
+        <div class="irisFrame">
+            <div class="subHeadingText">Iris</div>
+            <div class="buttonDiv"><div id="iris-Up-2" class="buttonLink">&#8593;</div></div>
+            <div class="buttonDiv"><div id="iris-Down-2" class="buttonLink">&#8595;</div></div>
         </div>
-    </div>
-
-    <div class="presetFrame">
-        <div class="presetDiv">
-            <div id="preset-2-0" class="presetLink">Store</div>
-            <div id="preset-2-1" class="presetLink">1</div>
-            <div id="preset-2-2" class="presetLink">2</div>
-            <div id="preset-2-3" class="presetLink">3</div>
-            <div id="preset-2-4" class="presetLink">4</div>
-            <div id="preset-2-5" class="presetLink">5</div>
-            <div id="preset-2-6" class="presetLink">6</div>
-            <div id="preset-2-7" class="presetLink">7</div>
+        <div class="horizontalSpace"></div>
+        <div class="presetFrame">
+            <div class="presetDiv">
+                <div id="preset-20" class="presetLink">Store</div>
+                <div id="preset-21" class="presetLink">1</div>
+                <div id="preset-22" class="presetLink">2</div>
+                <div id="preset-23" class="presetLink">3</div>
+                <div id="preset-24" class="presetLink">4</div>
+                <div id="preset-25" class="presetLink">5</div>
+                <div id="preset-26" class="presetLink">6</div>
+                <div id="preset-27" class="presetLink">7</div>
+            </div>
         </div>
     </div>
-</div>
+</fieldset>
 
-<div class="mainFrame">
-    <div class="labelFrame">
-        <div class="heading">Camera 3 </div><br>
-        <div class="buttonDiv">
-            <div id="pan-UpLeft-3" class="buttonLink">&#8598;</div>
-            <div id="pan-Up-3" class="buttonLink">&#8593;</div>
-            <div id="pan-UpRight-3" class="buttonLink">&#8599;</div>
-            <div class="horizontalSpace"></div>
-            <div class="subHeadingText subheadingZoom">Zoom</div>
-            <div class="horizontalSpace"></div>
-            <div class="subHeadingText subheadingFocus">Focus</div>
+<fieldset class="headingFrame headingFrameLast">
+    <legend class="heading">Camera 3</legend>
+    <div class="panelFrame">
+        <div id="joystick-3" class="joystickFrame"></div>
+        <div class="horizontalSpace"></div>
+        <div class="zoomFrame">
+            <div class="subHeadingText">Zoom</div>
+            <div class="buttonDiv"><div id="zoom-In-3" class="buttonLink">&#8593;</div></div>
+            <div class="buttonDiv"><div id="zoom-Out-3" class="buttonLink">&#8595;</div></div>
         </div>
-
-        <div class="buttonDiv">
-            <div id="pan-Left-3" class="buttonLink">&#8592;</div>
-            <div id="pan-Home-3" class="buttonLink">0</div>
-            <div id="pan-Right-3" class="buttonLink">&#8594;</div>
-            <div class="horizontalSpace"></div>
-            <div id="zoom-In-3" class="buttonLink">&#8593;</div>
-            <div class="horizontalSpace"></div>
-            <div id="focus-Auto-3" class="buttonLink">A</div>
-            <div id="focus-Near-3" class="buttonLink">&#8593;</div>
-            <div class="horizontalSpace"></div>
+        <div class="horizontalSpace"></div>
+        <div class="fokusFrame">
+            <div class="subHeadingText">Fokus</div>
+            <div class="buttonDiv">
+                <div id="focus-Auto-3" class="buttonLink">A</div>
+                <div id="focus-Near-3" class="buttonLink">&#8593;</div>
+            </div>
+            <div class="buttonDiv">
+                <div id="focus-Manual-3" class="buttonLink">M</div>
+                <div id="focus-Far-3" class="buttonLink">&#8595;</div>
+            </div>
         </div>
-
-        <div class="buttonDiv">
-            <div id="pan-DownLeft-3" class="buttonLink">&#8601;</div>
-            <div id="pan-Down-3" class="buttonLink">&#8595;</div>
-            <div id="pan-DownRight-3" class="buttonLink">&#8600;</div>
-            <div class="horizontalSpace"></div>
-            <div id="zoom-Out-3" class="buttonLink">&#8595;</div>
-            <div class="horizontalSpace"></div>
-            <div id="focus-Manual-3" class="buttonLink">M</div>
-            <div id="focus-Far-3" class="buttonLink">&#8595;</div>
+        <div class="irisFrame">
+            <div class="subHeadingText">Iris</div>
+            <div class="buttonDiv"><div id="iris-Up-3" class="buttonLink">&#8593;</div></div>
+            <div class="buttonDiv"><div id="iris-Down-3" class="buttonLink">&#8595;</div></div>
         </div>
-    </div>
-
-    <div class="presetFrame">
-        <div class="presetDiv">
-            <div id="preset-3-0" class="presetLink">Store</div>
-            <div id="preset-3-1" class="presetLink">1</div>
-            <div id="preset-3-2" class="presetLink">2</div>
-            <div id="preset-3-3" class="presetLink">3</div>
-            <div id="preset-3-4" class="presetLink">4</div>
-            <div id="preset-3-5" class="presetLink">5</div>
-            <div id="preset-3-6" class="presetLink">6</div>
-            <div id="preset-3-7" class="presetLink">7</div>
+        <div class="horizontalSpace"></div>
+        <div class="presetFrame">
+            <div class="presetDiv">
+                <div id="preset-30" class="presetLink">Store</div>
+                <div id="preset-31" class="presetLink">1</div>
+                <div id="preset-32" class="presetLink">2</div>
+                <div id="preset-33" class="presetLink">3</div>
+                <div id="preset-34" class="presetLink">4</div>
+                <div id="preset-35" class="presetLink">5</div>
+                <div id="preset-36" class="presetLink">6</div>
+                <div id="preset-37" class="presetLink">7</div>
+            </div>
         </div>
     </div>
-</div>
+</fieldset>
 
+<script src="nipplejs.js"></script>
 <script>
     const DEBUG = 1;
     const MAX_PRESETS = 7;
@@ -357,6 +351,7 @@
     let isStoreSelected = [false,false,false,false];
     let selectedPreset = [0,0,0,0];
     let focusMode = [[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0]];
+    let previousPanCmd = ["", "", "", ""];
 
     // CMD_PTZ_POSITION parameters: 0=presetNr
     const CMD_PTZ_POSITION_SET = "81 01 04 3F 01 0{0} FF";
@@ -386,6 +381,10 @@
     const CMD_PTZ_FOCUS_NEAR = "81 01 04 08 03 FF";
     const CMD_PTZ_FOCUS_STOP = "81 01 04 08 00 FF";
     
+    // CMD_PTZ_IRIS have no parameters
+    const CMD_PTZ_IRIS_UP = "81 01 04 0B 02 FF";
+    const CMD_PTZ_IRIS_DOWN = "81 01 04 0B 03 FF";
+
     String.prototype.format = function() {
         let a = this;
         for (let k in arguments) {
@@ -405,7 +404,7 @@
 
     function updatePresetBorders(camNr) {
         for (let presetNr = 0; presetNr <= MAX_PRESETS; presetNr++) {
-            let element = document.getElementById("preset-" + camNr + "-" + presetNr);
+            let element = document.getElementById("preset-" + camNr + "" + presetNr);
             if (element === undefined) continue;
 
             let className = "";
@@ -446,8 +445,8 @@
         updatePresetBorders(camNr);
     }
 
-    function sendCameraUDPCommand(camNr, cmdBytes) {
-        return sendCommand(camNr, cmdBytes, "sendCameraUDPCommand.php/", false);
+    function sendCameraCommand(camNr, cmdBytes) {
+        return sendCommand(camNr, cmdBytes, "sendCameraCommand.php/", false);
     }
 
     function sendCommand(camNr, cmdBytes, url, handleResponse) {
@@ -472,43 +471,48 @@
         }
     }
 
-    function ptzPan(camNr, panCmd)
+    function ptzPan(camNr, panCmd, panSpeed, tiltSpeed)
     {
-        debug("PanTilt " + camNr);
         clearSelectedPreset(camNr);
-        sendCameraUDPCommand(camNr, panCmd.format(PAN_SPEED, TILT_SPEED));
+        let newPanCmd = panCmd.format(panSpeed, tiltSpeed);
+        if (newPanCmd != previousPanCmd[camNr]) {
+            debug("PanTilt " + camNr);
+            previousPanCmd[camNr] = newPanCmd;
+            sendCameraCommand(camNr, newPanCmd);
+        }
     }
 
     function ptzPanStop(camNr)
     {
         debug("Pan stop " + camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_PAN_STOP.format(PAN_SPEED, TILT_SPEED));
+        previousPanCmd[camNr] = "";
+        sendCameraCommand(camNr, CMD_PTZ_PAN_STOP.format(PAN_SPEED, TILT_SPEED));
     }
 
     function ptzPanHome(camNr)
     {
         debug("Pan home " + camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_PAN_HOME);
+        sendCameraCommand(camNr, CMD_PTZ_PAN_HOME);
     }
 
     function ptzZoomIn(camNr)
     {
         debug("Zoom In " + camNr);
         clearSelectedPreset(camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_ZOOM_IN.format(ZOOM_SPEED));
+        sendCameraCommand(camNr, CMD_PTZ_ZOOM_IN.format(ZOOM_SPEED));
     }
 
     function ptzZoomOut(camNr)
     {
         debug("Zoom Out " + camNr);
         clearSelectedPreset(camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_ZOOM_OUT.format(ZOOM_SPEED));
+        sendCameraCommand(camNr, CMD_PTZ_ZOOM_OUT.format(ZOOM_SPEED));
     }
 
     function ptzZoomStop(camNr)
     {
         debug("Zoom Stop " + camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_ZOOM_STOP);
+        sendCameraCommand(camNr, CMD_PTZ_ZOOM_STOP);
     }
 
     function ptzFocusAuto(camNr)
@@ -517,7 +521,7 @@
         clearSelectedPreset(camNr);
         focusMode[camNr][0] = 1;
         updateFocusMode(camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_AUTO);
+        sendCameraCommand(camNr, CMD_PTZ_FOCUS_AUTO);
     }
 
     function ptzFocusManual(camNr)
@@ -526,7 +530,7 @@
         clearSelectedPreset(camNr);
         focusMode[camNr][0] = 2;
         updateFocusMode(camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_MANUAL);
+        sendCameraCommand(camNr, CMD_PTZ_FOCUS_MANUAL);
     }
 
     function ptzFocusNear(camNr)
@@ -536,7 +540,7 @@
             ptzFocusManual(camNr);
         }
         clearSelectedPreset(camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_NEAR);
+        sendCameraCommand(camNr, CMD_PTZ_FOCUS_NEAR);
     }
 
     function ptzFocusFar(camNr)
@@ -546,23 +550,38 @@
             ptzFocusManual(camNr);
         }
         clearSelectedPreset(camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_FAR);
+        sendCameraCommand(camNr, CMD_PTZ_FOCUS_FAR);
     }
 
     function ptzFocusStop(camNr)
     {
         debug("Focus Stop " + camNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_FOCUS_STOP);
+        sendCameraCommand(camNr, CMD_PTZ_FOCUS_STOP);
+    }
+
+
+    function ptzIrisUp(camNr)
+    {
+        debug("Iris Up " + camNr);
+        clearSelectedPreset(camNr);
+        sendCameraCommand(camNr, CMD_PTZ_IRIS_UP);
+    }
+
+    function ptzIrisDown(camNr)
+    {
+        debug("Iris Down " + camNr);
+        clearSelectedPreset(camNr);
+        sendCameraCommand(camNr, CMD_PTZ_IRIS_DOWN);
     }
 
     function sendStorePreset(camNr, presetNr) {
         debug("Store pos for " + camNr + " to preset " + presetNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_POSITION_SET.format(presetNr));
+        sendCameraCommand(camNr, CMD_PTZ_POSITION_SET.format(presetNr));
     }
 
     function sendRecallPreset(camNr, presetNr) {
         debug("Recall pos for " + camNr + " to preset " + presetNr);
-        sendCameraUDPCommand(camNr, CMD_PTZ_POSITION_RECALL.format(presetNr));
+        sendCameraCommand(camNr, CMD_PTZ_POSITION_RECALL.format(presetNr));
     }
 
     function presetClicked(camNr, presetNr)
@@ -590,41 +609,6 @@
     // Register event listeners
     for (let camNr = 1; camNr <= 3; camNr++)
     {
-        let element = document.getElementById("pan-UpLeft-" + camNr);
-        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_UP_LEFT); });
-        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
-
-        element = document.getElementById("pan-Left-" + camNr);
-        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_LEFT); });
-        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
-
-        element = document.getElementById("pan-DownLeft-" + camNr);
-        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_DOWN_LEFT); });
-        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
-
-        element = document.getElementById("pan-Up-" + camNr);
-        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_UP); });
-        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
-
-        element = document.getElementById("pan-Home-" + camNr);
-        element.addEventListener('click', () => { ptzPanHome(camNr); });
-
-        element = document.getElementById("pan-Down-" + camNr);
-        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_DOWN); });
-        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
-
-        element = document.getElementById("pan-UpRight-" + camNr);
-        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_UP_RIGHT); });
-        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
-
-        element = document.getElementById("pan-Right-" + camNr);
-        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_RIGHT); });
-        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
-
-        element = document.getElementById("pan-DownRight-" + camNr);
-        element.addEventListener('mousedown', () => { ptzPan(camNr, CMD_PTZ_PAN_DOWN_RIGHT); });
-        element.addEventListener('mouseup', () => { ptzPanStop(camNr); });
-
         element = document.getElementById("zoom-In-" + camNr);
         element.addEventListener('mousedown', () => { ptzZoomIn(camNr); });
         element.addEventListener('mouseup', () => { ptzZoomStop(camNr); });
@@ -647,18 +631,80 @@
         element.addEventListener('mousedown', () => { ptzFocusFar(camNr); });
         element.addEventListener('mouseup', () => { ptzFocusStop(camNr); });
         
-        element = document.getElementById("preset-" + camNr + "-0");
+        element = document.getElementById("iris-Up-" + camNr);
+        element.addEventListener('click', () => { ptzIrisUp(camNr); });
+        
+        element = document.getElementById("iris-Down-" + camNr);
+        element.addEventListener('click', () => { ptzIrisDown(camNr); });
+        
+        element = document.getElementById("preset-" + camNr + "0");
         element.addEventListener('click', () => { storeClicked(camNr); });
         
         for (let presetNr = 1; presetNr <= MAX_PRESETS; presetNr++) {
-            element = document.getElementById("preset-" + camNr + "-" + presetNr);
+            element = document.getElementById("preset-" + camNr + "" + presetNr);
             element.addEventListener('click', () => { presetClicked(camNr, presetNr); });
         }
     }
+    
+    function dump(s) { console.log(s); }
+    function createJoystick(elementName) {
+        return nipplejs.create({
+                                zone: document.getElementById(elementName),
+                                mode: 'static',
+                                position: { left: '50%', top: '50%' },
+                                color: 'silver',
+                                size: 180
+                                });
+    }
+
+    function bindJoystickEvents (joystick, camNr) {
+                joystick.on('end', function (evt, data) {
+                    //debug(data);
+                    ptzPanStop(data.id + 1);
+                }).on('move', function (evt, data) {
+                    //debug(data);
+                    let camNr = data.instance.id + 1; 
+                    let panCmd = getPanCmdFromAngle(data.angle.degree);
+                    let panSpeed = getPanSpeedFromDistance(data.distance);
+                    let tiltSpeed = panSpeed;
+                    if (panSpeed !== "00") ptzPan(camNr, panCmd, panSpeed, tiltSpeed);
+                });
+    }
+
+    function getPanCmdFromAngle(angle) {
+        const offset = 22.5;
+        const angleDirMap = [   
+            [ 0 + offset, CMD_PTZ_PAN_RIGHT ], 
+            [ 45 + offset, CMD_PTZ_PAN_UP_RIGHT ], 
+            [ 90 + offset, CMD_PTZ_PAN_UP ],
+            [ 135 + offset, CMD_PTZ_PAN_UP_LEFT ], 
+            [ 180 + offset, CMD_PTZ_PAN_LEFT ], 
+            [ 225 + offset, CMD_PTZ_PAN_DOWN_LEFT ], 
+            [ 270 + offset, CMD_PTZ_PAN_DOWN ],
+            [ 315 + offset, CMD_PTZ_PAN_DOWN_RIGHT ]
+        ];
+        let direction = CMD_PTZ_PAN_RIGHT;
+        for (let [a, d] of angleDirMap) {
+            if (angle > a) continue;
+            direction = d;
+            break;
+        }
+        return direction;
+    }
+    
+    function getPanSpeedFromDistance(distance) {
+         // Use 0 speed up to distance 2, max speed for distance over 70 pixels. 2 digits in uppercase.
+         if (distance <= 5) return "00";
+         return ("0" + Math.min(PAN_SPEED, Math.round((distance / 70.0) * PAN_SPEED)).toString(16)).slice(-2).toUpperCase();
+    }
+
+    var joystick1 = createJoystick('joystick-1', 1);
+    var joystick2 = createJoystick('joystick-2', 2);
+    var joystick3 = createJoystick('joystick-3', 3);
+    
+    bindJoystickEvents(joystick1);
+    bindJoystickEvents(joystick2);
+    bindJoystickEvents(joystick3);
 </script>
 </body>
 </html>
-
-
-
-
