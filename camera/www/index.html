@@ -17,6 +17,11 @@
         background: radial-gradient(ellipse at center, #373234, #222222);
     }
 
+    hr {
+        margin: 0, 0, 0, 0;
+        border: 1px solid rgb(77, 50, 90);
+    }
+
     div {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -55,17 +60,17 @@
 
     .zoomFrame {
         border: 0px solid #fcc600;
-        width: 100px;
+        width: 80px;
     }
 
     .irisFrame {
         border: 0px solid #fcc600;
-        width: 100px;
+        width: 80px;
     }
 
     .fokusFrame {
         border: 0px solid #fcc600;
-        width: 200px;
+        width: 150px;
         min-width: 150px;
     }
 
@@ -91,13 +96,14 @@
         font-size: 16px;
         font-weight: 100;
         text-align: center;
-        padding: 10px 0 10px 0;
-        margin: 10px 10px 10px 10px;
+        padding: 15px 0 0px 0;
+        margin: 0px;
         text-shadow: 1px 1px 20px #000000;
         text-decoration: none;
         display: inline-block;
         cursor: pointer;
         color: #DDDDDD;
+        width: 100%
     }
 
     .buttonDiv {
@@ -211,19 +217,19 @@
 <body>
 <span class="copyright">Cupolen Camera Controller v 0.2</span>
 
-<fieldset class="headingFrame">
+<fieldset id="control-1" class="headingFrame">
     <legend class="heading">Camera 1</legend>
-    <div class="panelFrame">
+    <div id="controlPanel-1" class="panelFrame">
         <div id="joystick-1" class="joystickFrame"></div>
         <div class="horizontalSpace"></div>
         <div class="zoomFrame">
-            <div class="subHeadingText">Zoom</div>
+            <div class="subHeadingText">Zoom<hr></div>
             <div class="buttonDiv"><div id="zoom-In-1" class="buttonLink">&#8593;</div></div>
             <div class="buttonDiv"><div id="zoom-Out-1" class="buttonLink">&#8595;</div></div>
         </div>
         <div class="horizontalSpace"></div>
         <div class="fokusFrame">
-            <div class="subHeadingText">Fokus</div>
+            <div class="subHeadingText">Fokus<hr></div>
             <div class="buttonDiv">
                 <div id="focus-Auto-1" class="buttonLink">A</div>
                 <div id="focus-Near-1" class="buttonLink">&#8593;</div>
@@ -233,8 +239,9 @@
                 <div id="focus-Far-1" class="buttonLink">&#8595;</div>
             </div>
         </div>
+        <div class="horizontalSpace"></div>
         <div class="irisFrame">
-            <div class="subHeadingText">Iris</div>
+            <div class="subHeadingText">Iris<hr></div>
             <div class="buttonDiv"><div id="iris-Up-1" class="buttonLink">&#8593;</div></div>
             <div class="buttonDiv"><div id="iris-Down-1" class="buttonLink">&#8595;</div></div>
         </div>
@@ -254,19 +261,19 @@
     </div>
 </fieldset>
 
-<fieldset class="headingFrame">
+<fieldset id="control-2" class="headingFrame">
     <legend class="heading">Camera 2</legend>
-    <div class="panelFrame">
+    <div id="controlPanel-2" class="panelFrame">
         <div id="joystick-2" class="joystickFrame"></div>
         <div class="horizontalSpace"></div>
         <div class="zoomFrame">
-            <div class="subHeadingText">Zoom</div>
+            <div class="subHeadingText">Zoom<hr></div>
             <div class="buttonDiv"><div id="zoom-In-2" class="buttonLink">&#8593;</div></div>
             <div class="buttonDiv"><div id="zoom-Out-2" class="buttonLink">&#8595;</div></div>
         </div>
         <div class="horizontalSpace"></div>
         <div class="fokusFrame">
-            <div class="subHeadingText">Fokus</div>
+            <div class="subHeadingText">Fokus<hr></div>
             <div class="buttonDiv">
                 <div id="focus-Auto-2" class="buttonLink">A</div>
                 <div id="focus-Near-2" class="buttonLink">&#8593;</div>
@@ -276,8 +283,9 @@
                 <div id="focus-Far-2" class="buttonLink">&#8595;</div>
             </div>
         </div>
+        <div class="horizontalSpace"></div>
         <div class="irisFrame">
-            <div class="subHeadingText">Iris</div>
+            <div class="subHeadingText">Iris<hr></div>
             <div class="buttonDiv"><div id="iris-Up-2" class="buttonLink">&#8593;</div></div>
             <div class="buttonDiv"><div id="iris-Down-2" class="buttonLink">&#8595;</div></div>
         </div>
@@ -297,19 +305,19 @@
     </div>
 </fieldset>
 
-<fieldset class="headingFrame headingFrameLast">
+<fieldset id="control-3" class="headingFrame headingFrameLast">
     <legend class="heading">Camera 3</legend>
-    <div class="panelFrame">
+    <div id="controlPanel-3" class="panelFrame">
         <div id="joystick-3" class="joystickFrame"></div>
         <div class="horizontalSpace"></div>
         <div class="zoomFrame">
-            <div class="subHeadingText">Zoom</div>
+            <div class="subHeadingText">Zoom<hr></div>
             <div class="buttonDiv"><div id="zoom-In-3" class="buttonLink">&#8593;</div></div>
             <div class="buttonDiv"><div id="zoom-Out-3" class="buttonLink">&#8595;</div></div>
         </div>
         <div class="horizontalSpace"></div>
         <div class="fokusFrame">
-            <div class="subHeadingText">Fokus</div>
+            <div class="subHeadingText">Fokus<hr></div>
             <div class="buttonDiv">
                 <div id="focus-Auto-3" class="buttonLink">A</div>
                 <div id="focus-Near-3" class="buttonLink">&#8593;</div>
@@ -319,8 +327,9 @@
                 <div id="focus-Far-3" class="buttonLink">&#8595;</div>
             </div>
         </div>
+        <div class="horizontalSpace"></div>
         <div class="irisFrame">
-            <div class="subHeadingText">Iris</div>
+            <div class="subHeadingText">Iris<hr></div>
             <div class="buttonDiv"><div id="iris-Up-3" class="buttonLink">&#8593;</div></div>
             <div class="buttonDiv"><div id="iris-Down-3" class="buttonLink">&#8595;</div></div>
         </div>
@@ -348,6 +357,7 @@
     const TILT_SPEED = 0x12;
     const ZOOM_SPEED = 0x7;
 
+    let joystickDiameter = 180;
     let isStoreSelected = [false,false,false,false];
     let selectedPreset = [0,0,0,0];
     let focusMode = [[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0]];
@@ -385,6 +395,7 @@
     const CMD_PTZ_IRIS_UP = "81 01 04 0B 02 FF";
     const CMD_PTZ_IRIS_DOWN = "81 01 04 0B 03 FF";
 
+
     String.prototype.format = function() {
         let a = this;
         for (let k in arguments) {
@@ -402,6 +413,33 @@
         if (DEBUG !== 0) console.log(s);
     }
 
+    function adaptToWindowSize() {
+        joystickDiameter = Math.min(180, (window.innerHeight / 4)-30); // Global var, used in scrips below
+        let controlPanelHeight = Math.min(250, window.innerHeight / 4);
+        let hasControlPanelMaxSize = (controlPanelHeight > 240);
+        let marginBottom = 0;
+        if (!hasControlPanelMaxSize) {
+            for (let camNr = 1; camNr <=3; camNr++) {
+                let element = document.getElementById("controlPanel-" + camNr);
+                element.style.height = controlPanelHeight+"px";
+                element = document.getElementById("control-" + camNr);
+                element.style.margin = marginBottom + "px";
+                element = document.getElementById("joystick-" + camNr);
+                element.style.width = joystickDiameter + "px";
+                element.style.height = joystickDiameter + "px";
+            
+                for (let presetNr = 0; presetNr <= MAX_PRESETS; presetNr++) {
+                    let element = document.getElementById("preset-" + camNr + "" + presetNr);
+                    let w = Math.min(150, (window.innerHeight / 8)-30);
+                    let h = Math.min(73, (controlPanelHeight / 2)-40);
+                    
+                    element.style.width = w + "px";
+                    element.style.height = h + "px";
+                }
+            }
+        }
+    }
+    
     function updatePresetBorders(camNr) {
         for (let presetNr = 0; presetNr <= MAX_PRESETS; presetNr++) {
             let element = document.getElementById("preset-" + camNr + "" + presetNr);
@@ -652,8 +690,8 @@
                                 zone: document.getElementById(elementName),
                                 mode: 'static',
                                 position: { left: '50%', top: '50%' },
-                                color: 'silver',
-                                size: 180
+                                color: 'rgb(167, 120, 160)',
+                                size: joystickDiameter
                                 });
     }
 
@@ -698,6 +736,7 @@
          return ("0" + Math.min(PAN_SPEED, Math.round((distance / 70.0) * PAN_SPEED)).toString(16)).slice(-2).toUpperCase();
     }
 
+    adaptToWindowSize();
     var joystick1 = createJoystick('joystick-1', 1);
     var joystick2 = createJoystick('joystick-2', 2);
     var joystick3 = createJoystick('joystick-3', 3);
