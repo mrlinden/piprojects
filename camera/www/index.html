@@ -80,6 +80,11 @@
         overflow: auto;
     }
 
+    .stopFrame {
+        border: 0px solid #fcc600;
+        width: 80px;
+    }
+
     .heading {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 20px;
@@ -212,6 +217,11 @@
     .selectFrame {
         border-color: #fcc600;
     }
+
+    .unackedFrame {
+        border-color: red;
+    }
+
 </style>
 </head>
 <body>
@@ -258,6 +268,11 @@
                 <div id="preset-17" class="presetLink">7</div>
             </div>
         </div>
+        <div class="horizontalSpace"></div>
+        <div class="stopFrame">
+            <div class="subHeadingText">Reset<hr></div>
+            <div class="buttonDiv"><div id="reset-1" class="buttonLink">X</div></div>
+        </div>
     </div>
 </fieldset>
 
@@ -301,6 +316,11 @@
                 <div id="preset-26" class="presetLink">6</div>
                 <div id="preset-27" class="presetLink">7</div>
             </div>
+        </div>
+        <div class="horizontalSpace"></div>
+        <div class="stopFrame">
+            <div class="subHeadingText">Reset<hr></div>
+            <div class="buttonDiv"><div id="reset-2" class="buttonLink">X</div></div>
         </div>
     </div>
 </fieldset>
@@ -346,6 +366,11 @@
                 <div id="preset-37" class="presetLink">7</div>
             </div>
         </div>
+        <div class="horizontalSpace"></div>
+        <div class="stopFrame">
+            <div class="subHeadingText">Reset<hr></div>
+            <div class="buttonDiv"><div id="reset-3" class="buttonLink">X</div></div>
+        </div>
     </div>
 </fieldset>
 
@@ -362,6 +387,7 @@
     let selectedPreset = [0,0,0,0];
     let focusMode = [[0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0]];
     let previousPanCmd = ["", "", "", ""];
+    let awaitingAck = [false,false,false,false];
 
     // CMD_PTZ_POSITION parameters: 0=presetNr
     const CMD_PTZ_POSITION_SET = "81 01 04 3F 01 0{0} FF";
@@ -378,6 +404,7 @@
     const CMD_PTZ_PAN_DOWN_RIGHT = "81 01 06 01 {0} {1} 02 02 FF";
     const CMD_PTZ_PAN_STOP = "81 01 06 01 {0} {1} 03 03 FF";
     const CMD_PTZ_PAN_HOME = "81 01 06 04 FF";
+    const CMD_PTZ_RESET = "88 01 00 01 FF";
 
     // CMD_PTZ_ZOOM parameters: 0=ZoomSpeed [0-7, where 7 is fast]
     const CMD_PTZ_ZOOM_IN = "81 01 04 07 2{0} FF";
@@ -478,13 +505,28 @@
         }
     }
 
+    function updateAckIndicator(camNr) {
+        let ackIndicator = "";
+        if (awaitingAck[camNr]) ackIndicator = " unackedFrame";
+        let resetElement = document.getElementById("reset-"+camNr);
+        if (resetElement === undefined) return;
+        resetElement.className = "buttonLink" + ackIndicator;
+    }
+
     function clearSelectedPreset(camNr) {
         selectedPreset[camNr] = 0;
         updatePresetBorders(camNr);
     }
 
-    function sendCameraCommand(camNr, cmdBytes) {
-        return sendCommand(camNr, cmdBytes, "sendCameraCommand.php/", false);
+    function sendCameraCommand(camNr, cmdBytes, ignoreAwaitingAck=false) {
+        console.log("(ignoreAwaitingAck " + ignoreAwaitingAck + " : " + awaitingAck[camNr]);
+        console.log("(ignoreAwaitingAck == false && awaitingAck[camNr] == true) " + (ignoreAwaitingAck == false && awaitingAck[camNr] == true));
+
+        if (ignoreAwaitingAck == false && awaitingAck[camNr] == true) return; // Skip command if outstanding ack
+        if (!ignoreAwaitingAck) awaitingAck[camNr] = true;
+        console.log("ignoreAwaitingAck " + ignoreAwaitingAck + " awaitingAck[camNr] " + awaitingAck[camNr]);
+        updateAckIndicator(camNr);
+        sendCommand(camNr, cmdBytes, "sendCameraCommand.php/", true);
     }
 
     function sendCommand(camNr, cmdBytes, url, handleResponse) {
@@ -495,12 +537,13 @@
         let http = new XMLHttpRequest();
         http.open("POST", url, true);
         http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        //debug("sendCommand " + httpData + " to url " + url);
+        debug("sendCommand " + httpData + " to url " + url);
         http.send(httpData);
         if (handleResponse) {
             http.onload = function() {
-                //applyStatus(http.responseText);
-                //debug("handle response: " + http.responseText);
+                awaitingAck[camNr] = false;
+                updateAckIndicator(camNr);
+                debug("handle response: " + http.responseText);
             };
         } else {
             http.onload = function() {
@@ -622,6 +665,12 @@
         sendCameraCommand(camNr, CMD_PTZ_POSITION_RECALL.format(presetNr));
     }
 
+    function sendReset(camNr) {
+        debug("Reset camera " + camNr);
+        awaitingAck[camNr] = false;
+        sendCameraCommand(camNr, CMD_PTZ_RESET, true); // Send "Reset all" to the IP of given camera
+    }
+
     function presetClicked(camNr, presetNr)
     {
         selectedPreset[camNr] = presetNr;
@@ -682,6 +731,9 @@
             element = document.getElementById("preset-" + camNr + "" + presetNr);
             element.addEventListener('click', () => { presetClicked(camNr, presetNr); });
         }
+
+        element = document.getElementById("reset-" + camNr);
+        element.addEventListener('click', () => { sendReset(camNr); });
     }
     
     function dump(s) { console.log(s); }
