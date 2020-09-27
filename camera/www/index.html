@@ -393,15 +393,28 @@
     const CMD_PTZ_POSITION_SET = "81 01 04 3F 01 0{0} FF";
     const CMD_PTZ_POSITION_RECALL = "81 01 04 3F 02 0{0} FF";
 
+    const PAN_DIR = { UP: 0, DOWN: 1, LEFT: 2, RIGHT: 3, UP_LEFT: 4, UP_RIGHT: 5, DOWN_LEFT: 6, DOWN_RIGHT: 7 };
+    const PAN_DIR_STR = new Map();
+    PAN_DIR_STR[PAN_DIR.UP] = "UP";
+    PAN_DIR_STR[PAN_DIR.DOWN] = "DOWN";
+    PAN_DIR_STR[PAN_DIR.LEFT] = "LEFT";
+    PAN_DIR_STR[PAN_DIR.RIGHT] = "RIGHT";
+    PAN_DIR_STR[PAN_DIR.UP_LEFT] = "UP_LEFT";
+    PAN_DIR_STR[PAN_DIR.UP_RIGHT] = "UP_RIGHT";
+    PAN_DIR_STR[PAN_DIR.DOWN_LEFT] = "DOWN_LEFT";
+    PAN_DIR_STR[PAN_DIR.DOWN_RIGHT] = "DOWN_RIGHT";
+
     // CMD_PTZ_PAN parameters: 0=PanSpeed [1-12h]; 1=TiltSpeed [1-12h]
-    const CMD_PTZ_PAN_UP = "81 01 06 01 {0} {1} 03 01 FF";
-    const CMD_PTZ_PAN_DOWN = "81 01 06 01 {0} {1} 03 02 FF";
-    const CMD_PTZ_PAN_LEFT = "81 01 06 01 {0} {1} 01 03 FF";
-    const CMD_PTZ_PAN_RIGHT = "81 01 06 01 {0} {1} 02 03 FF";
-    const CMD_PTZ_PAN_UP_LEFT = "81 01 06 01 {0} {1} 01 01 FF";
-    const CMD_PTZ_PAN_UP_RIGHT = "81 01 06 01 {0} {1} 02 01 FF";
-    const CMD_PTZ_PAN_DOWN_LEFT = "81 01 06 01 {0} {1} 01 02 FF";
-    const CMD_PTZ_PAN_DOWN_RIGHT = "81 01 06 01 {0} {1} 02 02 FF";
+    const CMD_PTZ_PAN = new Map();
+    CMD_PTZ_PAN[PAN_DIR.UP] = "81 01 06 01 {0} {1} 03 01 FF";
+    CMD_PTZ_PAN[PAN_DIR.DOWN] = "81 01 06 01 {0} {1} 03 02 FF";
+    CMD_PTZ_PAN[PAN_DIR.LEFT] = "81 01 06 01 {0} {1} 01 03 FF";
+    CMD_PTZ_PAN[PAN_DIR.RIGHT] = "81 01 06 01 {0} {1} 02 03 FF";
+    CMD_PTZ_PAN[PAN_DIR.UP_LEFT] = "81 01 06 01 {0} {1} 01 01 FF";
+    CMD_PTZ_PAN[PAN_DIR.UP_RIGHT] = "81 01 06 01 {0} {1} 02 01 FF";
+    CMD_PTZ_PAN[PAN_DIR.DOWN_LEFT] = "81 01 06 01 {0} {1} 01 02 FF";
+    CMD_PTZ_PAN[PAN_DIR.DOWN_RIGHT] = "81 01 06 01 {0} {1} 02 02 FF";
+
     const CMD_PTZ_PAN_STOP = "81 01 06 01 {0} {1} 03 03 FF";
     const CMD_PTZ_PAN_HOME = "81 01 06 04 FF";
     const CMD_PTZ_RESET = "88 01 00 01 FF";
@@ -519,17 +532,21 @@
     }
 
     function sendCameraCommand(camNr, cmdBytes, ignoreAwaitingAck=false) {
-        console.log("(ignoreAwaitingAck " + ignoreAwaitingAck + " : " + awaitingAck[camNr]);
-        console.log("(ignoreAwaitingAck == false && awaitingAck[camNr] == true) " + (ignoreAwaitingAck == false && awaitingAck[camNr] == true));
+        //console.log("(ignoreAwaitingAck " + ignoreAwaitingAck + " : " + awaitingAck[camNr]);
+        //console.log("(ignoreAwaitingAck == false && awaitingAck[camNr] == true) " + (ignoreAwaitingAck == false && awaitingAck[camNr] == true));
 
         if (ignoreAwaitingAck == false && awaitingAck[camNr] == true) return; // Skip command if outstanding ack
         if (!ignoreAwaitingAck) awaitingAck[camNr] = true;
-        console.log("ignoreAwaitingAck " + ignoreAwaitingAck + " awaitingAck[camNr] " + awaitingAck[camNr]);
+        //console.log("ignoreAwaitingAck " + ignoreAwaitingAck + " awaitingAck[camNr] " + awaitingAck[camNr]);
         updateAckIndicator(camNr);
         sendCommand(camNr, cmdBytes, "sendCameraCommand.php/", true);
     }
 
     function sendCommand(camNr, cmdBytes, url, handleResponse) {
+        awaitingAck[camNr] = false;
+        updateAckIndicator(camNr);
+        return;
+
         let cmd = cmdBytes.toString().stripAllSpaces();
         let cmdLength = 2 + cmd.length / 2; // 2 bytes length indicator. Div by 2 due to 2 chars per byte in string
         let lengthHeader = ((cmdLength < 0x10) ? "000" : "00") + cmdLength.toString(16); // 1 or 2 hex digits
@@ -552,12 +569,13 @@
         }
     }
 
-    function ptzPan(camNr, panCmd, panSpeed, tiltSpeed)
+    function ptzPan(camNr, panDir, panSpeed, tiltSpeed)
     {
         clearSelectedPreset(camNr);
-        let newPanCmd = panCmd.format(panSpeed, tiltSpeed);
+        let panCmd = CMD_PTZ_PAN[panDir];
+        let newPanCmd = String(panCmd).format(panSpeed, tiltSpeed);
         if (newPanCmd != previousPanCmd[camNr]) {
-            debug("PanTilt " + camNr);
+            debug("PanTilt " + camNr + " " + PAN_DIR_STR[panDir] + " speed " + panSpeed);
             previousPanCmd[camNr] = newPanCmd;
             sendCameraCommand(camNr, newPanCmd);
         }
@@ -754,28 +772,29 @@
                 }).on('move', function (evt, data) {
                     //debug(data);
                     let camNr = data.instance.id + 1; 
-                    let panCmd = getPanCmdFromAngle(data.angle.degree);
+                    let panDir = getPanDirFromAngle(data.angle.degree);
                     let panSpeed = getPanSpeedFromDistance(data.distance);
                     let tiltSpeed = panSpeed;
-                    if (panSpeed !== "00") ptzPan(camNr, panCmd, panSpeed, tiltSpeed);
+                    if (panSpeed !== "00") ptzPan(camNr, panDir, panSpeed, tiltSpeed);
                 });
     }
 
-    function getPanCmdFromAngle(angle) {
+    function getPanDirFromAngle(angle) {
         const offset = 22.5;
         const angleDirMap = [   
-            [ 0 + offset, CMD_PTZ_PAN_RIGHT ], 
-            [ 45 + offset, CMD_PTZ_PAN_UP_RIGHT ], 
-            [ 90 + offset, CMD_PTZ_PAN_UP ],
-            [ 135 + offset, CMD_PTZ_PAN_UP_LEFT ], 
-            [ 180 + offset, CMD_PTZ_PAN_LEFT ], 
-            [ 225 + offset, CMD_PTZ_PAN_DOWN_LEFT ], 
-            [ 270 + offset, CMD_PTZ_PAN_DOWN ],
-            [ 315 + offset, CMD_PTZ_PAN_DOWN_RIGHT ]
+            [ 0 + offset, PAN_DIR.RIGHT ], 
+            [ 45 + offset, PAN_DIR.UP_RIGHT ], 
+            [ 90 + offset, PAN_DIR.UP ],
+            [ 135 + offset, PAN_DIR.UP_LEFT ], 
+            [ 180 + offset, PAN_DIR.LEFT ], 
+            [ 225 + offset, PAN_DIR.DOWN_LEFT ], 
+            [ 270 + offset, PAN_DIR.DOWN ],
+            [ 315 + offset, PAN_DIR.DOWN_RIGHT ]
         ];
-        let direction = CMD_PTZ_PAN_RIGHT;
+        let direction = PAN_DIR.RIGHT;
         for (let [a, d] of angleDirMap) {
             if (angle > a) continue;
+            //console.log("Angle: " + angle + " dir " + PAN_DIR_STR[d]);
             direction = d;
             break;
         }

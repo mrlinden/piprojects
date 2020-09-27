@@ -942,7 +942,6 @@ Collection.prototype.onstart = function (evt) {
 
     // Update the box position
     self.updateBox();
-
     var process = function (touch) {
         // If we can create new nipples
         // meaning we don't have more active nipples than we should.
@@ -969,9 +968,17 @@ Collection.prototype.processOnStart = function (evt) {
         x: evt.pageX,
         y: evt.pageY
     };
-
     var nipple = self.getOrCreate(identifier, position);
+    nipple.startPositionOffset = {
+        x: (nipple.position.x - position.x),
+        y: (nipple.position.y - position.y)
+    };
+    position = nipple.position;
+    
+    console.log("X: " + position.x + ":" + position.y);
+    console.log("nipple X" + nipple.position.x + ":" + nipple.position.y);
 
+    
     // Update its touch identifier
     if (nipple.identifier !== identifier) {
         self.manager.removeIdentifier(nipple.identifier);
@@ -1065,8 +1072,8 @@ Collection.prototype.processOnMove = function (evt) {
 
     var size = nipple.options.size / 2;
     var pos = {
-        x: evt.pageX,
-        y: evt.pageY
+        x: (evt.pageX + nipple.startPositionOffset.x),
+        y: (evt.pageY + nipple.startPositionOffset.y)
     };
 
     var dist = u.distance(pos, nipple.position);
