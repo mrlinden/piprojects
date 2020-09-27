@@ -750,7 +750,8 @@
         element = document.getElementById("reset-" + camNr);
         element.addEventListener('click', () => { sendReset(camNr); });
     }
-    
+    window.addEventListener('resize', adaptToWindowSize);
+
     function dump(s) { console.log(s); }
     function createJoystick(elementName) {
         return nipplejs.create({
