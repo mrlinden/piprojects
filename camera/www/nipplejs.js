@@ -975,10 +975,6 @@ Collection.prototype.processOnStart = function (evt) {
     };
     position = nipple.position;
     
-    console.log("X: " + position.x + ":" + position.y);
-    console.log("nipple X" + nipple.position.x + ":" + nipple.position.y);
-
-    
     // Update its touch identifier
     if (nipple.identifier !== identifier) {
         self.manager.removeIdentifier(nipple.identifier);

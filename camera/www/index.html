@@ -461,6 +461,7 @@
         if (!hasControlPanelMaxSize) {
             for (let camNr = 1; camNr <=3; camNr++) {
                 let element = document.getElementById("controlPanel-" + camNr);
+                let controlPanelWidth = element.style.width;
                 element.style.height = controlPanelHeight+"px";
                 element = document.getElementById("control-" + camNr);
                 element.style.margin = marginBottom + "px";
@@ -470,7 +471,7 @@
             
                 for (let presetNr = 0; presetNr <= MAX_PRESETS; presetNr++) {
                     let element = document.getElementById("preset-" + camNr + "" + presetNr);
-                    let w = Math.min(150, (window.innerHeight / 8)-30);
+                    let w = Math.min(150, (controlPanelWidth / 4) - 60);// (window.innerHeight / 8)-30);
                     let h = Math.min(73, (controlPanelHeight / 2)-40);
                     
                     element.style.width = w + "px";
@@ -531,13 +532,9 @@
         updatePresetBorders(camNr);
     }
 
-    function sendCameraCommand(camNr, cmdBytes, ignoreAwaitingAck=false) {
-        //console.log("(ignoreAwaitingAck " + ignoreAwaitingAck + " : " + awaitingAck[camNr]);
-        //console.log("(ignoreAwaitingAck == false && awaitingAck[camNr] == true) " + (ignoreAwaitingAck == false && awaitingAck[camNr] == true));
-
-        if (ignoreAwaitingAck == false && awaitingAck[camNr] == true) return; // Skip command if outstanding ack
-        if (!ignoreAwaitingAck) awaitingAck[camNr] = true;
-        //console.log("ignoreAwaitingAck " + ignoreAwaitingAck + " awaitingAck[camNr] " + awaitingAck[camNr]);
+    function sendCameraCommand(camNr, cmdBytes, ignoreAwaitingAck=true, updateAwaitingAck=true) {
+        if (ignoreAwaitingAck === false && awaitingAck[camNr] === true) return; // Skip command if outstanding ack
+        awaitingAck[camNr] = updateAwaitingAck;
         updateAckIndicator(camNr);
         sendCommand(camNr, cmdBytes, "sendCameraCommand.php/", true);
     }
@@ -577,7 +574,7 @@
         if (newPanCmd != previousPanCmd[camNr]) {
             debug("PanTilt " + camNr + " " + PAN_DIR_STR[panDir] + " speed " + panSpeed);
             previousPanCmd[camNr] = newPanCmd;
-            sendCameraCommand(camNr, newPanCmd);
+            sendCameraCommand(camNr, newPanCmd, false, true);
         }
     }
 
@@ -686,7 +683,7 @@
     function sendReset(camNr) {
         debug("Reset camera " + camNr);
         awaitingAck[camNr] = false;
-        sendCameraCommand(camNr, CMD_PTZ_RESET, true); // Send "Reset all" to the IP of given camera
+        sendCameraCommand(camNr, CMD_PTZ_RESET, true, false); // Send "Reset all" to the IP of given camera
     }
 
     function presetClicked(camNr, presetNr)
