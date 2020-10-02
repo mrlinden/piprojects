@@ -320,7 +320,7 @@
         <div class="horizontalSpace"></div>
         <div class="stopFrame">
             <div class="subHeadingText">Reset<hr></div>
-            <div class="buttonDiv"><div id="reset-2" class="buttonLink">X</div></div>
+            <div class="buttonDiv"><div id="reset-2" class="buttonLink">R</div></div>
         </div>
     </div>
 </fieldset>
@@ -375,6 +375,8 @@
 </fieldset>
 
 <script src="nipplejs.js"></script>
+<script src="getLabels.php"></script>
+
 <script>
     const DEBUG = 1;
     const MAX_PRESETS = 7;
@@ -480,7 +482,17 @@
             }
         }
     }
-    
+
+    function updatePresetLabels() {
+        for (let camNr = 1; camNr <= 3; camNr++) {
+            for (let presetNr = 1; presetNr <= MAX_PRESETS; presetNr++) {
+                let element = document.getElementById("preset-" + camNr + "" + presetNr);
+                if (element === undefined) continue;
+                element.innerText = presetLabel[camNr][presetNr];
+            }
+        }
+    }
+
     function updatePresetBorders(camNr) {
         for (let presetNr = 0; presetNr <= MAX_PRESETS; presetNr++) {
             let element = document.getElementById("preset-" + camNr + "" + presetNr);
@@ -703,6 +715,26 @@
         updatePresetBorders(camNr);
     }
 
+    function PresetSetLabel(camNr, presetNr)
+    {
+        let labelText = prompt("Preset Label:", presetLabel[camNr][presetNr]);
+        if (labelText != null && labelText != "") {
+            presetLabel[camNr][presetNr] = label;
+
+            let url = "storePresetLabel.php";
+            let labelId = "L" + camNr + "" + presetNr;
+            let httpData = "labelId=" + labelId + "&labelText=" + labelText;
+            let http = new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            debug("sendCommand " + httpData + " to url " + url);
+            http.send(httpData);
+            http.onload = function() {
+                debug("handle preset label response: " + http.responseText);
+            };
+        }
+        updatePresetLabels();
+    }
 
     // Register event listeners
     for (let camNr = 1; camNr <= 3; camNr++)
@@ -741,6 +773,7 @@
         for (let presetNr = 1; presetNr <= MAX_PRESETS; presetNr++) {
             element = document.getElementById("preset-" + camNr + "" + presetNr);
             element.addEventListener('click', () => { presetClicked(camNr, presetNr); });
+            element.addEventListener('dblclick', () => { PresetSetLabel(camNr, presetNr); });
         }
 
         element = document.getElementById("reset-" + camNr);
@@ -801,6 +834,7 @@
          return ("0" + Math.min(PAN_SPEED, Math.round((distance / 70.0) * PAN_SPEED)).toString(16)).slice(-2).toUpperCase();
     }
 
+    updatePresetLabels();
     adaptToWindowSize();
     var joystick1 = createJoystick('joystick-1', 1);
     var joystick2 = createJoystick('joystick-2', 2);
