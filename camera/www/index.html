@@ -578,7 +578,7 @@
     {
         let labelText = prompt("Preset Label:", presetLabel[camNr][presetNr]);
         if (labelText != null && labelText != "") {
-            presetLabel[camNr][presetNr] = label;
+            presetLabel[camNr][presetNr] = labelText;
 
             let url = "storePresetLabel.php";
             let labelId = "L" + camNr + "" + presetNr;
