@@ -540,10 +540,6 @@
     }
 
     function sendCommand(camNr, cmdBytes, url, handleResponse) {
-        awaitingAck[camNr] = false;
-        updateAckIndicator(camNr);
-        return;
-
         let cmd = cmdBytes.toString().stripAllSpaces();
         let cmdLength = 2 + cmd.length / 2; // 2 bytes length indicator. Div by 2 due to 2 chars per byte in string
         let lengthHeader = ((cmdLength < 0x10) ? "000" : "00") + cmdLength.toString(16); // 1 or 2 hex digits
