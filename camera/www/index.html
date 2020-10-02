@@ -574,6 +574,24 @@
         }
     }
 
+    function PresetSetLabel(camNr, presetNr)
+    {
+        let labelText = prompt("Preset Label:", presetLabel[camNr][presetNr]);
+        if (labelText != null && labelText != "") {
+            presetLabel[camNr][presetNr] = label;
+
+            let url = "storePresetLabel.php";
+            let labelId = "L" + camNr + "" + presetNr;
+            let httpData = "labelId=" + labelId + "&labelText=" + labelText;
+            let http = new XMLHttpRequest();
+            http.open("POST", url, true);
+            http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            debug("sendCommand " + httpData + " to url " + url);
+            http.send(httpData);
+        }
+        updatePresetLabels();
+    }
+
     function ptzPan(camNr, panDir, panSpeed, tiltSpeed)
     {
         clearSelectedPreset(camNr);
@@ -713,27 +731,6 @@
     {
         isStoreSelected[camNr] = !isStoreSelected[camNr]; // Toggle
         updatePresetBorders(camNr);
-    }
-
-    function PresetSetLabel(camNr, presetNr)
-    {
-        let labelText = prompt("Preset Label:", presetLabel[camNr][presetNr]);
-        if (labelText != null && labelText != "") {
-            presetLabel[camNr][presetNr] = label;
-
-            let url = "storePresetLabel.php";
-            let labelId = "L" + camNr + "" + presetNr;
-            let httpData = "labelId=" + labelId + "&labelText=" + labelText;
-            let http = new XMLHttpRequest();
-            http.open("POST", url, true);
-            http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            debug("sendCommand " + httpData + " to url " + url);
-            http.send(httpData);
-            http.onload = function() {
-                debug("handle preset label response: " + http.responseText);
-            };
-        }
-        updatePresetLabels();
     }
 
     // Register event listeners
