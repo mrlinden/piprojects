@@ -588,7 +588,6 @@
             http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             debug("sendCommand " + httpData + " to url " + url);
             http.send(httpData);
-	    http.onload = function() { debug("aha " + http.responseText); };
         }
         updatePresetLabels();
     }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+'<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -113,7 +113,7 @@ String.prototype.format = function() {
 };
 
 function toggleLamp(i) {
-    skipNextPeriodicRequest = 2;
+    skipNextPeriodicRequest = 4;
     isLampOn[i] = 1 - isLampOn[i];
     sendHelvarUDPCommand(cmdSetLamp(i, isLampOn[i]));
     updateButtonStyles();
@@ -167,8 +167,8 @@ function applyStatus(statusLine) {
         if (itemAndValue.length > 1) {
             var value = itemAndValue[1];
             switch(itemAndValue[0]) {
-                case "L500" : isLampOn[1] = (value == '1') ? 1 : 0; break;
-                case "L501" : isLampOn[2] = (value == '1') ? 1 : 0; break;
+                case "L501" : isLampOn[1] = (value == '1') ? 1 : 0; break;
+                case "L500" : isLampOn[2] = (value == '1') ? 1 : 0; break;
             }
         }
     }
