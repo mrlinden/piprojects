@@ -272,6 +272,8 @@
         <div class="stopFrame">
             <div class="subHeadingText">Reset<hr></div>
             <div class="buttonDiv"><div id="reset-1" class="buttonLink">X</div></div>
+            <div class="buttonDiv"><div id="wb-OnePush-1" class="buttonLink">WB</div></div>
+            </div>
         </div>
     </div>
 </fieldset>
@@ -320,7 +322,9 @@
         <div class="horizontalSpace"></div>
         <div class="stopFrame">
             <div class="subHeadingText">Reset<hr></div>
-            <div class="buttonDiv"><div id="reset-2" class="buttonLink">R</div></div>
+            <div class="buttonDiv"><div id="reset-2" class="buttonLink">X</div></div>
+            <div class="buttonDiv"><div id="wb-OnePush-2" class="buttonLink">WB</div></div>
+            </div>
         </div>
     </div>
 </fieldset>
@@ -370,6 +374,7 @@
         <div class="stopFrame">
             <div class="subHeadingText">Reset<hr></div>
             <div class="buttonDiv"><div id="reset-3" class="buttonLink">X</div></div>
+            <div class="buttonDiv"><div id="wb-OnePush-3" class="buttonLink">WB</div></div>
         </div>
     </div>
 </fieldset>
@@ -437,6 +442,8 @@
     const CMD_PTZ_IRIS_UP = "81 01 04 0B 02 FF";
     const CMD_PTZ_IRIS_DOWN = "81 01 04 0B 03 FF";
 
+    // CMD_WB_ONE_PUSH has no parameters
+    const CMD_WB_ONE_PUSH = "81 01 04 35 03 FF";
 
     String.prototype.format = function() {
         let a = this;
@@ -696,6 +703,12 @@
         sendCameraCommand(camNr, CMD_PTZ_IRIS_DOWN);
     }
 
+    function ptzWbOnePush(camNr)
+    {
+        debug("One Push WB " + camNr);
+        sendCameraCommand(camNr, CMD_WB_ONE_PUSH);
+    }
+
     function sendStorePreset(camNr, presetNr) {
         debug("Store pos for " + camNr + " to preset " + presetNr);
         sendCameraCommand(camNr, CMD_PTZ_POSITION_SET.format(presetNr));
@@ -763,6 +776,9 @@
         
         element = document.getElementById("iris-Down-" + camNr);
         element.addEventListener('click', () => { ptzIrisDown(camNr); });
+
+        element = document.getElementById("wb-OnePush-" + camNr);
+        element.addEventListener('click', () => { ptzWbOnePush(camNr); });
         
         element = document.getElementById("preset-" + camNr + "0");
         element.addEventListener('click', () => { storeClicked(camNr); });
